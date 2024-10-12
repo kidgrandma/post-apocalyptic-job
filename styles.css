@@ -18,7 +18,7 @@ button {
     padding: 10px 20px;
     margin-top: 
 }
-/* Glitch Effect for the Cover Image */
+/* Glitch Effect for the Container */
 @keyframes glitch {
   0% {
     clip: rect(42px, 9999px, 44px, 0);
@@ -42,31 +42,4 @@ button {
   }
   50% {
     clip: rect(10px, 9999px, 40px, 0);
-    transform: skew(0.7deg);
-  }
-  60% {
-    clip: rect(80px, 9999px, 30px, 0);
-    transform: skew(0.1deg);
-  }
-  70% {
-    clip: rect(30px, 9999px, 70px, 0);
-    transform: skew(0.9deg);
-  }
-  80% {
-    clip: rect(60px, 9999px, 35px, 0);
-    transform: skew(0.6deg);
-  }
-  90% {
-    clip: rect(40px, 9999px, 45px, 0);
-    transform: skew(0.4deg);
-  }
-  100% {
-    clip: rect(15px, 9999px, 80px, 0);
-    transform: skew(0.5deg);
-  }
-}
-
-#cover-image {
-  position: relative;
-  animation: glitch 1s infinite;
-}
+    transform: skew
