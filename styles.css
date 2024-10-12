@@ -1,23 +1,30 @@
+/* Base Styles */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    padding: 20px;
+    margin: 0;
+    padding: 0;
     background-color: #6A0DAD; /* Deep Violet */
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensures vertical centering */
+    overflow: hidden;
 }
 
+/* Container Styles */
 #quiz-container {
-    padding: 20px;
-    max-width: 900px;
-    margin: 0 auto;
- background-color: #8338EC; /* Cosmic Purple */
+    position: relative;
+    animation: glitch 1.5s infinite;
+    background-color: #8338EC; /* Cosmic Purple */
     border-radius: 10px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
 }
 
-button {
-    padding: 10px 20px;
-    margin-top: 
-}
 /* Glitch Effect for the Container */
 @keyframes glitch {
   0% {
@@ -66,14 +73,43 @@ button {
   }
 }
 
-#quiz-container {
-  position: relative;
-  animation: glitch 1.5s infinite;
-  background-color: #8338EC; /* Cosmic Purple */
-  border-radius: 10px;
-  padding: 20px;
+/* Image Styling */
+#cover-image {
+    animation: none; /* Ensure the image has no animation */
+    width: 100%; /* Make image responsive */
+    max-width: 600px;
+    display: block;
+    margin: 0 auto;
 }
 
-#cover-image {
-  animation: none; /* Ensure the image has no animation */
+/* Button Styles */
+button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: #4A90E2; /* Electric Blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #4A90E2;
+}
+
+button:hover {
+    box-shadow: 0 0 20px #00FFFF;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    #quiz-container {
+        padding: 10px;
+        max-width: 100%;
+        border-radius: 5px;
+    }
+}
+
+/* Disable glitch effect on very small screens */
+@media (max-width: 400px) {
+    #quiz-container {
+        animation: none; /* Removes glitch effect on very small screens */
+    }
 }
