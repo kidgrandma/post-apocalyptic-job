@@ -26,21 +26,37 @@ body {
     text-align: center;
 }
 
-/* Button Styling */
+/* Button Styling with Responsive Text */
 button {
     padding: 10px 20px;
     margin-top: 20px;
     cursor: pointer;
     background-color: #4A90E2; /* Electric Blue */
     color: white; /* White text for contrast */
-    font-family: 'LazyDog', sans-serif; /* Apply LazyDog font to buttons */
+    font-family: 'LazyDog', sans-serif; /* Apply LazyDog font */
+    font-size: 2vw; /* Responsive text size based on viewport width */
     border: none;
     border-radius: 5px;
     box-shadow: 0 0 10px #4A90E2;
 }
 
+/* Adjust for smaller viewports */
+@media (max-width: 600px) {
+    button {
+        font-size: 4vw; /* Larger text for smaller screens */
+    }
+}
+
+/* Adjust for very large screens */
+@media (min-width: 1600px) {
+    button {
+        font-size: 24px; /* Fixed size for very large screens */
+    }
+}
+
 button:hover {
     box-shadow: 0 0 20px #00FFFF; /* Neon Cyan glow on hover */
+}
 }
 
 /* Glitch Effect for the Container */
