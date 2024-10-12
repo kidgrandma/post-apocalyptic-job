@@ -113,3 +113,11 @@ button:hover {
         animation: none; /* Removes glitch effect on very small screens */
     }
 }
+@font-face {
+    font-family: 'LazyDog';
+    src: url('images/lazy_dog.ttf') format('truetype'); /* Custom font loaded from the images folder */
+}
+
+body {
+    font-family: 'LazyDog', sans-serif; /* Use LazyDog font with sans-serif fallback */
+}
