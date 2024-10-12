@@ -42,4 +42,38 @@ button {
   }
   50% {
     clip: rect(10px, 9999px, 40px, 0);
-    transform: skew
+    transform: skew(0.7deg);
+  }
+  60% {
+    clip: rect(80px, 9999px, 30px, 0);
+    transform: skew(0.1deg);
+  }
+  70% {
+    clip: rect(30px, 9999px, 70px, 0);
+    transform: skew(0.9deg);
+  }
+  80% {
+    clip: rect(60px, 9999px, 35px, 0);
+    transform: skew(0.6deg);
+  }
+  90% {
+    clip: rect(40px, 9999px, 45px, 0);
+    transform: skew(0.4deg);
+  }
+  100% {
+    clip: rect(15px, 9999px, 80px, 0);
+    transform: skew(0.5deg);
+  }
+}
+
+#quiz-container {
+  position: relative;
+  animation: glitch 1.5s infinite;
+  background-color: #8338EC; /* Cosmic Purple */
+  border-radius: 10px;
+  padding: 20px;
+}
+
+#cover-image {
+  animation: none; /* Ensure the image has no animation */
+}
