@@ -3,23 +3,17 @@ body {
     text-align: center;
     padding: 20px;
     background-color: #6A0DAD; /* Deep Violet */
-    color: white; /* Ensure text is readable against the dark background */
+    color: white;
 }
 
 #quiz-container {
     padding: 20px;
     max-width: 900px;
     margin: 0 auto;
-    background-color: #B8EBD8; /* Light mint green (a bit lighter than your image) */
+    background-color: #B8EBD8; /* Light mint green */
     border-radius: 10px;
 }
 
 button {
     padding: 10px 20px;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
-#question-page, #result-page {
-    display: none;
-}
+    margin-top: 
