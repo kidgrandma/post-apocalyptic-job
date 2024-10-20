@@ -15,6 +15,12 @@ body {
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
+}body {
+    background-image: url('./images/quiz-background.gif'); /* Adjust the path if necessary */
+    background-size: cover; /* Ensures the GIF covers the entire background */
+    background-position: center; /* Centers the GIF */
+    background-repeat: no-repeat; /* Ensures the GIF doesn't repeat */
+    background-attachment: fixed; /* Keeps the GIF fixed while scrolling */
 }
 
 #quiz-container {
