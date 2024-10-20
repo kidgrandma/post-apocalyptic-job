@@ -5,8 +5,8 @@ let userAnswers = [];
 
 const questions = [
     {
-        question: "Question 1: What do you prefer?",
-        answers: ["Option 1", "Option 2", "Option 3"],
+        question: "Welcome 2 the apocalypse! You just woke up in the ruins of Bill Nye's townhouse. Is something burning?!",
+        answers: ["Check it out", "Jump out window", "SCREAM"],
         scores: [1, 2, 3]
     },
     {
