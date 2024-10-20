@@ -10,8 +10,8 @@ const questions = [
         scores: [1, 2, 3]
     },
     {
-        question: "Question 2: Choose a color",
-        answers: ["Red", "Blue", "Green"],
+        question: "Thank gosh you got out of there alive. Death by science guy would have been a weird way to go out. It’s breakfast time! Choose a BUDDY™️ to forge for food:",
+        answers: ["Tupperware Tammy", "The Hermes Shredders", "The Used Bar Salesman"],
         scores: [3, 1, 2]
     }
     // Add more questions here
