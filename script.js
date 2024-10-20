@@ -7,17 +7,20 @@ const questions = [
     {
         question: "Welcome 2 the apocalypse! You just woke up in the ruins of Bill Nye's townhouse. Is something burning?!",
         answers: ["Check it out", "Jump out window", "SCREAM"],
-        scores: [1, 2, 3]
+        scores: [1, 2, 3],
+        illustration: "images/question1-illustration.gif" // Path to GIF for Question 1
     },
     {
-        question: "Thank gosh you got out of there alive. Death by science guy would have been a weird way to go out. It’s breakfast time! Choose a BUDDY™️ to forge for food:",
-        answers: ["Tupperware Tammy", "The Hermes Shredders", "The Used Bar Salesman"],
-        scores: [3, 1, 2]
+        question: "Question 2: Choose a color",
+        answers: ["Red", "Blue", "Green"],
+        scores: [3, 1, 2],
+        illustration: "images/question2-illustration.gif" // Path to GIF for Question 2
     }
     // Add more questions here
 ];
 
-function startQuiz() {  // Remove the glitch effect from the container
+function startQuiz() {
+    // Remove the glitch effect from the container
     document.getElementById("quiz-container").classList.remove("glitch");
 
     // Start the quiz
@@ -28,10 +31,15 @@ function startQuiz() {  // Remove the glitch effect from the container
 
 function showQuestion() {
     const current = questions[currentQuestion];
+    
+    // Update the question text
     document.getElementById("question-text").innerText = current.question;
     
+    // Update the illustration for the current question
+    document.getElementById("question-illustration").src = current.illustration;
+    
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";
+    answersContainer.innerHTML = ""; // Clear previous answers
 
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
