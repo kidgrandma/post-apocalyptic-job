@@ -9,7 +9,7 @@ body {
     background-size: cover; /* Ensures the GIF covers the entire background */
     background-position: center; /* Centers the GIF */
     background-repeat: no-repeat; /* Ensures the GIF doesn't repeat */
-    background-attachment: fixed; /* Keeps the GIF fixed while scrolling */
+    background-attachment: scroll; /* Disable parallax for mobile */
     color: white;
     text-align: center;
     padding: 0;
@@ -21,6 +21,12 @@ body {
     overflow: hidden;
 }
 
+@media (min-width: 1024px) {
+    body {
+        background-attachment: fixed; /* Enable parallax for desktop */
+    }
+}
+
 #quiz-container {
     padding: 20px;
     max-width: 600px;
@@ -30,15 +36,34 @@ body {
     text-align: center;
 }
 
-/* Glitch effect applied initially */
-.glitch {
-    animation: glitch 1.5s infinite;
-    background-color: #8338EC; /* Cosmic Purple */
-    border-radius: 10px;
-    padding: 20px;
+/* Slide Transition for Questions */
+.slide-enter {
+    opacity: 0;
+    transform: translateX(100%);
+}
+.slide-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.slide-exit {
+    opacity: 1;
+    transform: translateX(0);
+}
+.slide-exit-active {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Updated Button Styling for Vertical Stack and New Color */
+/* Faster transitions for mobile */
+@media (max-width: 600px) {
+    .slide-enter-active, .slide-exit-active {
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+}
+
+/* Button Styling with Vertical Stack and Custom Color */
 button {
     display: block; /* Ensures buttons stack vertically */
     width: 100%; /* Takes full width of the container */
@@ -48,7 +73,7 @@ button {
     background-color: #6A0DAD; /* Purple Haze */
     color: white; /* White text for contrast */
     font-family: 'LazyDog', sans-serif; /* Apply LazyDog font */
-    font-size: 2vw; /* Responsive text size based on viewport width */
+    font-size: 5vw; /* Responsive text size based on viewport width */
     border: none;
     border-radius: 5px;
     box-shadow: 0 0 10px #6A0DAD; /* Glow effect */
@@ -59,57 +84,96 @@ button:hover {
     box-shadow: 0 0 20px #9400D3; /* Neon purple glow on hover */
 }
 
-/* Adjust for smaller viewports */
-@media (max-width: 600px) {
-    button {
-        font-size: 4vw; /* Larger text for smaller screens */
-    }
+/* Button Press Animation */
+button:active {
+    transform: scale(0.97); /* Slight shrink for mobile responsiveness */
+    box-shadow: 0 0 10px #9400D3; /* Keep the glow */
 }
 
-/* Adjust for very large screens */
-@media (min-width: 1600px) {
-    button {
-        font-size: 24px; /* Fixed size for very large screens */
-    }
-}
-/* Glitch animation keyframes */
-@keyframes glitch {
-  0% { clip: rect(42px, 9999px, 44px, 0); transform: skew(0.3deg); }
-  10% { clip: rect(20px, 9999px, 80px, 0); transform: skew(0.8deg); }
-  20% { clip: rect(50px, 9999px, 15px, 0); transform: skew(0.2deg); }
-  30% { clip: rect(10px, 9999px, 55px, 0); transform: skew(0.5deg); }
-  40% { clip: rect(35px, 9999px, 65px, 0); transform: skew(1deg); }
-  50% { clip: rect(10px, 9999px, 40px, 0); transform: skew(0.7deg); }
-  60% { clip: rect(80px, 9999px, 30px, 0); transform: skew(0.1deg); }
-  70% { clip: rect(30px, 9999px, 70px, 0); transform: skew(0.9deg); }
-  80% { clip: rect(60px, 9999px, 35px, 0); transform: skew(0.6deg); }
-  90% { clip: rect(40px, 9999px, 45px, 0); transform: skew(0.4deg); }
-  100% { clip: rect(15px, 9999px, 80px, 0); transform: skew(0.5deg); }
-}
-
-/* Adjust for smaller viewports */
-@media (max-width: 600px) {
-    button {
-        font-size: 4vw; /* Larger text for smaller screens */
-    }
-    #quiz-container {
-        padding: 10px;
-        max-width: 100%;
-        border-radius: 5px;
-    }
-}
-
-/* Adjust for very large screens */
 @media (min-width: 1600px) {
     button {
         font-size: 24px; /* Fixed size for very large screens */
     }
 }
 
-/* Disable glitch effect on very small screens */
-@media (max-width: 400px) {
-    #quiz-container {
-        animation: none; /* Removes glitch effect on very small screens */
+/* Fade-In Animation for Results */
+#result-page {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+#result-page.show {
+    opacity: 1;
+}
+
+/* Faster transition for mobile */
+@media (max-width: 600px) {
+    #result-page {
+        transition: opacity 0.4s ease-in;
+    }
+}
+
+/* Glitch Text Animation for Headers */
+.glitch-title {
+    position: relative;
+    font-size: 7vw; /* Scaled for mobile */
+    color: white;
+}
+
+.glitch-title::before, .glitch-title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+}
+
+.glitch-title::before {
+    left: 2px;
+    text-shadow: -2px 0 red;
+    animation: glitch-animation 2s infinite;
+}
+
+.glitch-title::after {
+    left: -2px;
+    text-shadow: -2px 0 cyan;
+    animation: glitch-animation 3s infinite;
+}
+
+@keyframes glitch-animation {
+    0%, 100% { clip: rect(20px, 9999px, 80px, 0); transform: skew(0.2deg); }
+    50% { clip: rect(10px, 9999px, 40px, 0); transform: skew(0.5deg); }
+}
+
+@media (max-width: 600px) {
+    .glitch-title {
+        font-size: 10vw; /* Larger text for mobile */
+    }
+}
+
+/* Loading Spinner for Results */
+.spinner {
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #8338EC; /* Cosmic Purple */
+    border-radius: 50%;
+    width: 40px; /* Smaller for mobile */
+    height: 40px;
+    animation: spin 0.8s linear infinite; /* Faster for mobile */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 600px) {
+    .spinner {
+        width: 30px; /* Even smaller for mobile */
+        height: 30px;
     }
 }
 
