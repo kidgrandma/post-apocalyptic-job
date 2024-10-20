@@ -38,25 +38,40 @@ body {
     padding: 20px;
 }
 
-/* Button Styling with Responsive Text */
+/* Updated Button Styling for Vertical Stack and New Color */
 button {
-    padding: 10px 20px;
-    margin-top: 20px;
+    display: block; /* Ensures buttons stack vertically */
+    width: 100%; /* Takes full width of the container */
+    padding: 15px 20px;
+    margin: 10px 0; /* Adds some space between each button */
     cursor: pointer;
-    background-color: #4A90E2; /* Electric Blue */
+    background-color: #6A0DAD; /* Purple Haze */
     color: white; /* White text for contrast */
     font-family: 'LazyDog', sans-serif; /* Apply LazyDog font */
     font-size: 2vw; /* Responsive text size based on viewport width */
     border: none;
     border-radius: 5px;
-    box-shadow: 0 0 10px #4A90E2;
+    box-shadow: 0 0 10px #6A0DAD; /* Glow effect */
 }
 
-/* Button hover effect */
+/* Button Hover Effect with Glow */
 button:hover {
-    box-shadow: 0 0 20px #00FFFF; /* Neon Cyan glow on hover */
+    box-shadow: 0 0 20px #9400D3; /* Neon purple glow on hover */
 }
 
+/* Adjust for smaller viewports */
+@media (max-width: 600px) {
+    button {
+        font-size: 4vw; /* Larger text for smaller screens */
+    }
+}
+
+/* Adjust for very large screens */
+@media (min-width: 1600px) {
+    button {
+        font-size: 24px; /* Fixed size for very large screens */
+    }
+}
 /* Glitch animation keyframes */
 @keyframes glitch {
   0% { clip: rect(42px, 9999px, 44px, 0); transform: skew(0.3deg); }
