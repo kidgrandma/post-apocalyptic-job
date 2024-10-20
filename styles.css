@@ -5,7 +5,7 @@
 
 body {
     font-family: 'LazyDog', sans-serif; /* Use LazyDog font with sans-serif fallback */
-   background-image: url('./images/quiz-background.gif'); /* Adjust the path if necessary */
+    background-image: url('./images/quiz-background.gif'); /* Adjust the path if necessary */
     background-size: cover; /* Ensures the GIF covers the entire background */
     background-position: center; /* Centers the GIF */
     background-repeat: no-repeat; /* Ensures the GIF doesn't repeat */
@@ -30,6 +30,14 @@ body {
     text-align: center;
 }
 
+/* Glitch effect applied initially */
+.glitch {
+    animation: glitch 1.5s infinite;
+    background-color: #8338EC; /* Cosmic Purple */
+    border-radius: 10px;
+    padding: 20px;
+}
+
 /* Button Styling with Responsive Text */
 button {
     padding: 10px 20px;
@@ -44,10 +52,35 @@ button {
     box-shadow: 0 0 10px #4A90E2;
 }
 
+/* Button hover effect */
+button:hover {
+    box-shadow: 0 0 20px #00FFFF; /* Neon Cyan glow on hover */
+}
+
+/* Glitch animation keyframes */
+@keyframes glitch {
+  0% { clip: rect(42px, 9999px, 44px, 0); transform: skew(0.3deg); }
+  10% { clip: rect(20px, 9999px, 80px, 0); transform: skew(0.8deg); }
+  20% { clip: rect(50px, 9999px, 15px, 0); transform: skew(0.2deg); }
+  30% { clip: rect(10px, 9999px, 55px, 0); transform: skew(0.5deg); }
+  40% { clip: rect(35px, 9999px, 65px, 0); transform: skew(1deg); }
+  50% { clip: rect(10px, 9999px, 40px, 0); transform: skew(0.7deg); }
+  60% { clip: rect(80px, 9999px, 30px, 0); transform: skew(0.1deg); }
+  70% { clip: rect(30px, 9999px, 70px, 0); transform: skew(0.9deg); }
+  80% { clip: rect(60px, 9999px, 35px, 0); transform: skew(0.6deg); }
+  90% { clip: rect(40px, 9999px, 45px, 0); transform: skew(0.4deg); }
+  100% { clip: rect(15px, 9999px, 80px, 0); transform: skew(0.5deg); }
+}
+
 /* Adjust for smaller viewports */
 @media (max-width: 600px) {
     button {
         font-size: 4vw; /* Larger text for smaller screens */
+    }
+    #quiz-container {
+        padding: 10px;
+        max-width: 100%;
+        border-radius: 5px;
     }
 }
 
@@ -58,64 +91,11 @@ button {
     }
 }
 
-button:hover {
-    box-shadow: 0 0 20px #00FFFF; /* Neon Cyan glow on hover */
-}
-
-/* Glitch Effect for the Container */
-@keyframes glitch {
-  0% {
-    clip: rect(42px, 9999px, 44px, 0);
-    transform: skew(0.3deg);
-  }
-  10% {
-    clip: rect(20px, 9999px, 80px, 0);
-    transform: skew(0.8deg);
-  }
-  20% {
-    clip: rect(50px, 9999px, 15px, 0);
-    transform: skew(0.2deg);
-  }
-  30% {
-    clip: rect(10px, 9999px, 55px, 0);
-    transform: skew(0.5deg);
-  }
-  40% {
-    clip: rect(35px, 9999px, 65px, 0);
-    transform: skew(1deg);
-  }
-  50% {
-    clip: rect(10px, 9999px, 40px, 0);
-    transform: skew(0.7deg);
-  }
-  60% {
-    clip: rect(80px, 9999px, 30px, 0);
-    transform: skew(0.1deg);
-  }
-  70% {
-    clip: rect(30px, 9999px, 70px, 0);
-    transform: skew(0.9deg);
-  }
-  80% {
-    clip: rect(60px, 9999px, 35px, 0);
-    transform: skew(0.6deg);
-  }
-  90% {
-    clip: rect(40px, 9999px, 45px, 0);
-    transform: skew(0.4deg);
-  }
-  100% {
-    clip: rect(15px, 9999px, 80px, 0);
-    transform: skew(0.5deg);
-  }
-}
-
-#quiz-container {
-    position: relative;
-    animation: glitch 1.5s infinite;
-    background-color: #8338EC; /* Cosmic Purple */
-    border-radius: 10px;
-    padding: 20px;
+/* Disable glitch effect on very small screens */
+@media (max-width: 400px) {
+    #quiz-container {
+        animation: none; /* Removes glitch effect on very small screens */
+    }
 }
 
 /* Image Styling */
@@ -125,20 +105,4 @@ button:hover {
     max-width: 600px;
     display: block;
     margin: 0 auto;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 600px) {
-    #quiz-container {
-        padding: 10px;
-        max-width: 100%;
-        border-radius: 5px;
-    }
-}
-
-/* Disable glitch effect on very small screens */
-@media (max-width: 400px) {
-    #quiz-container {
-        animation: none; /* Removes glitch effect on very small screens */
-    }
 }
