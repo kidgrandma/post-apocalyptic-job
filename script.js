@@ -16,8 +16,12 @@ const questions = [
     }
     // Add more questions here
 ];
+    
+}function startQuiz() {
+    // Remove the glitch effect from the container
+    document.getElementById("quiz-container").classList.remove("glitch");
 
-function startQuiz() {
+    // Start the quiz
     document.getElementById("start-page").style.display = "none";
     document.getElementById("question-page").style.display = "block";
     showQuestion();
