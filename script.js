@@ -1,8 +1,32 @@
+// Event listener to start the quiz
 document.getElementById("start-quiz").addEventListener("click", startQuiz);
 
-let currentQuestion = 0;
-let userAnswers = [];
+let currentQuestion = 0;  // Tracks the current question index
+let userAnswers = [];  // Stores the user's answers
 
+// Function to start the quiz, hide the start page, and show the first question
+function startQuiz() {
+    document.getElementById("start-page").style.display = "none";  // Hide the start page
+    document.getElementById("question-page").style.display = "block";  // Show the question page
+    showQuestion();  // Display the first question
+}
+
+// Function to show the current question
+function showQuestion() {
+    const current = questions[currentQuestion];  // Get the current question from the array
+    document.getElementById("question-text").innerText = current.question;  // Display the question text
+    document.getElementById("question-illustration").src = current.gif;  // Display the corresponding GIF
+
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";  // Clear any previous answers
+
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");  // Create a new button for each answer
+        answerButton.innerText = answer;  // Set the answer text on the button
+        answerButton.addEventListener("click", () => selectAnswer(index));  // Add click listener for selecting the answer
+        answersContainer.appendChild(answerButton);  // Append the button to the container
+    });
+}
 // Define the questions, answers, scores, and GIFs
 const questions = [
     {
