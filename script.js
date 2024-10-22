@@ -297,7 +297,6 @@ function getCrewColor(outcome) {
     document.getElementById("meet-moderator").addEventListener("click", () => {
         window.location.href = "https://worksucks.net";
     });
-};
 // Functionality to copy quiz link to clipboard
 document.getElementById("copy-link-btn").addEventListener("click", () => {
     const quizLink = window.location.href;  // Current quiz URL
