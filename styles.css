@@ -5,11 +5,11 @@
 
 body {
     font-family: 'LazyDog', sans-serif;
-    background-image: url('./images/quiz-background.gif'); /* Background GIF visible */
+    background-image: url('./images/quiz-background.gif');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: scroll; /* Disable parallax for mobile */
+    background-attachment: scroll;
     color: white;
     text-align: center;
     padding: 0;
@@ -21,7 +21,6 @@ body {
     overflow: hidden;
 }
 
-/* Parallax effect for desktop */
 @media (min-width: 1024px) {
     body {
         background-attachment: fixed; /* Enable parallax for desktop */
@@ -32,94 +31,61 @@ body {
     padding: 20px;
     max-width: 600px;
     margin: 0 auto;
-    background-color: rgba(131, 56, 236, 0.8); /* Cosmic Purple with slight transparency */
+    background-color: rgba(131, 56, 236, 0.7); /* Increased transparency */
     border-radius: 10px;
     text-align: center;
-    backdrop-filter: blur(5px); /* Blurred container to enhance background visibility */
+    backdrop-filter: blur(5px); /* Blurred container */
 }
 
-/* Slide Transition for Questions */
-.slide-enter {
-    opacity: 0;
-    transform: translateX(100%);
-}
-.slide-enter-active {
-    opacity: 1;
-    transform: translateX(0);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.slide-exit {
-    opacity: 1;
-    transform: translateX(0);
-}
-.slide-exit-active {
-    opacity: 0;
-    transform: translateX(-100%);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* Faster transitions for mobile */
+/* Smaller container on mobile */
 @media (max-width: 600px) {
-    .slide-enter-active, .slide-exit-active {
-        transition: opacity 0.2s ease, transform 0.2s ease;
+    #quiz-container {
+        padding: 10px;
+        max-width: 90%; /* Smaller container */
+        background-color: rgba(131, 56, 236, 0.5); /* More transparent on mobile */
+        border-radius: 8px;
+        backdrop-filter: blur(3px);
     }
 }
 
-/* Button Styling with Vertical Stack and Custom Color */
+/* Button Styling with Vertical Stack and Enhanced Contrast */
 button {
-    display: block; /* Ensures buttons stack vertically */
-    width: 100%; /* Takes full width of the container */
+    display: block;
+    width: 100%;
     padding: 15px 20px;
-    margin: 10px 0; /* Adds some space between each button */
+    margin: 10px 0;
     cursor: pointer;
     background-color: #6A0DAD; /* Purple Haze */
     color: white; /* White text for contrast */
     font-family: 'LazyDog', sans-serif;
-    font-size: 5vw; /* Responsive text size based on viewport width */
+    font-size: 5vw; /* Responsive text size */
     border: none;
     border-radius: 5px;
     box-shadow: 0 0 10px #6A0DAD; /* Glow effect */
+    text-transform: uppercase; /* To make buttons more distinct */
 }
 
-/* Button Hover Effect with Glow */
+/* Button Hover Effect */
 button:hover {
-    box-shadow: 0 0 20px #9400D3; /* Neon purple glow on hover */
+    box-shadow: 0 0 20px #9400D3;
+}
+
+/* Adjusted Button Text Color for Contrast */
+button {
+    background-color: #4A90E2; /* Lighter blue to distinguish from text */
+    color: #fff; /* Clear contrast with white text */
 }
 
 /* Button Press Animation */
 button:active {
-    transform: scale(0.97); /* Slight shrink for mobile responsiveness */
-    box-shadow: 0 0 10px #9400D3; /* Keep the glow */
-}
-
-/* Button scaling for large screens */
-@media (min-width: 1600px) {
-    button {
-        font-size: 24px; /* Fixed size for very large screens */
-    }
-}
-
-/* Fade-In Animation for Results */
-#result-page {
-    opacity: 0;
-    transition: opacity 0.5s ease-in;
-}
-
-#result-page.show {
-    opacity: 1;
-}
-
-/* Faster transition for mobile */
-@media (max-width: 600px) {
-    #result-page {
-        transition: opacity 0.4s ease-in;
-    }
+    transform: scale(0.97); 
+    box-shadow: 0 0 10px #9400D3;
 }
 
 /* Glitch Text Animation for Headers */
 .glitch-title {
     position: relative;
-    font-size: 7vw; /* Scaled for mobile */
+    font-size: 7vw;
     color: white;
 }
 
@@ -152,40 +118,20 @@ button:active {
     50% { clip: rect(10px, 9999px, 40px, 0); transform: skew(0.5deg); }
 }
 
+/* Adjustments for mobile */
 @media (max-width: 600px) {
     .glitch-title {
-        font-size: 10vw; /* Larger text for mobile */
-    }
-}
-
-/* Loading Spinner for Results */
-.spinner {
-    border: 3px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #8338EC; /* Cosmic Purple */
-    border-radius: 50%;
-    width: 40px; /* Smaller for mobile */
-    height: 40px;
-    animation: spin 0.8s linear infinite; /* Faster for mobile */
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@media (max-width: 600px) {
-    .spinner {
-        width: 30px; /* Even smaller for mobile */
-        height: 30px;
+        font-size: 10vw;
     }
 }
 
 /* Image Styling */
-#cover-image {
-    width: 100%; /* Make image responsive */
+#cover-image, #question-illustration {
+    width: 100%;
     max-width: 600px;
     display: block;
     margin: 0 auto;
+}
 }
 
 /* Question Illustrations Styling */
