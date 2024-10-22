@@ -119,19 +119,6 @@ button:active {
     }
 }
 
-/* Glitch Text Animation for Headers */
-.glitch-title {
-    position: relative;
-    font-size: 7vw;
-    color: white;
-}
-
-@media (max-width: 600px) {
-    .glitch-title {
-        font-size: 10vw;
-    }
-}
-
 #quiz-container {
     animation: none; /* Removes glitch effect on very small screens */
 }
