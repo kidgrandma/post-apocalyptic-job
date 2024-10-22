@@ -95,75 +95,48 @@ window.onload = function() {
         });
     }
 
- // Show Question 7 after 6A, 6B, or 6C
-function showQuestion7() {
-    currentQuestion = 6; // Index for Question 7
-    const current = question7;
+    // Show Question 7 after 6A, 6B, or 6C
+    function showQuestion7() {
+        currentQuestion = 6;  // Index for Question 7
+        const current = question7;
 
-    document.getElementById("question-text").innerText = current.question;
-    document.getElementById("question-illustration").src = current.gif;
+        document.getElementById("question-text").innerText = current.question;
+        document.getElementById("question-illustration").src = current.gif;
 
-    const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";
+        const answersContainer = document.getElementById("answers-container");
+        answersContainer.innerHTML = "";
 
-    current.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
-        answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Push score for Question 7
-            showQuestion8(); // After Question 7, go to Question 8
-        });
-        answersContainer.appendChild(answerButton);
-    });
-}
-
-// Function to show Question 8
-function showQuestion8() {
-    currentQuestion = 7; // Index for Question 8
-    const current = question8;
-
-    document.getElementById("question-text").innerText = current.question;
-    document.getElementById("question-illustration").src = current.gif;
-
-    const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";
-
-    current.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
-        answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Push score for Question 8
-            showQuestion9();  // After Question 8, go to Question 9
-        });
-        answersContainer.appendChild(answerButton);
-    });
-}
+        current.answers.forEach((answer, index) => {
+            const answerButton = document.createElement("button");
+            answerButton.innerText = answer;
+            answerButton.addEventListener("click", () => {
+                userAnswers.push(current.scores[index]);  // Push score for Question 7
+                showQuestion8();  // After Question 7, go to Question 8
+            });
+            answersContainer.appendChild(answerButton);
         });
     }
 
-    // Standard selectAnswer function for regular questions like 7 and beyond
-    function selectAnswer(answerIndex) {
-        userAnswers.push(questions[currentQuestion].scores[answerIndex]);
+    // Function to show Question 8
+    function showQuestion8() {
+        currentQuestion = 7;  // Index for Question 8
+        const current = question8;
 
-        if (currentQuestion === 4) {  // Handle branch logic for Question 5
-            selectAnswerForQuestion5(answerIndex);
-        } else if (currentQuestion === '6A' || currentQuestion === '6B' || currentQuestion === '6C') {
-            currentQuestion = 6;  // Move to Question 7 after 6A/B/C
-            showQuestion7();
-        } else if (currentQuestion === 9) {  // Branch logic for Question 10
-            if (answerIndex === 1) {
-                showCustomQuestion(question11);  // Go to Bonus Question 11
-            } else {
-                showResults();  // End the quiz and show results
-            }
-        } else {
-            currentQuestion++;
-            if (currentQuestion < questions.length) {
-                showQuestion();
-            } else {
-                showResults();  // End of quiz, show results
-            }
-        }
+        document.getElementById("question-text").innerText = current.question;
+        document.getElementById("question-illustration").src = current.gif;
+
+        const answersContainer = document.getElementById("answers-container");
+        answersContainer.innerHTML = "";
+
+        current.answers.forEach((answer, index) => {
+            const answerButton = document.createElement("button");
+            answerButton.innerText = answer;
+            answerButton.addEventListener("click", () => {
+                userAnswers.push(current.scores[index]);  // Push score for Question 8
+                showQuestion9();  // After Question 8, go to Question 9
+            });
+            answersContainer.appendChild(answerButton);
+        });
     }
 
     // Define custom Question 6A, 6B, 6C with adjusted scores
@@ -219,7 +192,7 @@ function showQuestion8() {
 
     // Bonus Question 11 with adjusted scores
     const question11 = {
-               question: "Wellness club was a decoy. Order up before you meet your crew.",
+        question: "Wellness club was a decoy. Order up before you meet your crew.",
         answers: ["Big Macintosh meal", "Pedialyte", "Straight-up bleach"],
         scores: [2, 1, 3],
         gif: "images/question11-illustration.gif"
@@ -345,4 +318,4 @@ function showQuestion8() {
     document.getElementById("meet-moderator").addEventListener("click", () => {
         window.location.href = "https://worksucks.net";
     });
-}
+};
