@@ -127,7 +127,28 @@ button:active {
         padding: 12px 20px;
     }
 }
+#share-buttons button {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #00FFFF;  /* Neon cyan */
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
+#share-buttons button:hover {
+    background-color: #FF00FF;  /* Neon magenta */
+    color: #FFF;
+}
+
+#share-buttons p {
+    font-family: 'LazyDog', sans-serif;
+    margin-bottom: 10px;
+}
 /* Image Styling */
 #cover-image, #question-illustration {
     width: 100%;
