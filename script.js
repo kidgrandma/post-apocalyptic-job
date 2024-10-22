@@ -18,6 +18,97 @@ function startQuiz() {
     updateProgressBar();  // Initialize the progress bar at the start of the quiz
     showQuestion();  // Call the function to display the first question
 }
+// Define the questions, answers, scores, and GIFs
+const questions = [
+    {
+        question: "Welcome 2 the apocalypse! You just woke up in the ruins of Bill Nye's townhouse. Is something burning?!",
+        answers: ["Check it out", "SCREAM", "Jump out window"],
+        scores: [2, 4, 3],
+        gif: "images/question1-illustration.gif"
+    },
+    {
+        question: "Thank gosh you got out of there alive. Death by science guy would have been a weird way to go out. It’s breakfast time! Choose a BUDDY™️ to forage for food:",
+        answers: ["Tupperware Tammy", "The Hermes Shredders", "The Used Bar Salesman"],
+        scores: [3, 5, 2],
+        gif: "images/question2-illustration.gif"
+    },
+    {
+        question: "Great work! You and your BUDDY™️ need to grab something to eat, where ya headed?",
+        answers: ["Waffle House", "Steal from someone's kid", "Street fighter for it"],
+        scores: [2, 3, 4],
+        gif: "images/question3-illustration.gif"
+    },
+    {
+        question: "Uh oh! Not enough food for you and BUDDY™️ - what do you do?",
+        answers: ["Kill BUDDY™️", "Share food with BUDDY™️", "Sell BUDDY™️"],
+        scores: [6, 2, 4],
+        gif: "images/question4-illustration.gif"
+    },
+    {
+        question: "Aw, BUDDY™️ died anyways. Time to look for shelter. Where do you go?",
+        answers: ["Abandoned DMV", "Mojo Dojo Casa House", "Spirit Halloween"],
+        scores: [6, 5, 3],
+        gif: "images/question5-illustration.gif"
+    }
+];
+
+// Define custom Question 6A, 6B, 6C with adjusted scores
+const question6A = {
+    question: "Post-apocalyptic club kids have kidnapped you! The bag's out, and they've been carpet farming for months. How do you escape?",
+    answers: ["Agua gun", "Bible", "Butter knife"],
+    scores: [2, 4, 6],
+    gif: "images/question6a-illustration.gif"
+};
+
+const question6B = {
+    question: "Ahh, the good old Olsen bait and switch. You're tied to the bed while they take turns reading your birth chart. How do you escape?",
+    answers: ["Bible", "Agua gun", "Butter knife"],
+    scores: [4, 2, 6],
+    gif: "images/question6b-illustration.gif"
+};
+
+const question6C = {
+    question: "We’re never closing!! You’re trapped inside an out-of-season Spirit Halloween with the Homicidal Power Ranger while he cries and reads Edgar Allen Poe Wikipedia facts. How do you escape?",
+    answers: ["Agua gun", "Butter knife", "Bible"],
+    scores: [2, 6, 4],
+    gif: "images/question6c-illustration.gif"
+};
+
+// Question 7 and beyond with adjusted scores
+const question7 = {
+    question: "Great work. Now that you found shelter, food, and a weapon—you’ve become quite the dickhead and your aura points are BANKRUPT. How will you repent?",
+    answers: ["Rehab", "Double down at the casino"],
+    scores: [3, 6],
+    gif: "images/question7-illustration.gif"
+};
+
+const question8 = {
+    question: "Surprise! It’s a water witch and they've granted you three wishes in exchange for all your supplies.",
+    answers: ["Wishy wish", "No deal", "Amateur massage"],
+    scores: [6, 3, 4],
+    gif: "images/question8-illustration.gif"
+};
+
+const question9 = {
+    question: "Oh no! You’ve been ROBBED. I guess this is the end. How do you go out?",
+    answers: ["OD on cigarettes", "Hadouken"],
+    scores: [3, 6],
+    gif: "images/question9-illustration.gif"
+};
+
+const question10 = {
+    question: "The Protein Priest has saved you. You can join his wellness club or pledge your life to an apocalypse crew.",
+    answers: ["Meet your new gang", "Hot yoga matcha baptism"],
+    scores: [6, 3],
+    gif: "images/question10-illustration.gif"
+};
+
+const question11 = {
+    question: "Wellness club was a decoy. Order up before you meet your crew.",
+    answers: ["Big Macintosh meal", "Pedialyte", "Straight-up bleach"],
+    scores: [2, 1, 3],
+    gif: "images/question11-illustration.gif"
+};
 
 // Function to show the current question
 function showQuestion() {
@@ -304,94 +395,3 @@ document.getElementById("copy-link-btn").addEventListener("click", () => {
         alert("Quiz link copied to clipboard!");
     });
 });
-// Define the questions, answers, scores, and GIFs
-const questions = [
-    {
-        question: "Welcome 2 the apocalypse! You just woke up in the ruins of Bill Nye's townhouse. Is something burning?!",
-        answers: ["Check it out", "SCREAM", "Jump out window"],
-        scores: [2, 4, 3],
-        gif: "images/question1-illustration.gif"
-    },
-    {
-        question: "Thank gosh you got out of there alive. Death by science guy would have been a weird way to go out. It’s breakfast time! Choose a BUDDY™️ to forage for food:",
-        answers: ["Tupperware Tammy", "The Hermes Shredders", "The Used Bar Salesman"],
-        scores: [3, 5, 2],
-        gif: "images/question2-illustration.gif"
-    },
-    {
-        question: "Great work! You and your BUDDY™️ need to grab something to eat, where ya headed?",
-        answers: ["Waffle House", "Steal from someone's kid", "Street fighter for it"],
-        scores: [2, 3, 4],
-        gif: "images/question3-illustration.gif"
-    },
-    {
-        question: "Uh oh! Not enough food for you and BUDDY™️ - what do you do?",
-        answers: ["Kill BUDDY™️", "Share food with BUDDY™️", "Sell BUDDY™️"],
-        scores: [6, 2, 4],
-        gif: "images/question4-illustration.gif"
-    },
-    {
-        question: "Aw, BUDDY™️ died anyways. Time to look for shelter. Where do you go?",
-        answers: ["Abandoned DMV", "Mojo Dojo Casa House", "Spirit Halloween"],
-        scores: [6, 5, 3],
-        gif: "images/question5-illustration.gif"
-    }
-];
-
-// Define custom Question 6A, 6B, 6C with adjusted scores
-const question6A = {
-    question: "Post-apocalyptic club kids have kidnapped you! The bag's out, and they've been carpet farming for months. How do you escape?",
-    answers: ["Agua gun", "Bible", "Butter knife"],
-    scores: [2, 4, 6],
-    gif: "images/question6a-illustration.gif"
-};
-
-const question6B = {
-    question: "Ahh, the good old Olsen bait and switch. You're tied to the bed while they take turns reading your birth chart. How do you escape?",
-    answers: ["Bible", "Agua gun", "Butter knife"],
-    scores: [4, 2, 6],
-    gif: "images/question6b-illustration.gif"
-};
-
-const question6C = {
-    question: "We’re never closing!! You’re trapped inside an out-of-season Spirit Halloween with the Homicidal Power Ranger while he cries and reads Edgar Allen Poe Wikipedia facts. How do you escape?",
-    answers: ["Agua gun", "Butter knife", "Bible"],
-    scores: [2, 6, 4],
-    gif: "images/question6c-illustration.gif"
-};
-
-// Question 7 and beyond with adjusted scores
-const question7 = {
-    question: "Great work. Now that you found shelter, food, and a weapon—you’ve become quite the dickhead and your aura points are BANKRUPT. How will you repent?",
-    answers: ["Rehab", "Double down at the casino"],
-    scores: [3, 6],
-    gif: "images/question7-illustration.gif"
-};
-
-const question8 = {
-    question: "Surprise! It’s a water witch and they've granted you three wishes in exchange for all your supplies.",
-    answers: ["Wishy wish", "No deal", "Amateur massage"],
-    scores: [6, 3, 4],
-    gif: "images/question8-illustration.gif"
-};
-
-const question9 = {
-    question: "Oh no! You’ve been ROBBED. I guess this is the end. How do you go out?",
-    answers: ["OD on cigarettes", "Hadouken"],
-    scores: [3, 6],
-    gif: "images/question9-illustration.gif"
-};
-
-const question10 = {
-    question: "The Protein Priest has saved you. You can join his wellness club or pledge your life to an apocalypse crew.",
-    answers: ["Meet your new gang", "Hot yoga matcha baptism"],
-    scores: [6, 3],
-    gif: "images/question10-illustration.gif"
-};
-
-const question11 = {
-    question: "Wellness club was a decoy. Order up before you meet your crew.",
-    answers: ["Big Macintosh meal", "Pedialyte", "Straight-up bleach"],
-    scores: [2, 1, 3],
-    gif: "images/question11-illustration.gif"
-};
