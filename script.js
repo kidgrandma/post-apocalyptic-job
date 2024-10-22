@@ -6,29 +6,28 @@ window.onload = function() {
     let userAnswers = [];  // Stores the user's answers
 
     // Function to start the quiz, hide the start page, and show the first question
-    function startQuiz() {
-        console.log("Start Quiz clicked");  // Log for troubleshooting
-        document.getElementById("start-page").style.display = "none";  // Hide the start page
-        document.getElementById("question-page").style.display = "block";  // Show the question page
-        showQuestion();  // Display the first question
-    }
+function startQuiz() {
+    document.getElementById("start-page").style.display = "none";  // Hides the start page
+    document.getElementById("question-page").style.display = "block";  // Shows the first question
+    showQuestion();  // Call the function to display the first question
+}
 
     // Function to show the current question
-    function showQuestion() {
-        const current = questions[currentQuestion];  // Get the current question from the array
-        document.getElementById("question-text").innerText = current.question;  // Display the question text
-        document.getElementById("question-illustration").src = current.gif;  // Display the corresponding GIF
+function showQuestion() {
+    const current = questions[currentQuestion];
+    document.getElementById("question-text").innerText = current.question;
+    document.getElementById("question-illustration").src = current.gif;
 
-        const answersContainer = document.getElementById("answers-container");
-        answersContainer.innerHTML = "";  // Clear any previous answers
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";  // Clears previous answers
 
-        current.answers.forEach((answer, index) => {
-            const answerButton = document.createElement("button");  // Create a new button for each answer
-            answerButton.innerText = answer;  // Set the answer text on the button
-            answerButton.addEventListener("click", () => selectAnswer(index));  // Add click listener for selecting the answer
-            answersContainer.appendChild(answerButton);  // Append the button to the container
-        });
-    }
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => selectAnswer(index));
+        answersContainer.appendChild(answerButton);
+    });
+}
 // Define the questions, answers, scores, and GIFs
 const questions = [
     {
