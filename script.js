@@ -261,7 +261,7 @@ function showBonusQuestion11() {
 // Function to display the quiz results
 function showResults() {
     document.getElementById("question-page").style.display = "none";
-    document.getElementById("result-page").style.display = "block";
+    document.getElementById("result-page").style.display = "block";  // Ensure the result page is shown
 
     const totalScore = userAnswers.reduce((a, b) => a + b, 0);
     const outcome = determineOutcome(totalScore);
@@ -270,7 +270,13 @@ function showResults() {
     const crewColor = getCrewColor(outcome);
     document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
     document.getElementById("result-title").style.color = crewColor;
-    document.getElementById("result-image").src = `images/outcome${getOutcomeImage(outcome)}.png`;
+
+    // Set the image for the result
+    const resultImageSrc = outcome === "Unknown" 
+        ? "images/unknown.gif"  // New fallback GIF 
+        : `images/outcome${getOutcomeImage(outcome)}.png`;
+        
+    document.getElementById("result-image").src = resultImageSrc;
 }
 
 // Function to determine the outcome based on total score
@@ -303,7 +309,7 @@ function getOutcomeImage(outcome) {
         case "Radioactive Radio Media Empire": return 10;
         case "The Olsen Twins": return 4;
         case "Museum of Car Parts": return 13;
-        default: return "unknown";  // Fallback in case of an unexpected outcome
+        default: return "unknown";  // Now the fallback is "unknown.gif"
     }
 }
 
