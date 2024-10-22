@@ -95,22 +95,49 @@ window.onload = function() {
         });
     }
 
-    // Show Question 7 after 6A, 6B, or 6C
-    function showQuestion7() {
-        currentQuestion = 6;
-        const current = question7;
+ // Show Question 7 after 6A, 6B, or 6C
+function showQuestion7() {
+    currentQuestion = 6; // Index for Question 7
+    const current = question7;
 
-        document.getElementById("question-text").innerText = current.question;
-        document.getElementById("question-illustration").src = current.gif;
+    document.getElementById("question-text").innerText = current.question;
+    document.getElementById("question-illustration").src = current.gif;
 
-        const answersContainer = document.getElementById("answers-container");
-        answersContainer.innerHTML = "";
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";
 
-        current.answers.forEach((answer, index) => {
-            const answerButton = document.createElement("button");
-            answerButton.innerText = answer;
-            answerButton.addEventListener("click", () => selectAnswer(index));
-            answersContainer.appendChild(answerButton);
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => {
+            userAnswers.push(current.scores[index]);  // Push score for Question 7
+            showQuestion8(); // After Question 7, go to Question 8
+        });
+        answersContainer.appendChild(answerButton);
+    });
+}
+
+// Function to show Question 8
+function showQuestion8() {
+    currentQuestion = 7; // Index for Question 8
+    const current = question8;
+
+    document.getElementById("question-text").innerText = current.question;
+    document.getElementById("question-illustration").src = current.gif;
+
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";
+
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => {
+            userAnswers.push(current.scores[index]);  // Push score for Question 8
+            showQuestion9();  // After Question 8, go to Question 9
+        });
+        answersContainer.appendChild(answerButton);
+    });
+}
         });
     }
 
