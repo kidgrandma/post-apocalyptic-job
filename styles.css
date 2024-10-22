@@ -50,21 +50,35 @@ body {
 /* Progress bar at the top */
 #progress-bar {
     width: 100%;
-    height: 5px;
-    background-color: rgba(255, 255, 255, 0.3);
-    position: relative;
+    height: 8px;  /* Increase height for better visibility */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;  /* Rounded corners */
     margin-top: 20px;
+    overflow: hidden;  /* Ensures the progress fill doesn't go outside */
+    position: relative;
 }
 
 #progress-fill {
-    height: 5px;
-    background-color: #FF00FF;
+    height: 100%;
+    background-image: linear-gradient(90deg, #FF00FF, #00FFFF);  /* Neon gradient effect */
     width: 0;
-    transition: width 0.5s ease;
+    transition: width 0.5s ease, box-shadow 0.5s ease;  /* Smooth width transition */
+    border-radius: 5px;  /* Rounded fill for a cleaner look */
+    box-shadow: 0 0 10px #FF00FF, 0 0 15px #00FFFF;  /* Neon glow effect */
 }
 
-h1, h2, p {
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); /* Improved text contrast */
+/* Add pulsing glow animation for progress fill */
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px #FF00FF, 0 0 15px #00FFFF;
+    }
+    to {
+        box-shadow: 0 0 20px #FF00FF, 0 0 25px #00FFFF;
+    }
+}
+
+#progress-fill {
+    animation: glow 1.5s infinite alternate;  /* Subtle pulsing glow */
 }
 
 /* Smaller container and increased transparency on mobile */
