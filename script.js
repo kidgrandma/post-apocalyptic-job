@@ -211,17 +211,45 @@ function updateProgressBar() {
         });
     }
 
-    // Function to display the quiz results
-    function showResults() {
-        document.getElementById("question-page").style.display = "none";
-        document.getElementById("result-page").style.display = "block";
+// Function to display the quiz results
+function showResults() {
+    document.getElementById("question-page").style.display = "none";
+    document.getElementById("result-page").style.display = "block";
 
-        const totalScore = userAnswers.reduce((a, b) => a + b, 0);
-        let outcome = determineOutcome(totalScore);
+    const totalScore = userAnswers.reduce((a, b) => a + b, 0);
+    let outcome = determineOutcome(totalScore);
+    
+    // Set dynamic complementary color for crew name
+    const crewColor = getCrewColor(outcome);
 
-        document.getElementById("result-title").innerText = `Congrats! You’re now a bonafide certified authentic genuine verified member of the ${outcome}`;
-        document.getElementById("result-image").src = `images/outcome${getOutcomeImage(outcome)}.png`;
+    // Update results page content
+    const resultTitle = `Congrats! You’re now a bonafide certified authentic genuine verified member of the ${outcome}`;
+    document.getElementById("result-title").innerHTML = resultTitle;
+    document.getElementById("result-title").style.color = crewColor;  // Apply dynamic color
+
+    document.getElementById("result-image").src = `images/outcome${getOutcomeImage(outcome)}.png`;
+
+    // Display share buttons
+    document.getElementById("share-buttons").style.display = "block";
+}
+
+// Function to map complementary color to the crew name
+function getCrewColor(outcome) {
+    switch(outcome) {
+        case "Homicidal Power Ranger": return "#FF4500";  // Example bright orange
+        case "Caffeine Nicotine Cartel": return "#008080";  // Teal
+        case "Hermes Shredders": return "#9400D3";  // Dark violet
+        case "The DMV (Club Kids)": return "#FFD700";  // Gold
+        case "Internet Preservation Society": return "#00FF7F";  // Spring green
+        case "Protein Priest": return "#FF6347";  // Tomato red
+        case "Tupperware Tammy": return "#FF69B4";  // Hot pink
+        case "Soap Saviors": return "#4B0082";  // Indigo
+        case "Radioactive Radio Media Empire": return "#32CD32";  // Lime green
+        case "The Olsen Twins": return "#4169E1";  // Royal blue
+        case "Museum of Car Parts": return "#2F4F4F";  // Dark slate gray
+        default: return "#FFFFFF";  // Default to white
     }
+}
 
     // Function to determine outcome based on score
     function determineOutcome(score) {
@@ -270,7 +298,13 @@ function updateProgressBar() {
         window.location.href = "https://worksucks.net";
     });
 };
-
+// Functionality to copy quiz link to clipboard
+document.getElementById("copy-link-btn").addEventListener("click", () => {
+    const quizLink = window.location.href;  // Current quiz URL
+    navigator.clipboard.writeText(quizLink).then(() => {
+        alert("Quiz link copied to clipboard!");
+    });
+});
 // Define the questions, answers, scores, and GIFs
 const questions = [
     {
