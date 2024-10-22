@@ -37,26 +37,75 @@ const questions = [
     }
 ];
 
-// Branching after question 5
+// Define question 6A, 6B, and 6C with correct file paths for GIFs
 const question6A = {
     question: "You’ve been kidnapped by post-apocalyptic club kids! The bag's out and they've been carpet farming for months. How do you escape?",
     answers: ["Agua gun", "Bible", "Butter knife"],
     scores: [1, 2, 3],
-    gif: "images/question6A-illustration.gif"
+    gif: "images/6a-illustration.gif"
 };
 
 const question6B = {
     question: "Ahh, the good old Olsen bait and switch. You're tied to the bed while they take turns reading your birth chart. How do you escape?",
     answers: ["Bible", "Agua gun", "Butter knife"],
     scores: [2, 1, 3],
-    gif: "images/question6B-illustration.gif"
+    gif: "images/6b-illustration.gif"
 };
 
 const question6C = {
     question: "We’re never closing!! You’re trapped inside an out-of-season Spirit Halloween with the Homicidal Power Ranger while he cries and reads Edgar Allen Poe Wikipedia facts. How do you escape?",
     answers: ["Agua gun", "Butter knife", "Bible"],
     scores: [1, 3, 2],
-    gif: "images/question6C-illustration.gif"
+    gif: "images/6c-illustration.gif"
+};
+
+// After answering 6A, 6B, or 6C, redirect back to question 7
+function selectAnswer(answerIndex) {
+    userAnswers.push(questions[currentQuestion].scores[answerIndex]);
+
+    if (currentQuestion === '6A' || currentQuestion === '6B' || currentQuestion === '6C') {
+        currentQuestion = 6;  // Go to question 7 after answering 6A, 6B, or 6C
+        questions.splice(6, 0, question7);  // Insert Question 7
+        showQuestion();
+    } else if (currentQuestion < questions.length) {
+        currentQuestion++;
+        showQuestion();
+    } else {
+        showResults();
+    }
+}
+
+// Function to display custom questions (like 6A, 6B, 6C) and move to next stage
+function showCustomQuestion(customQuestion) {
+    document.getElementById("question-text").innerText = customQuestion.question;
+    document.getElementById("question-illustration").src = customQuestion.gif;
+
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";
+
+    customQuestion.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => selectAnswer(index));
+        answersContainer.appendChild(answerButton);
+    });
+}
+
+// For branching after question 5
+function selectAnswerForQuestion5(answerIndex) {
+    userAnswers.push(questions[currentQuestion].scores[answerIndex]);
+
+    if (answerIndex === 0) {
+        currentQuestion = '6A';
+        showCustomQuestion(question6A);
+    } else if (answerIndex === 1) {
+        currentQuestion = '6B';
+        showCustomQuestion(question6B);
+    } else {
+        currentQuestion = '6C';
+        showCustomQuestion(question6C);
+    }
+}
 };
 
 // Question 7
