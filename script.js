@@ -3,13 +3,13 @@ window.onload = function () {
     
     document.getElementById("start-quiz").addEventListener("click", startQuiz);
     console.log("Start button event listener added");  // Ensure the event listener is attached properly
-
+}
     let currentQuestion = 0;  // Tracks the current question index
     let userAnswers = [];  // Stores the user's answers
 
     const totalQuestions = 10;  // Set the total number of questions (adjust this if needed)
     const progressBar = document.getElementById("progress-fill");  // Reference the progress bar fill
-}
+
 // Function to start the quiz, hide the start page, and show the first question
 function startQuiz() {
     console.log("Quiz started");  // Debug log
