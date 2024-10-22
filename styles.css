@@ -2,10 +2,9 @@
     font-family: 'LazyDog';
     src: url('images/Lazydog.otf') format('opentype');
 }
-
 body {
     font-family: 'LazyDog', sans-serif;
-    background-image: url('./images/quiz-background.gif');
+    background-image: url('images/quiz-background.gif');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -28,7 +27,7 @@ body {
 }
 
 #quiz-container {
-    padding: 20px;
+    padding: 1.25rem;  /* Convert px to rem for scalability */
     max-width: 600px;
     margin: 0 auto;
     background-color: rgba(131, 56, 236, 0.6); /* Slightly more transparent */
@@ -50,11 +49,11 @@ body {
 /* Progress bar at the top */
 #progress-bar {
     width: 100%;
-    height: 8px;  /* Increase height for better visibility */
+    height: 8px;  /* Increased height for better visibility */
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 5px;  /* Rounded corners */
     margin-top: 20px;
-    overflow: hidden;  /* Ensures the progress fill doesn't go outside */
+    overflow: hidden;
     position: relative;
 }
 
@@ -62,12 +61,12 @@ body {
     height: 100%;
     background-image: linear-gradient(90deg, #FF00FF, #00FFFF);  /* Neon gradient effect */
     width: 0;
-    transition: width 0.5s ease, box-shadow 0.5s ease;  /* Smooth width transition */
+    transition: width 0.5s ease, box-shadow 0.5s ease;
     border-radius: 5px;  /* Rounded fill for a cleaner look */
-    box-shadow: 0 0 10px #FF00FF, 0 0 15px #00FFFF;  /* Neon glow effect */
+    box-shadow: 0 0 10px #FF00FF, 0 0 15px #00FFFF;
+    animation: glow 1.5s infinite alternate;
 }
 
-/* Add pulsing glow animation for progress fill */
 @keyframes glow {
     from {
         box-shadow: 0 0 10px #FF00FF, 0 0 15px #00FFFF;
@@ -77,14 +76,10 @@ body {
     }
 }
 
-#progress-fill {
-    animation: glow 1.5s infinite alternate;  /* Subtle pulsing glow */
-}
-
-/* Smaller container and increased transparency on mobile */
+/* Mobile adjustments */
 @media (max-width: 600px) {
     #quiz-container {
-        padding: 10px;
+        padding: 0.625rem;  /* Use rem for responsive padding */
         max-width: 85%;
         background-color: rgba(131, 56, 236, 0.4); /* More transparent on mobile */
         border-radius: 8px;
@@ -92,24 +87,23 @@ body {
     }
 }
 
-/* Mobile button adjustments */
 button {
     display: block;
     width: 100%;
-    max-width: 300px; /* Set max-width to avoid buttons being too large */
-    padding: 8px 15px; /* Adjusted padding for mobile */
-    margin: 10px auto; /* Centered buttons */
+    max-width: 300px;
+    padding: 0.5rem 1rem;  /* Responsive padding */
+    margin: 10px auto;
     cursor: pointer;
     background-color: #00FFFF; /* Neon Cyan */
-    color: #000000; /* Black text for contrast */
+    color: #000;
     font-family: 'LazyDog', sans-serif;
-    font-size: 16px; /* Smaller font size for mobile */
+    font-size: 1rem;  /* Responsive font size */
     border: none;
     border-radius: 5px;
-    box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF; /* Glow effect with cyan and magenta */
+    box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF;
     text-transform: uppercase;
-    transition: all 0.3s ease;
-    animation: button-pulse 2s infinite alternate; /* Pulsating animation */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Smoother hover transition */
+    animation: button-pulse 2s infinite alternate;
 }
 
 @keyframes button-pulse {
@@ -121,14 +115,12 @@ button {
     }
 }
 
-/* Button Hover Effect */
 button:hover {
     background-color: #FF00FF;
-    color: #ffffff;
+    color: #FFF;
     box-shadow: 0 0 20px #FF00FF, 0 0 25px #00FFFF;
 }
 
-/* Button Press Animation */
 button:active {
     transform: scale(0.97);
     box-shadow: 0 0 15px #FF00FF, 0 0 20px #00FFFF;
@@ -137,16 +129,17 @@ button:active {
 /* Larger screens - adjust button size */
 @media (min-width: 1600px) {
     button {
-        font-size: 24px;
-        padding: 12px 20px;
+        font-size: 1.5rem; /* More scalable with rem units */
+        padding: 0.75rem 1.25rem;
     }
 }
+
 #share-buttons button {
     display: inline-block;
     margin: 10px;
     padding: 10px 20px;
-    font-size: 16px;
-    background-color: #00FFFF;  /* Neon cyan */
+    font-size: 1rem;
+    background-color: #00FFFF;
     color: #000;
     border: none;
     border-radius: 5px;
@@ -155,14 +148,10 @@ button:active {
 }
 
 #share-buttons button:hover {
-    background-color: #FF00FF;  /* Neon magenta */
+    background-color: #FF00FF;
     color: #FFF;
 }
 
-#share-buttons p {
-    font-family: 'LazyDog', sans-serif;
-    margin-bottom: 10px;
-}
 /* Image Styling */
 #cover-image, #question-illustration {
     width: 100%;
@@ -171,23 +160,12 @@ button:active {
     margin: 0 auto;
 }
 
-/* Interactive hover animation for images */
 #question-illustration:hover {
     transform: scale(1.05) rotate(1deg);
     transition: transform 0.3s ease;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 600px) {
-    #quiz-container {
-        padding: 10px;
-        max-width: 90%;
-        border-radius: 8px;
-        backdrop-filter: blur(3px); /* Lighter blur for smaller screens */
-    }
-}
-
-/* Optional subtle fade-in effect for question transitions */
+/* Subtle fade-in effect for question transitions */
 .fade-in {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
@@ -196,5 +174,3 @@ button:active {
 .fade-in-active {
     opacity: 1;
 }
-
-/* Remove glitch effect from earlier suggestion since no title is needed */
