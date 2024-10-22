@@ -59,7 +59,6 @@ window.onload = function () {
         console.log("Displaying results");  // Debug log for results
         // Add your result logic here
     }
-};
 
     // Define the questions, answers, scores, and GIFs
     const questions = [
