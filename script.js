@@ -25,6 +25,7 @@ window.onload = function () {
             const answerButton = document.createElement("button");
             answerButton.innerText = answer;
             answerButton.addEventListener("click", () => selectAnswer(index));
+            answerButton.style.width = '100%';  // Ensure the whole button is clickable
             answersContainer.appendChild(answerButton);
         });
     }
@@ -149,6 +150,7 @@ window.onload = function () {
                 userAnswers.push(customQuestion.scores[index]);  // Add custom question score
                 showQuestion7();  // Proceed to Question 7
             });
+            answerButton.style.width = '100%';  // Ensure the whole button is clickable
             answersContainer.appendChild(answerButton);
         });
     }
@@ -171,6 +173,7 @@ window.onload = function () {
                 userAnswers.push(current.scores[index]);  // Push score for Question 7
                 showQuestion8(); // After Question 7, go to Question 8
             });
+            answerButton.style.width = '100%';  // Ensure the whole button is clickable
             answersContainer.appendChild(answerButton);
         });
     }
@@ -179,7 +182,6 @@ window.onload = function () {
     function showQuestion8() {
         currentQuestion = 7; // Index for Question 8
         const current = question8;
-
         document.getElementById("question-text").innerText = current.question;
         document.getElementById("question-illustration").src = current.gif;
 
@@ -193,6 +195,7 @@ window.onload = function () {
                 userAnswers.push(current.scores[index]);  // Push score for Question 8
                 showQuestion9();  // After Question 8, go to Question 9
             });
+            answerButton.style.width = '100%';  // Ensure the whole button is clickable
             answersContainer.appendChild(answerButton);
         });
     }
@@ -215,6 +218,7 @@ window.onload = function () {
                 userAnswers.push(current.scores[index]);  // Push score for Question 9
                 showQuestion10();  // After Question 9, go to Question 10
             });
+            answerButton.style.width = '100%';  // Ensure the whole button is clickable
             answersContainer.appendChild(answerButton);
         });
     }
@@ -241,6 +245,7 @@ window.onload = function () {
                     showResults();  // End the quiz and show results
                 }
             });
+            answerButton.style.width = '100%';  // Ensure the whole button is clickable
             answersContainer.appendChild(answerButton);
         });
     }
@@ -263,6 +268,7 @@ window.onload = function () {
                 userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
                 showResults();  // After Bonus Question 11, show results
             });
+            answerButton.style.width = '100%';  // Ensure the whole button is clickable
             answersContainer.appendChild(answerButton);
         });
     }
