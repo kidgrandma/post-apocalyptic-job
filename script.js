@@ -7,6 +7,7 @@ window.onload = function () {
 
     // Function to start the quiz, hide the start page, and show the first question
     function startQuiz() {
+        console.log("Quiz started");  // Debug log
         document.getElementById("start-page").style.display = "none";  // Hides the start page
         document.getElementById("question-page").style.display = "block";  // Shows the first question
         showQuestion();  // Call the function to display the first question
@@ -14,6 +15,7 @@ window.onload = function () {
 
     // Function to show the current question
     function showQuestion() {
+        console.log("Displaying question:", currentQuestion);  // Debug log
         const current = questions[currentQuestion];
         document.getElementById("question-text").innerText = current.question;
         document.getElementById("question-illustration").src = current.gif;
@@ -24,11 +26,36 @@ window.onload = function () {
         current.answers.forEach((answer, index) => {
             const answerButton = document.createElement("button");
             answerButton.innerText = answer;
-            answerButton.addEventListener("click", () => selectAnswer(index));
             answerButton.style.width = '100%';  // Ensure the whole button is clickable
+            answerButton.addEventListener("click", () => {
+                console.log("Answer selected:", index);  // Debug log for answer selection
+                selectAnswer(index);
+            });
             answersContainer.appendChild(answerButton);
         });
     }
+
+    // Function to handle answer selection and advance to the next question
+    function selectAnswer(index) {
+        console.log("Current question:", currentQuestion, "Answer index:", index);  // Debug log for answer selection
+        userAnswers.push(questions[currentQuestion].scores[index]);  // Record the user's answer
+
+        // Increment the question number and move to the next question
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            showQuestion();  // Display the next question
+        } else {
+            console.log("No more questions, showing results");  // Debug log
+            showResults();  // Show results if no more questions
+        }
+    }
+
+    // Placeholder for the showResults function
+    function showResults() {
+        console.log("Displaying results");  // Debug log for results
+        // Add your result logic here
+    }
+};
 
     // Define the questions, answers, scores, and GIFs
     const questions = [
