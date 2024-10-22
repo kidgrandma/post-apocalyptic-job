@@ -2,6 +2,7 @@
     font-family: 'LazyDog';
     src: url('images/Lazydog.otf') format('opentype');
 }
+
 body {
     font-family: 'LazyDog', sans-serif;
     background-image: url('images/quiz-background.gif');
@@ -22,19 +23,19 @@ body {
 
 @media (min-width: 1024px) {
     body {
-        background-attachment: fixed; /* Enable parallax for desktop */
+        background-attachment: fixed; /* Parallax effect for desktop */
     }
 }
 
 #quiz-container {
-    padding: 1.25rem;  /* Convert px to rem for scalability */
+    padding: 1.25rem;  /* Scalable rem units */
     max-width: 600px;
     margin: 0 auto;
-    background-color: rgba(131, 56, 236, 0.6); /* Slightly more transparent */
+    background-color: rgba(131, 56, 236, 0.6); /* Transparent container */
     border-radius: 10px;
     text-align: center;
-    backdrop-filter: blur(5px); /* Blurred container */
-    animation: pulse 10s infinite alternate; /* Slight pulsing animation */
+    backdrop-filter: blur(5px); /* Blurred background */
+    animation: pulse 10s infinite alternate; /* Slight pulsing */
 }
 
 @keyframes pulse {
@@ -46,12 +47,12 @@ body {
     }
 }
 
-/* Progress bar at the top */
+/* Clean and modern progress bar */
 #progress-bar {
     width: 100%;
-    height: 8px;  /* Increased height for better visibility */
+    height: 8px;  /* Height for visibility */
     background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;  /* Rounded corners */
+    border-radius: 50px;  /* Rounded corners */
     margin-top: 20px;
     overflow: hidden;
     position: relative;
@@ -59,29 +60,29 @@ body {
 
 #progress-fill {
     height: 100%;
-    background-image: linear-gradient(90deg, #FF00FF, #00FFFF);  /* Neon gradient effect */
-    width: 0;
-    transition: width 0.5s ease, box-shadow 0.5s ease;
-    border-radius: 5px;  /* Rounded fill for a cleaner look */
-    box-shadow: 0 0 10px #FF00FF, 0 0 15px #00FFFF;
-    animation: glow 1.5s infinite alternate;
+    background-color: #00ffff;  /* Cyan color */
+    width: 0;  /* Initial width (0%) */
+    transition: width 0.5s ease;  /* Smooth transition */
+    border-radius: 50px;  /* Rounded fill */
+    box-shadow: 0 0 10px #00ffff, 0 0 15px #ff00ff;  /* Neon glow effect */
+    animation: glow 1.5s infinite alternate;  /* Glowing effect */
 }
 
 @keyframes glow {
     from {
-        box-shadow: 0 0 10px #FF00FF, 0 0 15px #00FFFF;
+        box-shadow: 0 0 10px #00ffff, 0 0 15px #ff00ff;
     }
     to {
-        box-shadow: 0 0 20px #FF00FF, 0 0 25px #00FFFF;
+        box-shadow: 0 0 20px #00ffff, 0 0 25px #ff00ff;
     }
 }
 
 /* Mobile adjustments */
 @media (max-width: 600px) {
     #quiz-container {
-        padding: 0.625rem;  /* Use rem for responsive padding */
+        padding: 0.625rem;
         max-width: 85%;
-        background-color: rgba(131, 56, 236, 0.4); /* More transparent on mobile */
+        background-color: rgba(131, 56, 236, 0.4); /* More transparency on mobile */
         border-radius: 8px;
         backdrop-filter: blur(3px);
     }
@@ -91,18 +92,18 @@ button {
     display: block;
     width: 100%;
     max-width: 300px;
-    padding: 0.5rem 1rem;  /* Responsive padding */
+    padding: 0.5rem 1rem;
     margin: 10px auto;
     cursor: pointer;
-    background-color: #00FFFF; /* Neon Cyan */
+    background-color: #00FFFF; /* Neon cyan */
     color: #000;
     font-family: 'LazyDog', sans-serif;
-    font-size: 1rem;  /* Responsive font size */
+    font-size: 1rem;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF;
+    box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF; /* Glow effect */
     text-transform: uppercase;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Smoother hover transition */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: button-pulse 2s infinite alternate;
 }
 
@@ -129,7 +130,7 @@ button:active {
 /* Larger screens - adjust button size */
 @media (min-width: 1600px) {
     button {
-        font-size: 1.5rem; /* More scalable with rem units */
+        font-size: 1.5rem;  /* Scalable with rem */
         padding: 0.75rem 1.25rem;
     }
 }
