@@ -37,7 +37,7 @@ const questions = [
     }
 ];
 
-// Define question 6A, 6B, and 6C with correct file paths for GIFs
+// Define custom question 6A, 6B, and 6C
 const question6A = {
     question: "You’ve been kidnapped by post-apocalyptic club kids! The bag's out and they've been carpet farming for months. How do you escape?",
     answers: ["Agua gun", "Bible", "Butter knife"],
@@ -59,23 +59,15 @@ const question6C = {
     gif: "images/6c-illustration.gif"
 };
 
-// After answering 6A, 6B, or 6C, redirect back to question 7
-function selectAnswer(answerIndex) {
-    userAnswers.push(questions[currentQuestion].scores[answerIndex]);
+// Question 7 and beyond
+const question7 = {
+    question: "Great work. Now that you found shelter, food, and a weapon—you’ve become quite the dickhead and your aura points are BANKRUPT. How will you repent?",
+    answers: ["Rehab", "Double down at the casino"],
+    scores: [1, 2],
+    gif: "images/question7-illustration.gif"
+};
 
-    if (currentQuestion === '6A' || currentQuestion === '6B' || currentQuestion === '6C') {
-        currentQuestion = 6;  // Go to question 7 after answering 6A, 6B, or 6C
-        questions.splice(6, 0, question7);  // Insert Question 7
-        showQuestion();
-    } else if (currentQuestion < questions.length) {
-        currentQuestion++;
-        showQuestion();
-    } else {
-        showResults();
-    }
-}
-
-// Function to display custom questions (like 6A, 6B, 6C) and move to next stage
+// Function to show a custom question (6A, 6B, or 6C)
 function showCustomQuestion(customQuestion) {
     document.getElementById("question-text").innerText = customQuestion.question;
     document.getElementById("question-illustration").src = customQuestion.gif;
@@ -86,65 +78,10 @@ function showCustomQuestion(customQuestion) {
     customQuestion.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
-        answerButton.addEventListener("click", () => selectAnswer(index));
+        answerButton.addEventListener("click", () => selectAnswer(index, customQuestion));
         answersContainer.appendChild(answerButton);
     });
 }
-
-// For branching after question 5
-function selectAnswerForQuestion5(answerIndex) {
-    userAnswers.push(questions[currentQuestion].scores[answerIndex]);
-
-    if (answerIndex === 0) {
-        currentQuestion = '6A';
-        showCustomQuestion(question6A);
-    } else if (answerIndex === 1) {
-        currentQuestion = '6B';
-        showCustomQuestion(question6B);
-    } else {
-        currentQuestion = '6C';
-        showCustomQuestion(question6C);
-    }
-}
-};
-
-// Question 7
-const question7 = {
-    question: "Great work. Now that you found shelter, food, and a weapon—you’ve become quite the dickhead and your aura points are BANKRUPT. How will you repent?",
-    answers: ["Rehab", "Double down at the casino"],
-    scores: [1, 2],
-    gif: "images/question7-illustration.gif"
-};
-
-// Question 8 and beyond
-const question8 = {
-    question: "Surprise! It’s a water witch and they've granted you three wishes in exchange for all your supplies.",
-    answers: ["Wishy wish", "No deal", "Amateur massage"],
-    scores: [3, 1, 2],
-    gif: "images/question8-illustration.gif"
-};
-
-const question9 = {
-    question: "Oh no! You’ve been ROBBED. I guess this is the end. How do you go out?",
-    answers: ["OD on cigarettes", "Hadouken"],
-    scores: [1, 3],
-    gif: "images/question9-illustration.gif"
-};
-
-const question10 = {
-    question: "You’ve been saved by The Protein Priest. You can join his wellness club or pledge your life to an apocalypse crew.",
-    answers: ["Meet your new gang", "Hot yoga matcha baptism"],
-    scores: [3, 1],
-    gif: "images/question10-illustration.gif"
-};
-
-// Bonus Question 11
-const question11 = {
-    question: "Wellness club was a decoy. Order up before you meet your crew.",
-    answers: ["Big Macintosh meal", "Pedialyte", "Straight-up bleach"],
-    scores: [2, 1, 3],
-    gif: "images/question11-illustration.gif"
-};
 
 // Start the quiz
 function startQuiz() {
@@ -171,57 +108,30 @@ function showQuestion() {
     });
 }
 
-// Handle branching after Question 5
+// Select the answer for current question and handle branching
 function selectAnswer(answerIndex) {
     userAnswers.push(questions[currentQuestion].scores[answerIndex]);
 
-    // Handle branching logic after question 5
-    if (currentQuestion === 4) {
+    if (currentQuestion === 4) {  // Question 5 branch
         if (answerIndex === 0) {
-            currentQuestion = '6A';
             showCustomQuestion(question6A);
         } else if (answerIndex === 1) {
-            currentQuestion = '6B';
             showCustomQuestion(question6B);
         } else {
-            currentQuestion = '6C';
             showCustomQuestion(question6C);
         }
     } else if (currentQuestion === '6A' || currentQuestion === '6B' || currentQuestion === '6C') {
-        currentQuestion = 6;  // Go back to the normal flow after 6
-        questions.splice(6, 0, question7);  // Insert Question 7
-        showQuestion();
-    } else if (currentQuestion === 9) {
-        if (answerIndex === 1) {
-            currentQuestion = '11';  // Go to Question 11
-            showCustomQuestion(question11);
-        } else {
-            showResults();  // Go to results if they choose "Meet your new gang"
-        }
-    } else if (currentQuestion === '11') {
-        showResults();  // After question 11, go to results
-    } else if (currentQuestion < questions.length) {
-        currentQuestion++;
+        currentQuestion = 6;  // Move to Question 7 after 6
+        questions.splice(6, 0, question7);  // Ensure Question 7 is loaded
         showQuestion();
     } else {
-        showResults();
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            showQuestion();
+        } else {
+            showResults();
+        }
     }
-}
-
-// For custom questions like 6A, 6B, 6C, and 11
-function showCustomQuestion(customQuestion) {
-    document.getElementById("question-text").innerText = customQuestion.question;
-    document.getElementById("question-illustration").src = customQuestion.gif;
-
-    const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";
-
-    customQuestion.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
-        answerButton.addEventListener("click", () => selectAnswer(index));
-        answersContainer.appendChild(answerButton);
-    });
 }
 
 // Calculate and display results
