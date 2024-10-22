@@ -48,38 +48,50 @@ body {
     }
 }
 
-/* Button Styling with Vertical Stack and Enhanced Contrast */
+/* Button Styling with Vertical Stack and Cyber-Style Color */
 button {
     display: block;
     width: 100%;
-    padding: 15px 20px;
+    padding: 10px 20px; /* Adjusted padding for better sizing */
     margin: 10px 0;
     cursor: pointer;
-    background-color: #6A0DAD; /* Purple Haze */
-    color: white; /* White text for contrast */
+    background-color: #00FFFF; /* Neon Cyan */
+    color: #000000; /* Black text for contrast */
     font-family: 'LazyDog', sans-serif;
-    font-size: 5vw; /* Responsive text size */
+    font-size: 18px; /* Fixed size for balance */
     border: none;
     border-radius: 5px;
-    box-shadow: 0 0 10px #6A0DAD; /* Glow effect */
-    text-transform: uppercase; /* To make buttons more distinct */
+    box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF; /* Glow effect with cyan and magenta */
+    text-transform: uppercase;
+    transition: all 0.3s ease; /* Smooth transition effect */
 }
 
 /* Button Hover Effect */
 button:hover {
-    box-shadow: 0 0 20px #9400D3;
-}
-
-/* Adjusted Button Text Color for Contrast */
-button {
-    background-color: #4A90E2; /* Lighter blue to distinguish from text */
-    color: #fff; /* Clear contrast with white text */
+    background-color: #FF00FF; /* Switch to Neon Magenta on hover */
+    color: #ffffff; /* White text for better readability */
+    box-shadow: 0 0 20px #FF00FF, 0 0 25px #00FFFF; /* Glow effect with magenta and cyan */
 }
 
 /* Button Press Animation */
 button:active {
-    transform: scale(0.97); 
-    box-shadow: 0 0 10px #9400D3;
+    transform: scale(0.97);
+    box-shadow: 0 0 15px #FF00FF, 0 0 20px #00FFFF;
+}
+
+/* Adjust for smaller viewports */
+@media (max-width: 600px) {
+    button {
+        font-size: 16px; /* Smaller text for mobile */
+        padding: 8px 15px; /* Adjust padding for mobile */
+    }
+}
+
+/* Fixed size for very large screens */
+@media (min-width: 1600px) {
+    button {
+        font-size: 24px; /* Larger text for very large screens */
+    }
 }
 
 /* Glitch Text Animation for Headers */
