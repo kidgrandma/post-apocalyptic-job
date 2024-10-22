@@ -1,10 +1,14 @@
-// Ensure everything runs after the page has fully loaded
 window.onload = function () {
+    console.log("Page loaded");  // Check if the script is loading correctly
+    
     document.getElementById("start-quiz").addEventListener("click", startQuiz);
+    console.log("Start button event listener added");  // Ensure the event listener is attached properly
 
     let currentQuestion = 0;  // Tracks the current question index
     let userAnswers = [];  // Stores the user's answers
 
+    // Continue with the rest of the script...
+};
     // Function to start the quiz, hide the start page, and show the first question
     function startQuiz() {
         console.log("Quiz started");  // Debug log
@@ -370,4 +374,4 @@ window.onload = function () {
     document.getElementById("meet-moderator").addEventListener("click", () => {
         window.location.href = "https://worksucks.net";
     });
-};
+};  // This closes the window.onload function
