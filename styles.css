@@ -48,7 +48,6 @@ body {
     }
 }
 
-/* Button Styling with Vertical Stack and Cyber-Style Color */
 button {
     display: block;
     width: 100%;
@@ -94,56 +93,12 @@ button:active {
     }
 }
 
-/* Glitch Text Animation for Headers */
-.glitch-title {
-    position: relative;
-    font-size: 7vw;
-    color: white;
-}
-
-.glitch-title::before, .glitch-title::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-    overflow: hidden;
-    clip: rect(0, 900px, 0, 0);
-}
-
-.glitch-title::before {
-    left: 2px;
-    text-shadow: -2px 0 red;
-    animation: glitch-animation 2s infinite;
-}
-
-.glitch-title::after {
-    left: -2px;
-    text-shadow: -2px 0 cyan;
-    animation: glitch-animation 3s infinite;
-}
-
-@keyframes glitch-animation {
-    0%, 100% { clip: rect(20px, 9999px, 80px, 0); transform: skew(0.2deg); }
-    50% { clip: rect(10px, 9999px, 40px, 0); transform: skew(0.5deg); }
-}
-
-/* Adjustments for mobile */
-@media (max-width: 600px) {
-    .glitch-title {
-        font-size: 10vw;
-    }
-}
-
 /* Image Styling */
 #cover-image, #question-illustration {
     width: 100%;
     max-width: 600px;
     display: block;
     margin: 0 auto;
-}
 }
 
 /* Question Illustrations Styling */
@@ -164,9 +119,19 @@ button:active {
     }
 }
 
-/* Disable glitch effect on very small screens */
-@media (max-width: 400px) {
-    #quiz-container {
-        animation: none; /* Removes glitch effect on very small screens */
+/* Glitch Text Animation for Headers */
+.glitch-title {
+    position: relative;
+    font-size: 7vw;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .glitch-title {
+        font-size: 10vw;
     }
+}
+
+#quiz-container {
+    animation: none; /* Removes glitch effect on very small screens */
 }
