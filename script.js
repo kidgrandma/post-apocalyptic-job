@@ -154,7 +154,6 @@ function showCustomQuestion(customQuestion) {
         answersContainer.appendChild(answerButton);
     });
 }
-
 // Show Question 7 after custom questions
 function showQuestion7() {
     const current = question7;
@@ -175,9 +174,91 @@ function showQuestion7() {
     });
 }
 
-// Functions for showing remaining questions (8-11), handling results, and updating progress bar follow similar structure...
+// Function to show Question 8
+function showQuestion8() {
+    const current = question8;
+    document.getElementById("question-text").innerText = current.question;
+    document.getElementById("question-illustration").src = current.gif;
 
-// Function to show the results page
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";
+
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => {
+            userAnswers.push(current.scores[index]);  // Push score for Question 8
+            showQuestion9();  // After Question 8, go to Question 9
+        });
+        answersContainer.appendChild(answerButton);
+    });
+}
+
+// Function to show Question 9
+function showQuestion9() {
+    const current = question9;
+    document.getElementById("question-text").innerText = current.question;
+    document.getElementById("question-illustration").src = current.gif;
+
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";
+
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => {
+            userAnswers.push(current.scores[index]);  // Push score for Question 9
+            showQuestion10();  // After Question 9, go to Question 10
+        });
+        answersContainer.appendChild(answerButton);
+    });
+}
+
+// Function to show Question 10
+function showQuestion10() {
+    const current = question10;
+    document.getElementById("question-text").innerText = current.question;
+    document.getElementById("question-illustration").src = current.gif;
+
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";
+
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => {
+            userAnswers.push(current.scores[index]);  // Push score for Question 10
+            if (index === 1) {
+                showBonusQuestion11();  // Go to Bonus Question 11 if they select the second answer
+            } else {
+                showResults();  // End the quiz and show results for any other answer
+            }
+        });
+        answersContainer.appendChild(answerButton);
+    });
+}
+
+// Function to show Bonus Question 11
+function showBonusQuestion11() {
+    const current = question11;
+    document.getElementById("question-text").innerText = current.question;
+    document.getElementById("question-illustration").src = current.gif;
+
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";
+
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => {
+            userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
+            showResults();  // After Bonus Question 11, show results
+        });
+        answersContainer.appendChild(answerButton);
+    });
+}
+
+// Function to display the quiz results
 function showResults() {
     document.getElementById("question-page").style.display = "none";
     document.getElementById("result-page").style.display = "block";
