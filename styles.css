@@ -1,14 +1,14 @@
 @font-face {
     font-family: 'LazyDog';
-    src: url('images/Lazydog.otf') format('opentype'); /* Updated to .otf format */
+    src: url('images/Lazydog.otf') format('opentype');
 }
 
 body {
-    font-family: 'LazyDog', sans-serif; /* Use LazyDog font with sans-serif fallback */
-    background-image: url('./images/quiz-background.gif'); /* Adjust the path if necessary */
-    background-size: cover; /* Ensures the GIF covers the entire background */
-    background-position: center; /* Centers the GIF */
-    background-repeat: no-repeat; /* Ensures the GIF doesn't repeat */
+    font-family: 'LazyDog', sans-serif;
+    background-image: url('./images/quiz-background.gif'); /* Background GIF visible */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     background-attachment: scroll; /* Disable parallax for mobile */
     color: white;
     text-align: center;
@@ -21,6 +21,7 @@ body {
     overflow: hidden;
 }
 
+/* Parallax effect for desktop */
 @media (min-width: 1024px) {
     body {
         background-attachment: fixed; /* Enable parallax for desktop */
@@ -31,9 +32,10 @@ body {
     padding: 20px;
     max-width: 600px;
     margin: 0 auto;
-    background-color: #8338EC; /* Cosmic Purple */
+    background-color: rgba(131, 56, 236, 0.8); /* Cosmic Purple with slight transparency */
     border-radius: 10px;
     text-align: center;
+    backdrop-filter: blur(5px); /* Blurred container to enhance background visibility */
 }
 
 /* Slide Transition for Questions */
@@ -72,7 +74,7 @@ button {
     cursor: pointer;
     background-color: #6A0DAD; /* Purple Haze */
     color: white; /* White text for contrast */
-    font-family: 'LazyDog', sans-serif; /* Apply LazyDog font */
+    font-family: 'LazyDog', sans-serif;
     font-size: 5vw; /* Responsive text size based on viewport width */
     border: none;
     border-radius: 5px;
@@ -90,6 +92,7 @@ button:active {
     box-shadow: 0 0 10px #9400D3; /* Keep the glow */
 }
 
+/* Button scaling for large screens */
 @media (min-width: 1600px) {
     button {
         font-size: 24px; /* Fixed size for very large screens */
@@ -179,9 +182,33 @@ button:active {
 
 /* Image Styling */
 #cover-image {
-    animation: none; /* Ensure the image has no animation */
     width: 100%; /* Make image responsive */
     max-width: 600px;
     display: block;
     margin: 0 auto;
+}
+
+/* Question Illustrations Styling */
+#question-illustration {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    #quiz-container {
+        padding: 10px;
+        max-width: 90%; /* Take up more screen space on mobile */
+        border-radius: 8px;
+        backdrop-filter: blur(3px); /* Lighter blur for smaller screens */
+    }
+}
+
+/* Disable glitch effect on very small screens */
+@media (max-width: 400px) {
+    #quiz-container {
+        animation: none; /* Removes glitch effect on very small screens */
+    }
 }
