@@ -97,7 +97,7 @@ window.onload = function() {
 
     // Show Question 7 after 6A, 6B, or 6C
     function showQuestion7() {
-        currentQuestion = 6;  // Index for Question 7
+        currentQuestion = 6; // Index for Question 7
         const current = question7;
 
         document.getElementById("question-text").innerText = current.question;
@@ -111,7 +111,7 @@ window.onload = function() {
             answerButton.innerText = answer;
             answerButton.addEventListener("click", () => {
                 userAnswers.push(current.scores[index]);  // Push score for Question 7
-                showQuestion8();  // After Question 7, go to Question 8
+                showQuestion8(); // After Question 7, go to Question 8
             });
             answersContainer.appendChild(answerButton);
         });
@@ -119,7 +119,7 @@ window.onload = function() {
 
     // Function to show Question 8
     function showQuestion8() {
-        currentQuestion = 7;  // Index for Question 8
+        currentQuestion = 7; // Index for Question 8
         const current = question8;
 
         document.getElementById("question-text").innerText = current.question;
@@ -134,6 +134,54 @@ window.onload = function() {
             answerButton.addEventListener("click", () => {
                 userAnswers.push(current.scores[index]);  // Push score for Question 8
                 showQuestion9();  // After Question 8, go to Question 9
+            });
+            answersContainer.appendChild(answerButton);
+        });
+    }
+
+    // Function to show Question 9
+    function showQuestion9() {
+        currentQuestion = 8; // Index for Question 9
+        const current = question9;
+
+        document.getElementById("question-text").innerText = current.question;
+        document.getElementById("question-illustration").src = current.gif;
+
+        const answersContainer = document.getElementById("answers-container");
+        answersContainer.innerHTML = "";
+
+        current.answers.forEach((answer, index) => {
+            const answerButton = document.createElement("button");
+            answerButton.innerText = answer;
+            answerButton.addEventListener("click", () => {
+                userAnswers.push(current.scores[index]);  // Push score for Question 9
+                showQuestion10();  // After Question 9, go to Question 10
+            });
+            answersContainer.appendChild(answerButton);
+        });
+    }
+
+    // Function to show Question 10
+    function showQuestion10() {
+        currentQuestion = 9; // Index for Question 10
+        const current = question10;
+
+        document.getElementById("question-text").innerText = current.question;
+        document.getElementById("question-illustration").src = current.gif;
+
+        const answersContainer = document.getElementById("answers-container");
+        answersContainer.innerHTML = "";
+
+        current.answers.forEach((answer, index) => {
+            const answerButton = document.createElement("button");
+            answerButton.innerText = answer;
+            answerButton.addEventListener("click", () => {
+                userAnswers.push(current.scores[index]);  // Push score for Question 10
+                if (index === 1) {
+                    showCustomQuestion(question11);  // Go to Bonus Question 11
+                } else {
+                    showResults();  // End the quiz and show results
+                }
             });
             answersContainer.appendChild(answerButton);
         });
@@ -154,7 +202,7 @@ window.onload = function() {
         gif: "images/question6b-illustration.gif"
     };
 
-    const question6C = {
+    const question6C =    const question6C = {
         question: "We’re never closing!! You’re trapped inside an out-of-season Spirit Halloween with the Homicidal Power Ranger while he cries and reads Edgar Allen Poe Wikipedia facts. How do you escape?",
         answers: ["Agua gun", "Butter knife", "Bible"],
         scores: [2, 6, 4],
@@ -198,17 +246,11 @@ window.onload = function() {
         gif: "images/question11-illustration.gif"
     };
 
-    // Start the quiz
-    function startQuiz() {
-        document.getElementById("quiz-container").classList.remove("glitch");
-        document.getElementById("start-page").style.display = "none";
-        document.getElementById("question-page").style.display = "block";
-        showQuestion();
-    }
+    // Function to show Bonus Question 11
+    function showBonusQuestion11() {
+        currentQuestion = 10; // Index for Question 11
+        const current = question11;
 
-    // Show the current question
-    function showQuestion() {
-        const current = questions[currentQuestion];
         document.getElementById("question-text").innerText = current.question;
         document.getElementById("question-illustration").src = current.gif;
 
@@ -218,34 +260,12 @@ window.onload = function() {
         current.answers.forEach((answer, index) => {
             const answerButton = document.createElement("button");
             answerButton.innerText = answer;
-            answerButton.addEventListener("click", () => selectAnswer(index));
+            answerButton.addEventListener("click", () => {
+                userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
+                showResults();  // After Bonus Question 11, show results
+            });
             answersContainer.appendChild(answerButton);
         });
-    }
-
-    // Handle selecting an answer and moving through questions
-    function selectAnswer(answerIndex) {
-        userAnswers.push(questions[currentQuestion].scores[answerIndex]);
-
-        if (currentQuestion === 4) {  // Handle branch logic for Question 5
-            selectAnswerForQuestion5(answerIndex);
-        } else if (currentQuestion === '6A' || currentQuestion === '6B' || currentQuestion === '6C') {
-            currentQuestion = 6;  // Move to Question 7 after 6A/B/C
-            showQuestion7();
-        } else if (currentQuestion === 9) {  // Branch logic for Question 10
-            if (answerIndex === 1) {
-                showCustomQuestion(question11);  // Go to Bonus Question 11
-            } else {
-                showResults();  // End the quiz and show results
-            }
-        } else {
-            currentQuestion++;
-            if (currentQuestion < questions.length) {
-                showQuestion();
-            } else {
-                showResults();  // End of quiz, show results
-            }
-        }
     }
 
     // Calculate and display results
