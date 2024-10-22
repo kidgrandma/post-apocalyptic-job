@@ -28,7 +28,6 @@ window.onload = function () {
         current.answers.forEach((answer, index) => {
             const answerButton = document.createElement("button");
             answerButton.innerText = answer;
-            answerButton.style.width = '100%';  // Ensure the whole button is clickable
             answerButton.addEventListener("click", () => {
                 console.log("Answer selected:", index);  // Debug log for answer selection
                 selectAnswer(index);
@@ -37,21 +36,35 @@ window.onload = function () {
         });
     }
 
-    // Function to handle answer selection and advance to the next question
-    function selectAnswer(index) {
-        console.log("Current question:", currentQuestion, "Answer index:", index);  // Debug log for answer selection
-        userAnswers.push(questions[currentQuestion].scores[index]);  // Record the user's answer
+// Function to handle answer selection and advance to the next question
+function selectAnswer(index) {
+    console.log("Current question:", currentQuestion, "Answer index:", index);  // Debug log for answer selection
+    userAnswers.push(questions[currentQuestion].scores[index]);  // Record the user's answer
 
-        // Increment the question number and move to the next question
-        currentQuestion++;
-        if (currentQuestion < questions.length) {
-            showQuestion();  // Display the next question
+    currentQuestion++;
+
+    // Handle Question 5 branching (leading to custom question 6A, 6B, or 6C)
+    if (currentQuestion === 4) {
+        if (index === 0) {
+            showCustomQuestion(question6A);  // Go to custom Question 6A
+        } else if (index === 1) {
+            showCustomQuestion(question6B);  // Go to custom Question 6B
         } else {
-            console.log("No more questions, showing results");  // Debug log
-            showResults();  // Show results if no more questions
+            showCustomQuestion(question6C);  // Go to custom Question 6C
         }
+    } 
+    // After custom question 6, go back to question 7
+    else if (currentQuestion === 6) {
+        showQuestion7();  // Display question 7
+    } 
+    else if (currentQuestion < questions.length) {
+        showQuestion();  // Display the next question if there are more
+    } 
+    else {
+        console.log("No more questions, showing results");  // Debug log
+        showResults();  // Show results if no more questions
     }
-
+}
     // Function to show custom Question 6A, 6B, or 6C
     function showCustomQuestion(customQuestion) {
         document.getElementById("question-text").innerText = customQuestion.question;
@@ -67,7 +80,6 @@ window.onload = function () {
                 userAnswers.push(customQuestion.scores[index]);  // Add custom question score
                 showQuestion7();  // Proceed to Question 7
             });
-            answerButton.style.width = '100%';  // Ensure the whole button is clickable
             answersContainer.appendChild(answerButton);
         });
     }
@@ -90,7 +102,6 @@ window.onload = function () {
                 userAnswers.push(current.scores[index]);  // Push score for Question 7
                 showQuestion8(); // After Question 7, go to Question 8
             });
-            answerButton.style.width = '100%';  // Ensure the whole button is clickable
             answersContainer.appendChild(answerButton);
         });
     }
@@ -112,7 +123,6 @@ window.onload = function () {
                 userAnswers.push(current.scores[index]);  // Push score for Question 8
                 showQuestion9();  // After Question 8, go to Question 9
             });
-            answerButton.style.width = '100%';  // Ensure the whole button is clickable
             answersContainer.appendChild(answerButton);
         });
     }
@@ -135,7 +145,6 @@ window.onload = function () {
                 userAnswers.push(current.scores[index]);  // Push score for Question 9
                 showQuestion10();  // After Question 9, go to Question 10
             });
-            answerButton.style.width = '100%';  // Ensure the whole button is clickable
             answersContainer.appendChild(answerButton);
         });
     }
@@ -157,12 +166,11 @@ window.onload = function () {
             answerButton.addEventListener("click", () => {
                 userAnswers.push(current.scores[index]);  // Push score for Question 10
                 if (index === 1) {
-                    showBonusQuestion11();  // Go to Bonus Question 11
+                    showBonusQuestion11();  // Go to Bonus Question 11 if they select the second answer
                 } else {
-                    showResults();  // End the quiz and show results
+                    showResults();  // End the quiz and show results for any other answer
                 }
             });
-            answerButton.style.width = '100%';  // Ensure the whole button is clickable
             answersContainer.appendChild(answerButton);
         });
     }
@@ -185,7 +193,6 @@ window.onload = function () {
                 userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
                 showResults();  // After Bonus Question 11, show results
             });
-            answerButton.style.width = '100%';  // Ensure the whole button is clickable
             answersContainer.appendChild(answerButton);
         });
     }
@@ -196,58 +203,47 @@ window.onload = function () {
         document.getElementById("result-page").style.display = "block";
 
         const totalScore = userAnswers.reduce((a, b) => a + b, 0);
-        // Adjusted score ranges based on total score
-        let outcome;
-        if (totalScore <= 12) {
-            outcome = "Homicidal Power Ranger";
-            document.getElementById("result-title").innerText = "Congrats! You’re now a bonafide certified authentic genuine verified accomplice of the Homicidal Power Ranger";
-            document.getElementById("result-image").src = "images/outcome2.png";
-        } else if (totalScore <= 15) {
-            outcome = "Caffeine Nicotine Cartel";
-            document.getElementById("result-title").innerText = "Congrats! You’re now a bonafide certified authentic genuine verified member of the Caffeine Nicotine Cartel";
-            document.getElementById("result-image").src = "images/outcome11.png";
-        } else if (totalScore <= 18) {
-            outcome = "Hermes Shredders";
-            document.getElementById("result-title").innerText = "Congrats! You’re now a bonafide certified authentic genuine verified member of the Hermes Shredders";
-            document.getElementById("result-image").src = "images/outcome8.png";
-        } else if (totalScore <= 21) {
-            outcome = "The DMV (Club Kids)";
-            document.getElementById("result-title").innerText = "Congrats! You’re now a bonafide certified authentic genuine verified member of The DMV";
-            document.getElementById("result-image").src = "images/outcome7.png";
-        } else if (totalScore <= 23) {
-            outcome = "Internet Preservation Society";
-            document.getElementById("result-title").innerText = "Congrats! You’re now a bonafide certified authentic genuine verified member of the Internet Preservation Society";
-            document.getElementById("result-image").src = "images/outcome9.png";
-        } else if (totalScore <= 25) {
-            outcome = "Protein Priest";
-            document.getElementById("result-title").innerText = "Congrats! You’re now a bonafide certified authentic genuine verified member of the Protein Priest";
-            document.getElementById("result-image").src = "images/outcome12.png";
-        } else if (totalScore <= 27) {
-            outcome = "Tupperware Tammy";
-            document.getElementById("result-title").innerText = "Congrats! You’re now a bonafide certified authentic genuine verified bestie of Tupperware Tammy";
-            document.getElementById("result-image").src = "images/outcome3.png";
-        } else if (totalScore <= 29) {
-            outcome = "Soap Saviors";
-            document.getElementById("result-title").innerText = "Congrats! You’re now a bonafide certified authentic genuine verified member of The Soap Saviors";
-            document.getElementById("result-image").src = "images/outcome1.png";
-        } else if (totalScore <= 31) {
-            outcome = "Radioactive Radio Media Empire";
-            document.getElementById("result-title").innerText = "Congrats! You’re now a bonafide certified authentic genuine verified member of Radioactive Radio Media Empire";
-            document.getElementById("result-image").src = "images/outcome10.png";
-        } else if (totalScore === 32) {
-            outcome = "The Olsen Twins";
-            document.getElementById("result-title").innerText = "Congrats! You’re now a bonafide certified authentic genuine verified member of The Olsen Twins";
-            document.getElementById("result-image").src = "images/outcome4.png";
-        } else if (totalScore === 33) {
-            outcome = "Museum of Car Parts";
-            document.getElementById("result-title").innerText = "Congrats! You’re now a bonafide certified authentic genuine verified member of the Museum of Car Parts";
-            document.getElementById("result-image").src = "images/outcome13.png";
-        }
+        let outcome = determineOutcome(totalScore);
 
-        document.getElementById("result-description").innerText = "You are now part of the " + outcome + " crew!";
+        document.getElementById("result-title").innerText = `Congrats! You’re now a bonafide certified authentic genuine verified member of the ${outcome}`;
+        document.getElementById("result-image").src = `images/outcome${getOutcomeImage(outcome)}.png`;
     }
 
-    // Retake quiz
+    // Function to determine outcome based on score
+    function determineOutcome(score) {
+        if (score <= 12) return "Homicidal Power Ranger";
+        if (score <= 15) return "Caffeine Nicotine Cartel";
+        if (score <= 18) return "Hermes Shredders";
+        if (score <= 21) return "The DMV (Club Kids)";
+        if (score <= 23) return "Internet Preservation Society";
+        if (score <= 25) return "Protein Priest";
+        if (score <= 27) return "Tupperware Tammy";        
+        if (score <= 29) return "Soap Saviors";
+        if (score <= 31) return "Radioactive Radio Media Empire";
+        if (score === 32) return "The Olsen Twins";
+        if (score === 33) return "Museum of Car Parts";
+        return "Unknown";  // Fallback in case of an unexpected score
+    }
+
+    // Function to map the outcome to the corresponding image
+    function getOutcomeImage(outcome) {
+        switch (outcome) {
+            case "Homicidal Power Ranger": return 2;
+            case "Caffeine Nicotine Cartel": return 11;
+            case "Hermes Shredders": return 8;
+            case "The DMV (Club Kids)": return 7;
+            case "Internet Preservation Society": return 9;
+            case "Protein Priest": return 12;
+            case "Tupperware Tammy": return 3;
+            case "Soap Saviors": return 1;
+            case "Radioactive Radio Media Empire": return 10;
+            case "The Olsen Twins": return 4;
+            case "Museum of Car Parts": return 13;
+            default: return "unknown";  // Fallback in case of an unexpected outcome
+        }
+    }
+
+    // Retake quiz button functionality
     document.getElementById("retake-quiz").addEventListener("click", () => {
         userAnswers = [];
         currentQuestion = 0;
@@ -255,11 +251,11 @@ window.onload = function () {
         document.getElementById("start-page").style.display = "block";
     });
 
-    // Redirect to website
+    // Redirect to website button functionality
     document.getElementById("meet-moderator").addEventListener("click", () => {
         window.location.href = "https://worksucks.net";
     });
-};  // This closes the window.onload function
+};
 
 // Define the questions, answers, scores, and GIFs
 const questions = [
