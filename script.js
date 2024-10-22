@@ -134,26 +134,115 @@ window.onload = function () {
         }
     }
 
-    // Standard selectAnswer function for regular questions
-    function selectAnswer(answerIndex) {
-        userAnswers.push(questions[currentQuestion].scores[answerIndex]);
+    // Function to show custom Question 6A, 6B, or 6C
+    function showCustomQuestion(customQuestion) {
+        document.getElementById("question-text").innerText = customQuestion.question;
+        document.getElementById("question-illustration").src = customQuestion.gif;
 
-        if (currentQuestion === 4) {  // Handle branch logic for Question 5
-            selectAnswerForQuestion5(answerIndex);
-        } else if (currentQuestion === 9) {  // Branch logic for Question 10
-            if (answerIndex === 1) {
-                showBonusQuestion11();  // Go to Bonus Question 11
-            } else {
-                showResults();  // End the quiz and show results
-            }
-        } else {
-            currentQuestion++;
-            if (currentQuestion < questions.length) {
-                showQuestion();
-            } else {
-                showResults();  // End of quiz, show results
-            }
-        }
+        const answersContainer = document.getElementById("answers-container");
+        answersContainer.innerHTML = "";
+
+        customQuestion.answers.forEach((answer, index) => {
+            const answerButton = document.createElement("button");
+            answerButton.innerText = answer;
+            answerButton.addEventListener("click", () => {
+                userAnswers.push(customQuestion.scores[index]);  // Add custom question score
+                showQuestion7();  // Proceed to Question 7
+            });
+            answersContainer.appendChild(answerButton);
+        });
+    }
+
+    // Show Question 7 after 6A, 6B, or 6C
+    function showQuestion7() {
+        currentQuestion = 6; // Index for Question 7
+        const current = question7;
+
+        document.getElementById("question-text").innerText = current.question;
+        document.getElementById("question-illustration").src = current.gif;
+
+        const answersContainer = document.getElementById("answers-container");
+        answersContainer.innerHTML = "";
+
+        current.answers.forEach((answer, index) => {
+            const answerButton = document.createElement("button");
+            answerButton.innerText = answer;
+            answerButton.addEventListener("click", () => {
+                userAnswers.push(current.scores[index]);  // Push score for Question 7
+                showQuestion8(); // After Question 7, go to Question 8
+            });
+            answersContainer.appendChild(answerButton);
+        });
+    }
+
+    // Function to show Question 8
+    function showQuestion8() {
+        currentQuestion = 7; // Index for Question 8
+        const current = question8;
+
+        document.getElementById("question-text").innerText = current.question;
+        document.getElementById("question-illustration").src = current.gif;
+
+        const answersContainer = document.getElementById("answers-container");
+        answersContainer.innerHTML = "";
+
+        current.answers.forEach((answer, index) => {
+            const answerButton = document.createElement("button");
+            answerButton.innerText = answer;
+            answerButton.addEventListener("click", () => {
+                userAnswers.push(current.scores[index]);  // Push score for Question 8
+                showQuestion9();  // After Question 8, go to Question 9
+            });
+            answersContainer.appendChild(answerButton);
+        });
+    }
+
+    // Function to show Question 9
+    function showQuestion9() {
+        currentQuestion = 8; // Index for Question 9
+        const current = question9;
+
+        document.getElementById("question-text").innerText = current.question;
+        document.getElementById("question-illustration").src = current.gif;
+
+        const answersContainer = document.getElementById("answers-container");
+        answersContainer.innerHTML = "";
+
+        current.answers.forEach((answer, index) => {
+            const answerButton = document.createElement("button");
+            answerButton.innerText = answer;
+            answerButton.addEventListener("click", () => {
+                userAnswers.push(current.scores[index]);  // Push score for Question 9
+                showQuestion10();  // After Question 9, go to Question 10
+            });
+            answersContainer.appendChild(answerButton);
+        });
+    }
+
+    // Function to show Question 10
+    function showQuestion10() {
+        currentQuestion = 9; // Index for Question 10
+        const current = question10;
+
+        document.getElementById("question-text").innerText = current.question;
+        document.getElementById("question-illustration").src = current.gif;
+
+        const answersContainer = document.getElementById("answers-container");
+        answersContainer.innerHTML = "";
+
+        current.answers.forEach((answer, index) => {
+            const answerButton = document.createElement("button");
+            answerButton.innerText = answer;
+            answerButton.addEventListener("click", () => {
+                userAnswers.push(current.scores[index]);  // Push score for Question 10
+                if (index === 1) {
+                    showBonusQuestion11();  // Go to Bonus Question 11
+                } else {
+                    showResults();  // End the quiz and show results
+                }
+            });
+            answersContainer.appendChild(answerButton);
+        });
     }
 
     // Function to show Bonus Question 11
