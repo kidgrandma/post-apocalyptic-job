@@ -151,8 +151,7 @@ function showCustomQuestion(customQuestion) {
             userAnswers.push(customQuestion.scores[index]);  // Record score
             console.log('Custom Question Answer:', index, 'Score added:', customQuestion.scores[index]);  // Log custom answers
             console.log('Current userAnswers after custom question:', userAnswers);
-            currentQuestion++;
-            showQuestion7();  // Move to question 7
+            showQuestion7();  // Directly call showQuestion7 after custom question
         });
         answersContainer.appendChild(answerButton);
     });
@@ -170,8 +169,9 @@ function showQuestion7() {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
         answerButton.addEventListener("click", () => {
+            console.log('Question 7 chosen:', index, 'Score added:', current.scores[index]);
             userAnswers.push(current.scores[index]);
-            showQuestion8();
+            showQuestion8();  // Move to next question
         });
         answersContainer.appendChild(answerButton);
     });
