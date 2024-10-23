@@ -149,10 +149,10 @@ function showCustomQuestion(customQuestion) {
         answerButton.innerText = answer;
         answerButton.addEventListener("click", () => {
             userAnswers.push(customQuestion.scores[index]);  // Record score
-            currentQuestion++;
-            console.log('Answer chosen:', index, 'Score added:', customQuestion.scores[index]);
+            console.log('Custom Question Answer:', index, 'Score added:', customQuestion.scores[index]);  // Log custom answers
             console.log('Current userAnswers after custom question:', userAnswers);
-            showQuestion7();  // Proceed to Question 7 after custom question
+            currentQuestion++;
+            showQuestion7();  // Move to question 7
         });
         answersContainer.appendChild(answerButton);
     });
@@ -261,32 +261,6 @@ function showBonusQuestion11() {
     });
 }
 
-// Function to display the quiz results
-function showResults() {
-    document.getElementById("question-page").style.display = "none";
-    document.getElementById("result-page").style.display = "block";  // Ensure the result page is shown
-    // Add this inside the showResults function
-console.log('Total score:', totalScore);
-    const totalScore = userAnswers.reduce((a, b) => a + b, 0);
-    const outcome = determineOutcome(totalScore);
-    
-    // Now log the outcome and the image path
-    console.log('Outcome:', outcome);
-    console.log('Image path:', `images/outcome${getOutcomeImage(outcome)}.png`);
-    
-    // Set dynamic color for crew name and update results
-    const crewColor = getCrewColor(outcome);
-    document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
-    document.getElementById("result-title").style.color = crewColor;
-
-    // Set the image for the result
-    const resultImageSrc = outcome === "Unknown" 
-        ? "images/unknown.gif"  // New fallback GIF 
-        : `images/outcome${getOutcomeImage(outcome)}.png`;
-        
-    document.getElementById("result-image").src = resultImageSrc;
-}
-
 // Function to determine the outcome based on total score
 function determineOutcome(score) {
     if (score <= 12) return "Homicidal Power Ranger";
@@ -338,7 +312,29 @@ function getCrewColor(outcome) {
         default: return "#000000";  // Black (fallback)
     }
 }
+// Function to display the quiz results
+function showResults() {
+    document.getElementById("question-page").style.display = "none";
+    document.getElementById("result-page").style.display = "block";  // Ensure the result page is shown
 
+    const totalScore = userAnswers.reduce((a, b) => a + b, 0);  // Initialize 'totalScore' here
+    const outcome = determineOutcome(totalScore);
+
+    console.log('Outcome:', outcome);
+    console.log('Image path:', `images/outcome${getOutcomeImage(outcome)}.png`);
+
+    // Set dynamic color for crew name and update results
+    const crewColor = getCrewColor(outcome);
+    document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
+    document.getElementById("result-title").style.color = crewColor;
+
+    // Set the image for the result
+    const resultImageSrc = outcome === "Unknown" 
+        ? "images/unknown.gif"  // New fallback GIF 
+        : `images/outcome${getOutcomeImage(outcome)}.png`;
+        
+    document.getElementById("result-image").src = resultImageSrc;
+}
 // Function to update the progress bar
 function updateProgressBar() {
     const progressPercent = (currentQuestion / totalQuestions) * 100;
