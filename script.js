@@ -120,7 +120,9 @@ function selectAnswer(index) {
     userAnswers.push(questions[currentQuestion].scores[index]);  // Record user's answer
     currentQuestion++;
     updateProgressBar();
-
+// Add this inside the selectAnswer function
+console.log('Answer chosen:', index, 'Score added:', questions[currentQuestion].scores[index]);
+console.log('Current userAnswers:', userAnswers);
     if (currentQuestion === 4) {
         if (index === 0) showCustomQuestion(question6A);
         else if (index === 1) showCustomQuestion(question6B);
@@ -134,7 +136,6 @@ function selectAnswer(index) {
         showResults();  // Show quiz results
     }
 }
-
 // Function to show custom Question 6A, 6B, or 6C
 function showCustomQuestion(customQuestion) {
     document.getElementById("question-text").innerText = customQuestion.question;
@@ -149,7 +150,9 @@ function showCustomQuestion(customQuestion) {
         answerButton.addEventListener("click", () => {
             userAnswers.push(customQuestion.scores[index]);  // Record score
             currentQuestion++;
-            showQuestion7();
+            console.log('Answer chosen:', index, 'Score added:', customQuestion.scores[index]);
+            console.log('Current userAnswers after custom question:', userAnswers);
+            showQuestion7();  // Proceed to Question 7 after custom question
         });
         answersContainer.appendChild(answerButton);
     });
@@ -262,7 +265,8 @@ function showBonusQuestion11() {
 function showResults() {
     document.getElementById("question-page").style.display = "none";
     document.getElementById("result-page").style.display = "block";  // Ensure the result page is shown
-    
+    // Add this inside the showResults function
+console.log('Total score:', totalScore);
     const totalScore = userAnswers.reduce((a, b) => a + b, 0);
     const outcome = determineOutcome(totalScore);
     
