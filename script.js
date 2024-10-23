@@ -269,19 +269,18 @@ function showBonusQuestion11() {
 
 // Function to determine the outcome based on total score
 function determineOutcome(score) {
-    if (score <= 12) return "Homicidal Power Ranger";
-    if (score <= 15) return "Caffeine Nicotine Cartel";
-    if (score <= 18) return "Hermes Shredders";
-    if (score <= 21) return "The DMV (Club Kids)";
-    if (score <= 23) return "Internet Preservation Society";
-    if (score <= 25) return "Protein Priest";
-    if (score <= 27) return "Tupperware Tammy";
-    if (score <= 29) return "Soap Saviors";
-    if (score <= 31) return "Radioactive Radio Media Empire";
-    if (score === 32) return "The Olsen Twins";
-    if (score === 33) return "Museum of Car Parts";
-    console.log('Determined Outcome for score', score);
-    return "Unknown";  // Fallback in case of an unexpected score
+    if (score <= 10) return "Homicidal Power Ranger";  // Lower score, high probability
+    if (score <= 14) return "Tupperware Tammy";        // Mid-low score, high probability
+    if (score <= 18) return "Caffeine Nicotine Cartel"; // Mid-range score, higher probability
+    if (score <= 22) return "Hermes Shredders";        // Mid-range score, higher probability
+    if (score <= 25) return "Protein Priest";          // Mid-high range, moderate probability
+    if (score <= 28) return "The DMV (Club Kids)";     // Higher score, moderate probability
+    if (score <= 31) return "Internet Preservation Society"; // High score, less common
+    if (score === 32) return "Soap Saviors";           // Very high score, rare
+    if (score === 33) return "Radioactive Radio Media Empire";  // Extremely rare
+    if (score === 34) return "The Olsen Twins";        // Extremely rare
+    if (score >= 35) return "Museum of Car Parts";     // Highest score, rarest outcome
+    return "Unknown";  // Fallback for unexpected score
 }
 
 // Function to map the outcome to the corresponding image
