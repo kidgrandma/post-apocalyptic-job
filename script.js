@@ -172,6 +172,7 @@ function showQuestion7() {
         answerButton.addEventListener("click", () => {
             console.log('Question 7 chosen:', index, 'Score added:', current.scores[index]);
             userAnswers.push(current.scores[index]);
+            console.log('User Answer:', current.scores[index], 'Current userAnswers:', userAnswers);
             showQuestion8();  // Move to next question
         });
         answersContainer.appendChild(answerButton);
@@ -192,6 +193,7 @@ function showQuestion8() {
         answerButton.innerText = answer;
         answerButton.addEventListener("click", () => {
             userAnswers.push(current.scores[index]);  // Push score for Question 8
+            console.log('User Answer:', current.scores[index], 'Current userAnswers:', userAnswers);
             showQuestion9();  // After Question 8, go to Question 9
         });
         answersContainer.appendChild(answerButton);
@@ -212,6 +214,7 @@ function showQuestion9() {
         answerButton.innerText = answer;
         answerButton.addEventListener("click", () => {
             userAnswers.push(current.scores[index]);  // Push score for Question 9
+            console.log('User Answer:', current.scores[index], 'Current userAnswers:', userAnswers);
             showQuestion10();  // After Question 9, go to Question 10
         });
         answersContainer.appendChild(answerButton);
@@ -232,6 +235,7 @@ function showQuestion10() {
         answerButton.innerText = answer;
         answerButton.addEventListener("click", () => {
             userAnswers.push(current.scores[index]);  // Push score for Question 10
+            console.log('User Answer:', current.scores[index], 'Current userAnswers:', userAnswers);
             if (index === 1) {
                 showBonusQuestion11();  // Go to Bonus Question 11 if they select the second answer
             } else {
@@ -256,6 +260,7 @@ function showBonusQuestion11() {
         answerButton.innerText = answer;
         answerButton.addEventListener("click", () => {
             userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
+            console.log('User Answer:', current.scores[index], 'Current userAnswers:', userAnswers);
             showResults();  // After Bonus Question 11, show results
         });
         answersContainer.appendChild(answerButton);
@@ -275,6 +280,7 @@ function determineOutcome(score) {
     if (score <= 31) return "Radioactive Radio Media Empire";
     if (score === 32) return "The Olsen Twins";
     if (score === 33) return "Museum of Car Parts";
+    console.log('Determined Outcome for score', score);
     return "Unknown";  // Fallback in case of an unexpected score
 }
 
