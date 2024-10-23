@@ -262,10 +262,14 @@ function showBonusQuestion11() {
 function showResults() {
     document.getElementById("question-page").style.display = "none";
     document.getElementById("result-page").style.display = "block";  // Ensure the result page is shown
-
+    
     const totalScore = userAnswers.reduce((a, b) => a + b, 0);
     const outcome = determineOutcome(totalScore);
-
+    
+    // Now log the outcome and the image path
+    console.log('Outcome:', outcome);
+    console.log('Image path:', `images/outcome${getOutcomeImage(outcome)}.png`);
+    
     // Set dynamic color for crew name and update results
     const crewColor = getCrewColor(outcome);
     document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
