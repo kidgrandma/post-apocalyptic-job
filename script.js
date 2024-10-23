@@ -269,18 +269,18 @@ function showBonusQuestion11() {
 
 // Function to determine the outcome based on total score
 function determineOutcome(score) {
-    if (score <= 10) return "Homicidal Power Ranger";  // Lower score, high probability
-    if (score <= 14) return "Tupperware Tammy";        // Mid-low score, high probability
-    if (score <= 18) return "Caffeine Nicotine Cartel"; // Mid-range score, higher probability
-    if (score <= 22) return "Hermes Shredders";        // Mid-range score, higher probability
-    if (score <= 25) return "Protein Priest";          // Mid-high range, moderate probability
-    if (score <= 28) return "The DMV (Club Kids)";     // Higher score, moderate probability
-    if (score <= 31) return "Internet Preservation Society"; // High score, less common
-    if (score === 32) return "Soap Saviors";           // Very high score, rare
-    if (score === 33) return "Radioactive Radio Media Empire";  // Extremely rare
-    if (score === 34) return "The Olsen Twins";        // Extremely rare
-    if (score >= 35) return "Museum of Car Parts";     // Highest score, rarest outcome
-    return "Unknown";  // Fallback for unexpected score
+    if (score <= 20) return "Homicidal Power Ranger"; // Most likely outcome for low scores
+    if (score <= 27) return "Caffeine Nicotine Cartel"; // Mid-range outcome
+    if (score <= 34) return "Hermes Shredders"; // Mid-range, likely outcome
+    if (score <= 40) return "Protein Priest"; // Upper-mid range outcome
+    if (score <= 45) return "The DMV (Club Kids)"; // Upper range, likely outcome
+    if (score <= 50) return "Internet Preservation Society"; // Higher range, less common
+    if (score <= 52) return "Tupperware Tammy"; // Higher range, less common
+    if (score <= 54) return "Soap Saviors"; // Rare, very high score
+    if (score <= 56) return "Radioactive Radio Media Empire"; // Rare, very high score
+    if (score <= 57) return "The Olsen Twins"; // Rare, near-perfect score
+    if (score === 58) return "Museum of Car Parts"; // Extremely rare, perfect score
+    return "Unknown"; // Fallback for unexpected scores
 }
 
 // Function to map the outcome to the corresponding image
