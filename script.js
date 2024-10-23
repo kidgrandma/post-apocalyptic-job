@@ -270,12 +270,12 @@ function showBonusQuestion11() {
 // Function to determine the outcome based on total score
 function determineOutcome(score) {
     if (score <= 20) return "Soap Saviors"; // Rare, very high score
-    if (score <= 27) return "Caffeine Nicotine Cartel"; // Mid-range outcome
-    if (score <= 34) return "Hermes Shredders"; // Mid-range, likely outcome
-    if (score <= 40) return "Homicidal Power Ranger"; // Very high score, lowest probability
-    if (score <= 45) return "The DMV (Club Kids)"; // Upper range, likely outcome
-    if (score <= 50) return "Internet Preservation Society"; // Higher range, less common
-    if (score <= 52) return "Tupperware Tammy"; // Higher range, less common
+    if (score <= 30) return "Caffeine Nicotine Cartel"; // Mid-range outcome
+    if (score <= 35) return "Hermes Shredders"; // Mid-range, likely outcome
+    if (score <= 37) return "Homicidal Power Ranger"; // Very high score, lowest probability
+    if (score <= 38) return "The DMV (Club Kids)"; // Upper range, likely outcome
+    if (score <= 40) return "Internet Preservation Society"; // Higher range, less common
+    if (score <= 45) return "Tupperware Tammy"; // Higher range, less common
     if (score <= 54) return "Protein Priest"; // Upper-mid range outcome
     if (score <= 56) return "Radioactive Radio Media Empire"; // Rare, very high score
     if (score <= 57) return "The Olsen Twins"; // Rare, near-perfect score
