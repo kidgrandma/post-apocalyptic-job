@@ -8,31 +8,31 @@ const questions = [
     {
         question: "Welcome to the apocalypse! You just woke up in the ruins of Bill Nye's townhouse. Is something burning?!",
         answers: ["Check it out", "SCREAM", "Jump out window"],
-        scores: [2, 4, 3],
+        scores: [2, 3, 3],
         gif: "images/question1-illustration.gif"
     },
     {
         question: "Thank gosh you got out of there alive. Death by science guy would have been a weird way to go out. It’s breakfast time! Choose a BUDDY™️ to forage for food:",
         answers: ["Tupperware Tammy", "The Hermes Shredders", "The Used Bar Salesman"],
-        scores: [3, 5, 2],
+        scores: [3, 4, 2],
         gif: "images/question2-illustration.gif"
     },
     {
         question: "Great work! You and your BUDDY™️ need to grab something to eat, where ya headed?",
         answers: ["Waffle House", "Steal from someone's kid", "Street fighter for it"],
-        scores: [2, 3, 4],
+        scores: [2, 3, 1],
         gif: "images/question3-illustration.gif"
     },
     {
         question: "Uh oh! Not enough food for you and BUDDY™️ - what do you do?",
         answers: ["Kill BUDDY™️", "Share food with BUDDY™️", "Sell BUDDY™️"],
-        scores: [6, 2, 4],
+        scores: [4, 2, 4],
         gif: "images/question4-illustration.gif"
     },
     {
         question: "Aw, BUDDY™️ died anyways. Time to look for shelter. Where do you go?",
         answers: ["Abandoned DMV", "Mojo Dojo Casa House", "Spirit Halloween"],
-        scores: [6, 5, 3],
+        scores: [3, 5, 3],
         gif: "images/question5-illustration.gif"
     }
 ];
@@ -41,19 +41,19 @@ const questions = [
 const question6A = {
     question: "Post-apocalyptic club kids have kidnapped you! The bag's out, and they've been carpet farming for months. How do you escape?",
     answers: ["Agua gun", "Bible", "Butter knife"],
-    scores: [2, 4, 6],
+    scores: [2, 4, 5],
     gif: "images/question6a-illustration.gif"
 };
 const question6B = {
     question: "Ahh, the good old Olsen bait and switch. You're tied to the bed while they take turns reading your birth chart. How do you escape?",
     answers: ["Bible", "Agua gun", "Butter knife"],
-    scores: [4, 2, 6],
+    scores: [4, 2, 4],
     gif: "images/question6b-illustration.gif"
 };
 const question6C = {
     question: "We’re never closing!! You’re trapped inside an out-of-season Spirit Halloween with the Homicidal Power Ranger. How do you escape?",
     answers: ["Agua gun", "Butter knife", "Bible"],
-    scores: [2, 6, 4],
+    scores: [2, 2, 4],
     gif: "images/question6c-illustration.gif"
 };
 
@@ -269,14 +269,14 @@ function showBonusQuestion11() {
 
 // Function to determine the outcome based on total score
 function determineOutcome(score) {
-    if (score <= 20) return "Homicidal Power Ranger"; // Most likely outcome for low scores
+    if (score <= 20) return "Soap Saviors"; // Rare, very high score
     if (score <= 27) return "Caffeine Nicotine Cartel"; // Mid-range outcome
     if (score <= 34) return "Hermes Shredders"; // Mid-range, likely outcome
-    if (score <= 40) return "Protein Priest"; // Upper-mid range outcome
+    if (score <= 40) return "Homicidal Power Ranger"; // Very high score, lowest probability
     if (score <= 45) return "The DMV (Club Kids)"; // Upper range, likely outcome
     if (score <= 50) return "Internet Preservation Society"; // Higher range, less common
     if (score <= 52) return "Tupperware Tammy"; // Higher range, less common
-    if (score <= 54) return "Soap Saviors"; // Rare, very high score
+    if (score <= 54) return "Protein Priest"; // Upper-mid range outcome
     if (score <= 56) return "Radioactive Radio Media Empire"; // Rare, very high score
     if (score <= 57) return "The Olsen Twins"; // Rare, near-perfect score
     if (score === 58) return "Museum of Car Parts"; // Extremely rare, perfect score
