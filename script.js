@@ -120,9 +120,8 @@ function selectAnswer(index) {
     userAnswers.push(questions[currentQuestion].scores[index]);  // Record user's answer
     currentQuestion++;
     updateProgressBar();
-// Add this inside the selectAnswer function
-console.log('Answer chosen:', index, 'Score added:', questions[currentQuestion].scores[index]);
-console.log('Current userAnswers:', userAnswers);
+    console.log('Answer chosen:', index, 'Score added:', questions[currentQuestion - 1].scores[index]);
+    console.log('Current userAnswers:', userAnswers);
     if (currentQuestion === 4) {
         if (index === 0) showCustomQuestion(question6A);
         else if (index === 1) showCustomQuestion(question6B);
@@ -136,6 +135,7 @@ console.log('Current userAnswers:', userAnswers);
         showResults();  // Show quiz results
     }
 }
+
 // Function to show custom Question 6A, 6B, or 6C
 function showCustomQuestion(customQuestion) {
     document.getElementById("question-text").innerText = customQuestion.question;
@@ -156,6 +156,7 @@ function showCustomQuestion(customQuestion) {
         answersContainer.appendChild(answerButton);
     });
 }
+
 // Show Question 7 after custom questions
 function showQuestion7() {
     const current = question7;
@@ -342,7 +343,6 @@ function updateProgressBar() {
         progressBar.style.width = `${progressPercent}%`;
     }
 }
-
 // Functionality to copy quiz link to clipboard
 document.addEventListener("DOMContentLoaded", function() {
     console.log("Page loaded");  // Check if the script is loading correctly
