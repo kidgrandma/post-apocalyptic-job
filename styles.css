@@ -9,14 +9,11 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Maintain parallax effect */
+    background-attachment: fixed; /* Keep background fixed */
     color: white;
     text-align: center;
     padding: 0;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
     overflow: hidden; /* Prevent scroll on the body */
 }
@@ -33,6 +30,7 @@ body {
     animation: pulse 10s infinite alternate; /* Slight pulsing */
     overflow-y: auto; /* Enable vertical scrolling */
     max-height: 90vh; /* Prevent overflow beyond viewport height */
+    position: relative; /* Position relative for better stacking context */
 }
 
 @keyframes pulse {
