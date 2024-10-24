@@ -93,7 +93,7 @@ const question11 = {
 function startQuiz() {
     document.getElementById("start-page").style.display = "none";  // Hides the start page
     document.getElementById("question-page").style.display = "block";  // Show the question page
-    showQuestion();
+    showQuestion();  // Display the first question
 }
 
 // Update the progress bar based on the current question
@@ -104,9 +104,9 @@ function updateProgressBar() {
     }
 }
 
-// Function to show the current question
+// Function to show the current question from the main question array
 function showQuestion() {
-    const current = questions[currentQuestion];
+    const current = questions[currentQuestion];  // Pull the current question
 
     // Validate that the question exists
     if (!current) {
@@ -114,7 +114,7 @@ function showQuestion() {
         return;
     }
 
-    // Display the question and GIF
+    // Display the question and associated GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
@@ -126,31 +126,34 @@ function showQuestion() {
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
-        answerButton.addEventListener("click", () => selectAnswer(index));
+        answerButton.addEventListener("click", () => selectAnswer(index));  // Handle answer selection
         answersContainer.appendChild(answerButton);
     });
-
+    
     updateProgressBar();  // Update progress bar after showing question
 }
 
-// Function to handle answer selection and advance to the next question
+// Function to handle answer selection and branching logic
 function selectAnswer(index) {
-    console.log('Selected answer for question:', currentQuestion, 'Index:', index);  // Debugging log
+    console.log('Selected answer for question:', currentQuestion, 'Index:', index);
 
-    // Branching logic for Question 5 (which is index 4)
-    if (currentQuestion === 4) {  // This is Question 5
+    // Special branching logic for Question 5
+    if (currentQuestion === 4) {  // If we are at Question 5 (index 4)
+        console.log('Branching from Question 5 to custom question');
+
+        // Branch to custom Question 6A, 6B, or 6C
         if (index === 0) {
-            showCustomQuestion(question6A);  // Go to 6A
+            showCustomQuestion(question6A);  // Go to custom question 6A
         } else if (index === 1) {
-            showCustomQuestion(question6B);  // Go to 6B
+            showCustomQuestion(question6B);  // Go to custom question 6B
         } else {
-            showCustomQuestion(question6C);  // Go to 6C
+            showCustomQuestion(question6C);  // Go to custom question 6C
         }
-        return;  // Avoid continuing to next question
+        return;  // Stop further execution here
     }
 
     // Default behavior for all other questions
-    userAnswers.push(questions[currentQuestion].scores[index]);  // Store user's answer
+    userAnswers.push(questions[currentQuestion].scores[index]);  // Store the user's answer
     currentQuestion++;  // Move to the next question
 
     // Check if there are more questions to show
@@ -165,9 +168,9 @@ function selectAnswer(index) {
 
 // Function to show custom Question 6A, 6B, or 6C
 function showCustomQuestion(customQuestion) {
-    console.log('Showing custom question:', customQuestion.question);  // Debugging log
+    console.log('Showing custom question:', customQuestion.question);
 
-    // Display custom question and its GIF
+    // Display custom question and its associated GIF
     document.getElementById("question-text").innerText = customQuestion.question;
     document.getElementById("question-illustration").src = customQuestion.gif;
 
@@ -181,22 +184,22 @@ function showCustomQuestion(customQuestion) {
         answerButton.innerText = answer;
 
         answerButton.addEventListener("click", () => {
-            userAnswers.push(customQuestion.scores[index]);  // Record score for custom question
-            moveToNextAfterCustom();  // After answering custom question, move to next
+            userAnswers.push(customQuestion.scores[index]);  // Store the answer
+            moveToNextAfterCustom();  // After answering the custom question, move to Question 7
         });
         answersContainer.appendChild(answerButton);
     });
 
     updateProgressBar();  // Update progress bar after showing custom question
 }
-// Function to move from custom question to the next main question (Question 7)
+
+// Function to move from a custom question to Question 7
 function moveToNextAfterCustom() {
     console.log("Moving to Question 7 after custom question");
-    currentQuestion = 6;  // Ensure that Question 7 (index 6) is next
-    showQuestion();  // Show Question 7
-    updateProgressBar();  // Ensure progress bar updates correctly
+    currentQuestion = 6;  // Set the current question to 7 (index 6)
+    showQuestion();  // Display Question 7
+    updateProgressBar();  // Update the progress bar
 }
-
 // Function to show Question 8
 function showQuestion8() {
     const current = question8;
