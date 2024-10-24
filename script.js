@@ -108,20 +108,17 @@ function updateProgressBar() {
 function selectAnswer(index) {
     console.log('Selected answer for question:', currentQuestion, 'Index:', index);  // Debugging log
 
-    // Branching logic for Question 5
-    if (currentQuestion === 4) {  // Index 4 is Question 5
-        console.log('Branching from Question 5 based on selected index:', index);
-
-        // Branch to custom Question 6A, 6B, or 6C
-        if (index === 0) {
-            showCustomQuestion(question6A);  // Go to Question 6A
-        } else if (index === 1) {
-            showCustomQuestion(question6B);  // Go to Question 6B
-        } else {
-            showCustomQuestion(question6C);  // Go to Question 6C
-        }
-        return;  // Stop further execution after showing custom question
+// Adjust for Question 5 leading to the custom questions
+if (currentQuestion === 4) {  // Index 4 corresponds to Question 5
+    if (index === 0) {
+        showCustomQuestion(question6A);  // Go to custom question 6A
+    } else if (index === 1) {
+        showCustomQuestion(question6B);  // Go to custom question 6B
+    } else {
+        showCustomQuestion(question6C);  // Go to custom question 6C
     }
+    return;  // Exit early to avoid incrementing currentQuestion further at this point
+}
 
     // Default behavior for all other questions
     userAnswers.push(questions[currentQuestion].scores[index]);  // Store user's answer
@@ -164,10 +161,10 @@ function showCustomQuestion(customQuestion) {
     updateProgressBar();  // Update progress bar after showing custom question
 }
 
-// Function to move from custom question to the next main question (Question 7)
+// Function to move from custom question (6A, 6B, 6C) to the next main question (Question 7)
 function moveToNextAfterCustom() {
     console.log("Moving to Question 7 after custom question");
-    currentQuestion = 6;  // Set to index 6 to ensure next is Question 7 (which is index 6)
+    currentQuestion = 6;  // Set currentQuestion to 6, which is Question 7 in your array
     showQuestion();  // Show Question 7
     updateProgressBar();  // Ensure progress bar updates correctly
 }
