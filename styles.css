@@ -15,11 +15,10 @@ body {
     padding: 0;
     margin: 0;
     min-height: 100vh;
-    overflow: hidden; /* Prevent scroll on the body */
 }
 
 #quiz-container {
-    padding: 1rem; /* Scalable rem units */
+    padding: 1rem;
     max-width: 600px;
     width: 90%; /* Ensure it doesn’t exceed the viewport */
     margin: 0 auto;
@@ -27,49 +26,29 @@ body {
     border-radius: 10px;
     text-align: center;
     backdrop-filter: blur(5px); /* Blurred background */
-    animation: pulse 10s infinite alternate; /* Slight pulsing */
     overflow-y: auto; /* Enable vertical scrolling */
     max-height: 90vh; /* Prevent overflow beyond viewport height */
-    position: relative; /* Position relative for better stacking context */
-}
-
-@keyframes pulse {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.02);
-    }
+    position: relative;
+    animation: none; /* Remove pulsing to avoid lag on mobile */
 }
 
 /* Clean and modern progress bar */
 #progress-bar {
     width: 100%;
-    height: 8px; /* Height for visibility */
+    height: 8px;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 50px; /* Rounded corners */
     margin-top: 20px;
     overflow: hidden;
-    position: relative;
 }
 
 #progress-fill {
     height: 100%;
-    background-color: #00ffff; /* Cyan color */
+    background-color: #00ffff; /* Neon color */
     width: 0; /* Initial width (0%) */
-    transition: width 0.5s ease; /* Smooth transition */
+    transition: none; /* Remove transition for instant progress */
     border-radius: 50px; /* Rounded fill */
     box-shadow: 0 0 10px #00ffff, 0 0 15px #ff00ff; /* Neon glow effect */
-    animation: glow 1.5s infinite alternate; /* Glowing effect */
-}
-
-@keyframes glow {
-    from {
-        box-shadow: 0 0 10px #00ffff, 0 0 15px #ff00ff;
-    }
-    to {
-        box-shadow: 0 0 20px #00ffff, 0 0 25px #ff00ff;
-    }
 }
 
 /* Mobile adjustments */
@@ -106,23 +85,12 @@ button {
     border-radius: 5px;
     box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF; /* Glow effect */
     text-transform: uppercase;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: button-pulse 2s infinite alternate;
-}
-
-@keyframes button-pulse {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.05);
-    }
+    animation: none; /* Remove button-pulse animation */
 }
 
 button:hover {
     background-color: #FF00FF;
     color: #FFF;
-    box-shadow: 0 0 20px #FF00FF, 0 0 25px #00FFFF;
 }
 
 button:active {
@@ -148,7 +116,6 @@ button:active {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 #share-buttons button:hover {
@@ -165,14 +132,13 @@ button:active {
 }
 
 #question-illustration:hover {
-    transform: scale(1.05) rotate(1deg);
-    transition: transform 0.3s ease;
+    transform: none; /* Remove unnecessary hover transform */
 }
 
 /* Subtle fade-in effect for question transitions */
 .fade-in {
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.3s ease-in-out; /* Shorten fade-in for performance */
 }
 
 .fade-in-active {
