@@ -105,11 +105,12 @@ function updateProgressBar() {
 }
 
 // Function to handle answer selection and advance to the next question
+// Function to handle answer selection and advance to the next question
 function selectAnswer(index) {
     console.log('Selected answer for question:', currentQuestion, 'Index:', index);  // Debugging log
 
-    // Handling Question 5's answers
-    if (currentQuestion === 5) {
+    // Handle Question 5 and branch to custom questions
+    if (currentQuestion === 4) {  // Remember array index starts at 0, so Question 5 is index 4
         console.log('Branching from Question 5 to custom question based on index:', index);  // Debugging log
 
         // Branch to Question 6A, 6B, or 6C based on answer to Question 5
@@ -120,7 +121,7 @@ function selectAnswer(index) {
         } else {
             showCustomQuestion(question6C);  // Go to custom question 6C
         }
-        return;  // Exit early, preventing the default flow to the next question
+        return;  // Exit early, preventing `currentQuestion` from incrementing and default flow
     }
 
     // Default behavior for all other questions
@@ -135,35 +136,6 @@ function selectAnswer(index) {
     }
 
     updateProgressBar();  // Always update the progress bar
-}
-
-// Function to show the current question
-function showQuestion() {
-    const current = questions[currentQuestion];
-
-    // Check if the current question exists
-    if (!current) {
-        console.error("Question not found for index", currentQuestion);
-        return;
-    }
-
-    // Display the current question and its associated GIF
-    document.getElementById("question-text").innerText = current.question;
-    document.getElementById("question-illustration").src = current.gif;
-
-    // Clear previous answers
-    const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Clears previous answers
-
-    // Create buttons for each answer
-    current.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
-        answerButton.addEventListener("click", () => selectAnswer(index));
-        answersContainer.appendChild(answerButton);
-    });
-
-    updateProgressBar();  // Update progress bar after showing question
 }
 
 // Function to show custom Question 6A, 6B, or 6C
