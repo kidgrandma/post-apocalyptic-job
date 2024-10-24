@@ -1,6 +1,7 @@
 let currentQuestion = 0;  // Tracks the current question index
 let userAnswers = [];  // Stores the user's answers
 const totalQuestions = 11;  // Total number of questions
+let progressBar = document.getElementById("progress-fill");
 
 // Define the questions, answers, scores, and GIFs
 const questions = [
@@ -94,12 +95,15 @@ function startQuiz() {
     document.getElementById("question-page").style.display = "block";  // Show the question page
     showQuestion();
 }
+
+// Update the progress bar based on the current question
 function updateProgressBar() {
     const progressPercent = (currentQuestion / totalQuestions) * 100;
     if (progressBar) {
         progressBar.style.width = `${progressPercent}%`;
     }
 }
+
 // Function to show the current question
 function showQuestion() {
     const current = questions[currentQuestion];
@@ -115,20 +119,19 @@ function showQuestion() {
         answerButton.addEventListener("click", () => selectAnswer(index));
         answersContainer.appendChild(answerButton);
     });
+
+    updateProgressBar();  // Update progress bar after displaying the question
 }
-function updateProgressBar() {
-    const progressPercent = (currentQuestion / totalQuestions) * 100;
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
-    }
-}
+
 // Function to handle answer selection and advance to the next question
 function selectAnswer(index) {
     userAnswers.push(questions[currentQuestion].scores[index]);  // Record user's answer
     currentQuestion++;
     
-    if (currentQuestion === 4) {
-        // Branch to Question 6A, 6B, or 6C
+    if (currentQuestion === 5) {
+        showQuestion();  // Show Question 5 after Question 4
+    } else if (currentQuestion === 6) {
+        // Branch to Question 6A, 6B, or 6C based on answer to Question 5
         if (index === 0) showCustomQuestion(question6A);
         else if (index === 1) showCustomQuestion(question6B);
         else showCustomQuestion(question6C);
@@ -138,12 +141,7 @@ function selectAnswer(index) {
         showResults();  // Show quiz results
     }
 }
-function updateProgressBar() {
-    const progressPercent = (currentQuestion / totalQuestions) * 100;
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
-    }
-}
+
 // Function to show custom Question 6A, 6B, or 6C
 function showCustomQuestion(customQuestion) {
     document.getElementById("question-text").innerText = customQuestion.question;
@@ -162,13 +160,8 @@ function showCustomQuestion(customQuestion) {
         answersContainer.appendChild(answerButton);
     });
 }
-function updateProgressBar() {
-    const progressPercent = (currentQuestion / totalQuestions) * 100;
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
-    }
-}
-// Show Question 7 after custom questions
+
+// Function to show Question 7 after custom questions
 function showQuestion7() {
     const current = question7;
     document.getElementById("question-text").innerText = current.question;
@@ -186,12 +179,8 @@ function showQuestion7() {
         });
         answersContainer.appendChild(answerButton);
     });
-}
-function updateProgressBar() {
-    const progressPercent = (currentQuestion / totalQuestions) * 100;
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
-    }
+
+    updateProgressBar();  // Update progress bar after advancing to next question
 }
 // Function to show Question 8
 function showQuestion8() {
@@ -212,13 +201,10 @@ function showQuestion8() {
         });
         answersContainer.appendChild(answerButton);
     });
+
+    updateProgressBar();  // Update progress bar
 }
-function updateProgressBar() {
-    const progressPercent = (currentQuestion / totalQuestions) * 100;
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
-    }
-}
+
 // Function to show Question 9
 function showQuestion9() {
     const current = question9;
@@ -238,13 +224,10 @@ function showQuestion9() {
         });
         answersContainer.appendChild(answerButton);
     });
+
+    updateProgressBar();  // Update progress bar
 }
-function updateProgressBar() {
-    const progressPercent = (currentQuestion / totalQuestions) * 100;
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
-    }
-}
+
 // Function to show Question 10
 function showQuestion10() {
     const current = question10;
@@ -268,13 +251,10 @@ function showQuestion10() {
         });
         answersContainer.appendChild(answerButton);
     });
+
+    updateProgressBar();  // Update progress bar
 }
-function updateProgressBar() {
-    const progressPercent = (currentQuestion / totalQuestions) * 100;
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
-    }
-}
+
 // Function to show Bonus Question 11
 function showBonusQuestion11() {
     const current = question11;
@@ -294,6 +274,8 @@ function showBonusQuestion11() {
         });
         answersContainer.appendChild(answerButton);
     });
+
+    updateProgressBar();  // Update progress bar
 }
 
 // Function to determine the outcome based on total score
@@ -329,7 +311,6 @@ function getOutcomeImage(outcome) {
         default: return "unknown";  // Now the fallback is "unknown.gif"
     }
 }
-
 // Function to get dynamic crew color based on the outcome
 function getCrewColor(outcome) {
     switch (outcome) {
@@ -369,13 +350,7 @@ function showResults() {
         : `images/outcome${getOutcomeImage(outcome)}.png`;
         
     document.getElementById("result-image").src = resultImageSrc;
-}
-// Function to update the progress bar
-function updateProgressBar() {
-    const progressPercent = (currentQuestion / totalQuestions) * 100;
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
-    }
+    updateProgressBar();  // Final update to the progress bar
 }
 // Functionality to copy quiz link to clipboard
 document.addEventListener("DOMContentLoaded", function() {
