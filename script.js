@@ -5,6 +5,7 @@ let progressBar = document.getElementById("progress-fill");
 
 // Define the questions, answers, scores, and GIFs
 const questions = [
+    // Main questions before branching
     {
         question: "Welcome to the apocalypse! You just woke up in the ruins of Bill Nye's townhouse. Is something burning?!",
         answers: ["Check it out", "SCREAM", "Jump out window"],
@@ -36,25 +37,26 @@ const questions = [
         gif: "images/question5-illustration.gif"
     }
 ];
-
-// Define custom Question 6A, 6B, 6C
-const question6A = {
-    question: "Post-apocalyptic club kids have kidnapped you! The bag's out, and they've been carpet farming for months. How do you escape?",
-    answers: ["Agua gun", "Bible", "Butter knife"],
-    scores: [2, 4, 5],
-    gif: "images/question6a-illustration.gif"
-};
-const question6B = {
-    question: "Ahh, the good old Olsen bait and switch. You're tied to the bed while they take turns reading your birth chart. How do you escape?",
-    answers: ["Bible", "Agua gun", "Butter knife"],
-    scores: [4, 2, 4],
-    gif: "images/question6b-illustration.gif"
-};
-const question6C = {
-    question: "We’re never closing!! You’re trapped inside an out-of-season Spirit Halloween with the Homicidal Power Ranger. How do you escape?",
-    answers: ["Agua gun", "Butter knife", "Bible"],
-    scores: [2, 2, 4],
-    gif: "images/question6c-illustration.gif"
+// Define custom questions (6A, 6B, 6C)
+const customQuestions = {
+    6A: {
+        question: "Post-apocalyptic club kids have kidnapped you! The bag's out, and they've been carpet farming for months. How do you escape?",
+        answers: ["Agua gun", "Bible", "Butter knife"],
+        scores: [2, 4, 5],
+        gif: "images/question6a-illustration.gif"
+    },
+    6B: {
+        question: "Ahh, the good old Olsen bait and switch. You're tied to the bed while they take turns reading your birth chart. How do you escape?",
+        answers: ["Bible", "Agua gun", "Butter knife"],
+        scores: [4, 2, 4],
+        gif: "images/question6b-illustration.gif"
+    },
+    6C: {
+        question: "We’re never closing!! You’re trapped inside an out-of-season Spirit Halloween with the Homicidal Power Ranger. How do you escape?",
+        answers: ["Agua gun", "Butter knife", "Bible"],
+        scores: [2, 2, 4],
+        gif: "images/question6c-illustration.gif"
+    }
 };
 
 // Other questions...
