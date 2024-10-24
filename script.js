@@ -108,16 +108,16 @@ function updateProgressBar() {
 function selectAnswer(index) {
     console.log('Selected answer for question:', currentQuestion, 'Index:', index);  // Debugging log
 
-// For Question 5 leading to custom questions 6A, 6B, or 6C
-if (currentQuestion === 4) {  // Index 4 corresponds to Question 5
+    // Branching logic for Question 5
+if (currentQuestion === 4) {  // This is Question 5
     if (index === 0) {
-        showCustomQuestion(question6A);  // Go to custom question 6A
+        showCustomQuestion(question6A);  // Go to 6A
     } else if (index === 1) {
-        showCustomQuestion(question6B);  // Go to custom question 6B
+        showCustomQuestion(question6B);  // Go to 6B
     } else {
-        showCustomQuestion(question6C);  // Go to custom question 6C
+        showCustomQuestion(question6C);  // Go to 6C
     }
-    return;  // Stop further execution here
+    return;  // Avoid continuing to next question
 }
 
     // Default behavior for all other questions
@@ -160,40 +160,40 @@ function showCustomQuestion(customQuestion) {
 
     updateProgressBar();  // Update progress bar after showing custom question
 }
-
-// Function to move from custom question (6A, 6B, or 6C) to Question 7
+// Function to move from custom question to the next main question (Question 7)
 function moveToNextAfterCustom() {
     console.log("Moving to Question 7 after custom question");
-    
-    // Instead of setting currentQuestion = 6 (which might not map directly), 
-    // we directly show Question 7 since it's not part of the questions array.
-    showQuestion7();  // Call function to show Question 7 directly
+    currentQuestion = 6;  // Set to index 6 to ensure next is Question 7 (which is index 6)
+    showQuestion7();  // Show Question 7
     updateProgressBar();  // Ensure progress bar updates correctly
 }
-// Function to show Question 7 directly
-function showQuestion7() {
-    const current = question7;  // Directly reference Question 7 object
 
-    // Display Question 7 and its GIF
+// Function to show the current question
+function showQuestion() {
+    const current = questions[currentQuestion];
+
+    // Validate that the question exists
+    if (!current) {
+        console.error("Question not found for index", currentQuestion);
+        return;
+    }
+
+    // Display the question and GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
     // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Clears previous answers
+    answersContainer.innerHTML = "";  // Clear answers
 
-    // Create buttons for each answer in Question 7
+    // Create buttons for each answer
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
-        answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Record answer
-            showQuestion8();  // Move to Question 8
-        });
+        answerButton.addEventListener("click", () => selectAnswer(index));
         answersContainer.appendChild(answerButton);
     });
-
-    updateProgressBar();  // Update progress bar after showing Question 7
+    updateProgressBar();  // Update progress bar after showing question
 }
 // Function to show Question 8
 function showQuestion8() {
