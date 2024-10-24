@@ -125,10 +125,14 @@ function showQuestion() {
 
 // Function to handle answer selection and advance to the next question
 function selectAnswer(index) {
-    userAnswers.push(questions[currentQuestion].scores[index]);  // Record user's answer
-    currentQuestion++;
+    // Check if the current question exists in the main questions array
+    if (questions[currentQuestion]) {
+        userAnswers.push(questions[currentQuestion].scores[index]);  // Record user's answer
+    }
     
-    // Ensure you show Question 5 after Question 4
+    currentQuestion++;
+
+    // Check if we're at Question 5, show it directly
     if (currentQuestion === 5) {
         showQuestion();  // Show Question 5
     } else if (currentQuestion === 6) {
@@ -136,11 +140,35 @@ function selectAnswer(index) {
         if (index === 0) showCustomQuestion(question6A);
         else if (index === 1) showCustomQuestion(question6B);
         else showCustomQuestion(question6C);
-    } else if (currentQuestion < totalQuestions) {
+    } else if (currentQuestion < questions.length) {
         showQuestion();  // Show next question
     } else {
         showResults();  // Show quiz results
     }
+}
+
+// Function to show the current question from the main questions array
+function showQuestion() {
+    const current = questions[currentQuestion];
+
+    // Check if the current question exists
+    if (!current) {
+        console.error("Question not found for index", currentQuestion);
+        return;
+    }
+
+    document.getElementById("question-text").innerText = current.question;
+    document.getElementById("question-illustration").src = current.gif;
+
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";  // Clears previous answers
+
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => selectAnswer(index));
+        answersContainer.appendChild(answerButton);
+    });
 }
 
 // Function to show custom Question 6A, 6B, or 6C
