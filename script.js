@@ -129,23 +129,25 @@ function showQuestion() {
         answerButton.addEventListener("click", () => selectAnswer(index));
         answersContainer.appendChild(answerButton);
     });
+
     updateProgressBar();  // Update progress bar after showing question
 }
+
 // Function to handle answer selection and advance to the next question
 function selectAnswer(index) {
     console.log('Selected answer for question:', currentQuestion, 'Index:', index);  // Debugging log
 
-    // Branching logic for Question 5
-if (currentQuestion === 4) {  // This is Question 5
-    if (index === 0) {
-        showCustomQuestion(question6A);  // Go to 6A
-    } else if (index === 1) {
-        showCustomQuestion(question6B);  // Go to 6B
-    } else {
-        showCustomQuestion(question6C);  // Go to 6C
+    // Branching logic for Question 5 (which is index 4)
+    if (currentQuestion === 4) {  // This is Question 5
+        if (index === 0) {
+            showCustomQuestion(question6A);  // Go to 6A
+        } else if (index === 1) {
+            showCustomQuestion(question6B);  // Go to 6B
+        } else {
+            showCustomQuestion(question6C);  // Go to 6C
+        }
+        return;  // Avoid continuing to next question
     }
-    return;  // Avoid continuing to next question
-}
 
     // Default behavior for all other questions
     userAnswers.push(questions[currentQuestion].scores[index]);  // Store user's answer
@@ -187,6 +189,7 @@ function showCustomQuestion(customQuestion) {
 
     updateProgressBar();  // Update progress bar after showing custom question
 }
+
 // Function to move from custom question to the next main question (Question 7)
 function moveToNextAfterCustom() {
     console.log("Moving to Question 7 after custom question");
@@ -194,6 +197,7 @@ function moveToNextAfterCustom() {
     showQuestion();  // Show Question 7
     updateProgressBar();  // Ensure progress bar updates correctly
 }
+
 // Function to show Question 8
 function showQuestion8() {
     const current = question8;
@@ -219,6 +223,7 @@ function showQuestion8() {
 
     updateProgressBar();  // Update progress bar after showing Question 8
 }
+
 // Function to show Question 9
 function showQuestion9() {
     const current = question9;
