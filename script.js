@@ -103,7 +103,34 @@ function updateProgressBar() {
         progressBar.style.width = `${progressPercent}%`;
     }
 }
-// Function to handle answer selection and advance to the next question
+
+// Function to show the current question
+function showQuestion() {
+    const current = questions[currentQuestion];
+
+    // Validate that the question exists
+    if (!current) {
+        console.error("Question not found for index", currentQuestion);
+        return;
+    }
+
+    // Display the question and GIF
+    document.getElementById("question-text").innerText = current.question;
+    document.getElementById("question-illustration").src = current.gif;
+
+    // Clear previous answers
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";  // Clear answers
+
+    // Create buttons for each answer
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => selectAnswer(index));
+        answersContainer.appendChild(answerButton);
+    });
+    updateProgressBar();  // Update progress bar after showing question
+}
 // Function to handle answer selection and advance to the next question
 function selectAnswer(index) {
     console.log('Selected answer for question:', currentQuestion, 'Index:', index);  // Debugging log
