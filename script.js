@@ -95,20 +95,28 @@ function startQuiz() {
     document.getElementById("question-page").style.display = "block";  // Show the question page
     showQuestion();
 }
-
-// Update the progress bar based on the current question
+// Function to update the progress bar based on the current question
 function updateProgressBar() {
     const progressPercent = (currentQuestion / totalQuestions) * 100;
     if (progressBar) {
         progressBar.style.width = `${progressPercent}%`;
     }
 }
-// Function to handle answer selection and advance to the next question
+
+// Initialization of progress bar
+document.addEventListener("DOMContentLoaded", function() {
+    progressBar = document.getElementById("progress-fill");
+    if (progressBar) {
+        console.log("Progress bar initialized");
+    } else {
+        console.error("Progress bar not found");
+    }
+});
 // Function to handle answer selection and advance to the next question
 function selectAnswer(index) {
-    console.log('Selected answer for question:', currentQuestion, 'Index:', index);  // Debugging log
+    console.log('Selected answer for question:', currentQuestion, 'Index:', index);
 
-    // Branching logic for Question 5
+    // Branching logic for Question 5 to custom questions 6A, 6B, or 6C
     if (currentQuestion === 4) {  // Index 4 is Question 5
         console.log('Branching from Question 5 based on selected index:', index);
 
@@ -123,11 +131,10 @@ function selectAnswer(index) {
         return;  // Stop further execution after showing custom question
     }
 
-    // Default behavior for all other questions
+    // Handle remaining questions normally
     userAnswers.push(questions[currentQuestion].scores[index]);  // Store user's answer
     currentQuestion++;  // Move to the next question
 
-    // Check if there are more questions to show
     if (currentQuestion < questions.length) {
         showQuestion();  // Show the next question
     } else {
@@ -137,9 +144,17 @@ function selectAnswer(index) {
     updateProgressBar();  // Always update the progress bar
 }
 
-// Function to show custom Question 6A, 6B, or 6C
+// After custom questions (6A, 6B, or 6C), go to Question 7
+function moveToNextAfterCustom() {
+    console.log("Moving to Question 7 after custom question");
+    currentQuestion = 6;  // Set to index 6 to ensure next is Question 7
+    showQuestion();  // Show Question 7
+    updateProgressBar();  // Ensure progress bar updates correctly
+}
+
+// Fix for showCustomQuestion
 function showCustomQuestion(customQuestion) {
-    console.log('Showing custom question:', customQuestion.question);  // Debugging log
+    console.log('Showing custom question:', customQuestion.question);
 
     // Display custom question and its GIF
     document.getElementById("question-text").innerText = customQuestion.question;
@@ -156,7 +171,7 @@ function showCustomQuestion(customQuestion) {
 
         answerButton.addEventListener("click", () => {
             userAnswers.push(customQuestion.scores[index]);  // Record score for custom question
-            moveToNextAfterCustom();  // After answering custom question, move to next
+            moveToNextAfterCustom();  // After answering custom question, move to Question 7
         });
         answersContainer.appendChild(answerButton);
     });
