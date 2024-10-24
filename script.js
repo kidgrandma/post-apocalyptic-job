@@ -128,8 +128,9 @@ function selectAnswer(index) {
     userAnswers.push(questions[currentQuestion].scores[index]);  // Record user's answer
     currentQuestion++;
     
+    // Ensure you show Question 5 after Question 4
     if (currentQuestion === 5) {
-        showQuestion();  // Show Question 5 after Question 4
+        showQuestion();  // Show Question 5
     } else if (currentQuestion === 6) {
         // Branch to Question 6A, 6B, or 6C based on answer to Question 5
         if (index === 0) showCustomQuestion(question6A);
