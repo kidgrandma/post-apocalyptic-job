@@ -164,36 +164,8 @@ function showCustomQuestion(customQuestion) {
 function moveToNextAfterCustom() {
     console.log("Moving to Question 7 after custom question");
     currentQuestion = 6;  // Set to index 6 to ensure next is Question 7 (which is index 6)
-    showQuestion7();  // Show Question 7
+    showQuestion();  // Show Question 7
     updateProgressBar();  // Ensure progress bar updates correctly
-}
-
-// Function to show the current question
-function showQuestion() {
-    const current = questions[currentQuestion];
-
-    // Validate that the question exists
-    if (!current) {
-        console.error("Question not found for index", currentQuestion);
-        return;
-    }
-
-    // Display the question and GIF
-    document.getElementById("question-text").innerText = current.question;
-    document.getElementById("question-illustration").src = current.gif;
-
-    // Clear previous answers
-    const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Clear answers
-
-    // Create buttons for each answer
-    current.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
-        answerButton.addEventListener("click", () => selectAnswer(index));
-        answersContainer.appendChild(answerButton);
-    });
-    updateProgressBar();  // Update progress bar after showing question
 }
 // Function to show Question 8
 function showQuestion8() {
