@@ -110,49 +110,48 @@ function selectAnswer(index) {
 
     // Handling Question 5's answers
     if (currentQuestion === 5) {
+        console.log('Branching from Question 5 to custom question based on index:', index);  // Debugging log
+
         // Branch to Question 6A, 6B, or 6C based on answer to Question 5
-        console.log('Branching from Question 5 to:', index);  // Log for debugging
         if (index === 0) {
-            showCustomQuestion(question6A);
+            showCustomQuestion(question6A);  // Go to custom question 6A
         } else if (index === 1) {
-            showCustomQuestion(question6B);
+            showCustomQuestion(question6B);  // Go to custom question 6B
         } else {
-            showCustomQuestion(question6C);
+            showCustomQuestion(question6C);  // Go to custom question 6C
         }
-        updateProgressBar();  // Update progress bar when moving to custom question
-        return;  // Exit early to avoid incrementing currentQuestion or calling showQuestion
+        return;  // Exit early, preventing the default flow to the next question
     }
 
-    // For all other questions (except custom questions)
+    // Default behavior for all other questions
     userAnswers.push(questions[currentQuestion].scores[index]);  // Record user's answer
-    currentQuestion++;  // Move to next question
+    currentQuestion++;  // Move to the next question
 
-    // Update the progress bar after answer selection
-    updateProgressBar();
-
-    // Show the next question if there are still questions left
+    // Check if we're still within the range of questions
     if (currentQuestion < questions.length) {
-        showQuestion();
+        showQuestion();  // Show the next question
     } else {
-        showResults();  // Show quiz results if we've reached the end
+        showResults();  // If no more questions, show the results
     }
+
+    updateProgressBar();  // Always update the progress bar
 }
 
-// Function to show the current question from the main questions array
+// Function to show the current question
 function showQuestion() {
     const current = questions[currentQuestion];
 
     // Check if the current question exists
     if (!current) {
         console.error("Question not found for index", currentQuestion);
-        return;  // Prevent further errors if question doesn't exist
+        return;
     }
 
-    // Display the current question and GIF
+    // Display the current question and its associated GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
-    // Clear previous answers from the container
+    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clears previous answers
 
@@ -171,11 +170,11 @@ function showQuestion() {
 function showCustomQuestion(customQuestion) {
     console.log('Showing custom question:', customQuestion.question);  // Debugging log
 
-    // Display the custom question and its GIF
+    // Display the custom question and its associated GIF
     document.getElementById("question-text").innerText = customQuestion.question;
     document.getElementById("question-illustration").src = customQuestion.gif;
 
-    // Clear previous answers from the container
+    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clears previous answers
 
@@ -201,7 +200,7 @@ function showQuestion7() {
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
-    // Clear previous answers from the container
+    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clears previous answers
 
@@ -222,26 +221,28 @@ function showQuestion7() {
 // Function to show Question 8
 function showQuestion8() {
     const current = question8;
+
+    // Display Question 8 and its GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
+    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";
+    answersContainer.innerHTML = "";  // Clears previous answers
 
+    // Create buttons for each answer in Question 8
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
         answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Push score for Question 8
-            console.log('User Answer:', current.scores[index], 'Current userAnswers:', userAnswers);
-            showQuestion9();  // After Question 8, go to Question 9
+            userAnswers.push(current.scores[index]);  // Record answer
+            showQuestion9();  // Move to Question 9
         });
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar
+    updateProgressBar();  // Update progress bar after showing Question 8
 }
-
 // Function to show Question 9
 function showQuestion9() {
     const current = question9;
