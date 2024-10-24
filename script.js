@@ -197,34 +197,6 @@ function moveToNextAfterCustom() {
     updateProgressBar();  // Ensure progress bar updates correctly
 }
 
-// Custom Question Logic: Showing 6A, 6B, or 6C
-function showCustomQuestion(customQuestion) {
-    console.log('Showing custom question:', customQuestion.question);
-
-    // Display custom question and its GIF
-    document.getElementById("question-text").innerText = customQuestion.question;
-    document.getElementById("question-illustration").src = customQuestion.gif;
-
-    // Clear previous answers
-    const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Clear answers
-
-    // Create buttons for each answer in the custom question
-    customQuestion.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
-
-        answerButton.addEventListener("click", () => {
-            userAnswers.push(customQuestion.scores[index]);  // Record score for custom question
-            moveToNextAfterCustom();  // After answering custom question, move to next
-        });
-        answersContainer.appendChild(answerButton);
-    });
-
-    updateProgressBar();  // Update progress bar after showing custom question
-}
-
-
 // Function to show Question 8
 function showQuestion8() {
     const current = question8;
