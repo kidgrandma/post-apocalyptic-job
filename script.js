@@ -131,7 +131,7 @@ function selectAnswer(index) {
         return;  // Stop further execution after showing custom question
     }
 
-    // Handle remaining questions normally
+    // Default behavior for all other questions
     userAnswers.push(questions[currentQuestion].scores[index]);  // Store user's answer
     currentQuestion++;  // Move to the next question
 
@@ -144,15 +144,14 @@ function selectAnswer(index) {
     updateProgressBar();  // Always update the progress bar
 }
 
-// After custom questions (6A, 6B, or 6C), go to Question 7
+// Fix for moving to Question 7 after custom questions
 function moveToNextAfterCustom() {
     console.log("Moving to Question 7 after custom question");
-    currentQuestion = 6;  // Set to index 6 to ensure next is Question 7
-    showQuestion();  // Show Question 7
-    updateProgressBar();  // Ensure progress bar updates correctly
+    currentQuestion = 6;  // Set to index 6 to ensure the next question is Question 7
+    showQuestion7();  // Explicitly show Question 7
 }
 
-// Fix for showCustomQuestion
+// Function to show custom Question 6A, 6B, or 6C
 function showCustomQuestion(customQuestion) {
     console.log('Showing custom question:', customQuestion.question);
 
@@ -179,25 +178,11 @@ function showCustomQuestion(customQuestion) {
     updateProgressBar();  // Update progress bar after showing custom question
 }
 
-// Function to move from custom question to the next main question (Question 7)
-function moveToNextAfterCustom() {
-    console.log("Moving to Question 7 after custom question");
-    currentQuestion = 6;  // Set to index 6 to ensure next is Question 7 (which is index 6)
-    showQuestion();  // Show Question 7
-    updateProgressBar();  // Ensure progress bar updates correctly
-}
+// Function to show Question 7 after custom questions
+function showQuestion7() {
+    const current = question7;
 
-// Function to show the current question
-function showQuestion() {
-    const current = questions[currentQuestion];
-
-    // Validate that the question exists
-    if (!current) {
-        console.error("Question not found for index", currentQuestion);
-        return;
-    }
-
-    // Display the question and GIF
+    // Display Question 7 and its GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
@@ -205,15 +190,18 @@ function showQuestion() {
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clear answers
 
-    // Create buttons for each answer
+    // Create buttons for each answer in Question 7
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
-        answerButton.addEventListener("click", () => selectAnswer(index));
+        answerButton.addEventListener("click", () => {
+            userAnswers.push(current.scores[index]);  // Record answer
+            showQuestion8();  // Move to Question 8
+        });
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar after showing question
+    updateProgressBar();  // Update progress bar after showing Question 7
 }
 // Function to show Question 8
 function showQuestion8() {
