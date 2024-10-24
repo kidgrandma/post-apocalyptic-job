@@ -103,60 +103,88 @@ function updateProgressBar() {
         progressBar.style.width = `${progressPercent}%`;
     }
 }
-
-// Function to handle answer selection and advance to the next question
 // Function to handle answer selection and advance to the next question
 function selectAnswer(index) {
     console.log('Selected answer for question:', currentQuestion, 'Index:', index);  // Debugging log
 
-    // Handle Question 5 and branch to custom questions
-    if (currentQuestion === 4) {  // Remember array index starts at 0, so Question 5 is index 4
-        console.log('Branching from Question 5 to custom question based on index:', index);  // Debugging log
+    // Branching logic for Question 5
+    if (currentQuestion === 4) {  // Index 4 is Question 5
+        console.log('Branching from Question 5 based on selected index:', index);
 
-        // Branch to Question 6A, 6B, or 6C based on answer to Question 5
+        // Branch to custom Question 6A, 6B, or 6C
         if (index === 0) {
-            showCustomQuestion(question6A);  // Go to custom question 6A
+            showCustomQuestion(question6A);  // Go to Question 6A
         } else if (index === 1) {
-            showCustomQuestion(question6B);  // Go to custom question 6B
+            showCustomQuestion(question6B);  // Go to Question 6B
         } else {
-            showCustomQuestion(question6C);  // Go to custom question 6C
+            showCustomQuestion(question6C);  // Go to Question 6C
         }
-        return;  // Exit early, preventing `currentQuestion` from incrementing and default flow
+        return;  // Stop further execution
     }
 
     // Default behavior for all other questions
-    userAnswers.push(questions[currentQuestion].scores[index]);  // Record user's answer
+    userAnswers.push(questions[currentQuestion].scores[index]);  // Store answer
     currentQuestion++;  // Move to the next question
 
-    // Check if we're still within the range of questions
+    // Check if we've reached the end of the quiz
     if (currentQuestion < questions.length) {
         showQuestion();  // Show the next question
     } else {
         showResults();  // If no more questions, show the results
     }
 
-    updateProgressBar();  // Always update the progress bar
+    updateProgressBar();  // Always update progress bar
+}
+
+// Function to show the current question
+function showQuestion() {
+    const current = questions[currentQuestion];
+
+    // Validate that the question exists
+    if (!current) {
+        console.error("Question not found for index", currentQuestion);
+        return;
+    }
+
+    // Display the question and GIF
+    document.getElementById("question-text").innerText = current.question;
+    document.getElementById("question-illustration").src = current.gif;
+
+    // Clear previous answers
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";  // Clear answers
+
+    // Create buttons for each answer
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => selectAnswer(index));
+        answersContainer.appendChild(answerButton);
+    });
+
+    updateProgressBar();  // Update progress bar after showing question
 }
 
 // Function to show custom Question 6A, 6B, or 6C
 function showCustomQuestion(customQuestion) {
-    console.log('Showing custom question:', customQuestion.question);  // Debugging log
+    console.log('Showing custom question:', customQuestion.question);
 
-    // Display the custom question and its associated GIF
+    // Display custom question and GIF
     document.getElementById("question-text").innerText = customQuestion.question;
     document.getElementById("question-illustration").src = customQuestion.gif;
 
     // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Clears previous answers
+    answersContainer.innerHTML = "";  // Clear answers
 
     // Create buttons for each answer in the custom question
     customQuestion.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
+
         answerButton.addEventListener("click", () => {
-            userAnswers.push(customQuestion.scores[index]);  // Record score for custom question
-            showQuestion7();  // Move to Question 7 after custom question
+            userAnswers.push(customQuestion.scores[index]);  // Record answer
+            showQuestion7();  // Move to Question 7
         });
         answersContainer.appendChild(answerButton);
     });
@@ -168,13 +196,13 @@ function showCustomQuestion(customQuestion) {
 function showQuestion7() {
     const current = question7;
 
-    // Display Question 7 and its GIF
+    // Display Question 7 and GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
     // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Clears previous answers
+    answersContainer.innerHTML = "";  // Clear answers
 
     // Create buttons for each answer in Question 7
     current.answers.forEach((answer, index) => {
@@ -190,6 +218,13 @@ function showQuestion7() {
     updateProgressBar();  // Update progress bar after showing Question 7
 }
 
+// Update progress bar function
+function updateProgressBar() {
+    const progressPercent = (currentQuestion / totalQuestions) * 100;
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
+}
 // Function to show Question 8
 function showQuestion8() {
     const current = question8;
