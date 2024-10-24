@@ -1,7 +1,6 @@
 let currentQuestion = 0;  // Tracks the current question index
 let userAnswers = [];  // Stores the user's answers
 const totalQuestions = 11;  // Total number of questions
-let progressBar; // Reference the progress bar fill
 
 // Define the questions, answers, scores, and GIFs
 const questions = [
@@ -93,10 +92,14 @@ const question11 = {
 function startQuiz() {
     document.getElementById("start-page").style.display = "none";  // Hides the start page
     document.getElementById("question-page").style.display = "block";  // Show the question page
-    updateProgressBar();
     showQuestion();
 }
-
+function updateProgressBar() {
+    const progressPercent = (currentQuestion / totalQuestions) * 100;
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
+}
 // Function to show the current question
 function showQuestion() {
     const current = questions[currentQuestion];
@@ -112,30 +115,35 @@ function showQuestion() {
         answerButton.addEventListener("click", () => selectAnswer(index));
         answersContainer.appendChild(answerButton);
     });
-    updateProgressBar();
 }
-
+function updateProgressBar() {
+    const progressPercent = (currentQuestion / totalQuestions) * 100;
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
+}
 // Function to handle answer selection and advance to the next question
 function selectAnswer(index) {
     userAnswers.push(questions[currentQuestion].scores[index]);  // Record user's answer
     currentQuestion++;
-    updateProgressBar();
-    console.log('Answer chosen:', index, 'Score added:', questions[currentQuestion - 1].scores[index]);
-    console.log('Current userAnswers:', userAnswers);
+    
     if (currentQuestion === 4) {
+        // Branch to Question 6A, 6B, or 6C
         if (index === 0) showCustomQuestion(question6A);
         else if (index === 1) showCustomQuestion(question6B);
         else showCustomQuestion(question6C);
-    } else if (currentQuestion === 5) {
-        currentQuestion++;  // Move to Question 7
-        showQuestion7();
     } else if (currentQuestion < totalQuestions) {
         showQuestion();  // Show next question
     } else {
         showResults();  // Show quiz results
     }
 }
-
+function updateProgressBar() {
+    const progressPercent = (currentQuestion / totalQuestions) * 100;
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
+}
 // Function to show custom Question 6A, 6B, or 6C
 function showCustomQuestion(customQuestion) {
     document.getElementById("question-text").innerText = customQuestion.question;
@@ -149,14 +157,17 @@ function showCustomQuestion(customQuestion) {
         answerButton.innerText = answer;
         answerButton.addEventListener("click", () => {
             userAnswers.push(customQuestion.scores[index]);  // Record score
-            console.log('Custom Question Answer:', index, 'Score added:', customQuestion.scores[index]);  // Log custom answers
-            console.log('Current userAnswers after custom question:', userAnswers);
-            showQuestion7();  // Directly call showQuestion7 after custom question
+            showQuestion7();  // Move to Question 7 after custom question
         });
         answersContainer.appendChild(answerButton);
     });
 }
-
+function updateProgressBar() {
+    const progressPercent = (currentQuestion / totalQuestions) * 100;
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
+}
 // Show Question 7 after custom questions
 function showQuestion7() {
     const current = question7;
@@ -170,15 +181,18 @@ function showQuestion7() {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
         answerButton.addEventListener("click", () => {
-            console.log('Question 7 chosen:', index, 'Score added:', current.scores[index]);
-            userAnswers.push(current.scores[index]);
-            console.log('User Answer:', current.scores[index], 'Current userAnswers:', userAnswers);
-            showQuestion8();  // Move to next question
+            userAnswers.push(current.scores[index]);  // Record answer
+            showQuestion8();  // Move to Question 8
         });
         answersContainer.appendChild(answerButton);
     });
 }
-
+function updateProgressBar() {
+    const progressPercent = (currentQuestion / totalQuestions) * 100;
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
+}
 // Function to show Question 8
 function showQuestion8() {
     const current = question8;
@@ -199,7 +213,12 @@ function showQuestion8() {
         answersContainer.appendChild(answerButton);
     });
 }
-
+function updateProgressBar() {
+    const progressPercent = (currentQuestion / totalQuestions) * 100;
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
+}
 // Function to show Question 9
 function showQuestion9() {
     const current = question9;
@@ -220,7 +239,12 @@ function showQuestion9() {
         answersContainer.appendChild(answerButton);
     });
 }
-
+function updateProgressBar() {
+    const progressPercent = (currentQuestion / totalQuestions) * 100;
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
+}
 // Function to show Question 10
 function showQuestion10() {
     const current = question10;
@@ -245,7 +269,12 @@ function showQuestion10() {
         answersContainer.appendChild(answerButton);
     });
 }
-
+function updateProgressBar() {
+    const progressPercent = (currentQuestion / totalQuestions) * 100;
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
+}
 // Function to show Bonus Question 11
 function showBonusQuestion11() {
     const current = question11;
@@ -367,17 +396,18 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error("Start button not found");
     }
 
-    const copyLinkBtn = document.getElementById("copy-link-btn");
-    if (copyLinkBtn) {
-        copyLinkBtn.addEventListener("click", () => {
-            const quizLink = window.location.href;  // Current quiz URL
-            navigator.clipboard.writeText(quizLink).then(() => {
-                alert("Quiz link copied to clipboard!");
-            }).catch(err => {
-                console.error("Could not copy text: ", err);
-            });
+// Copy Link button functionality
+const copyLinkBtn = document.getElementById("copy-link-btn");
+if (copyLinkBtn) {
+    copyLinkBtn.addEventListener("click", () => {
+        const quizLink = window.location.href;  // Copy current quiz URL
+        navigator.clipboard.writeText(quizLink).then(() => {
+            alert("Quiz link copied to clipboard!");
+        }).catch(err => {
+            console.error("Failed to copy link: ", err);
         });
-    }
+    });
+}
 
     const retakeButton = document.getElementById("retake-quiz");
     if (retakeButton) {
