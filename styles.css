@@ -6,58 +6,68 @@
 body {
     font-family: 'LazyDog', sans-serif;
     background-image: url('images/quiz-background.gif');
-    background-size: auto;
-    background-repeat: repeat;
+    background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-repeat: repeat; /* Repeat for longer viewports */
+    background-attachment: fixed; /* Keep background fixed */
     color: white;
     text-align: center;
     padding: 0;
     margin: 0;
     min-height: 100vh;
-}
-
-html {
-    scroll-behavior: smooth;
+    overflow-x: hidden; /* Prevent horizontal scroll on mobile */
 }
 
 #quiz-container {
     padding: 1rem;
     max-width: 600px;
-    width: 90%;
+    width: 90%; /* Ensure it doesn’t exceed the viewport */
     margin: 0 auto;
-    background-color: rgba(131, 56, 236, 0.6);
+    background-color: rgba(131, 56, 236, 0.6); /* Transparent container */
     border-radius: 10px;
     text-align: center;
-    backdrop-filter: blur(5px);
-    overflow-y: auto;
-    max-height: 90vh;
+    backdrop-filter: blur(5px); /* Blurred background */
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 90vh; /* Prevent overflow beyond viewport height */
     position: relative;
 }
 
+/* Clean and modern progress bar */
 #progress-bar {
     width: 100%;
     height: 8px;
     background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 50px;
+    border-radius: 50px; /* Rounded corners */
     margin-top: 20px;
     overflow: hidden;
 }
 
 #progress-fill {
     height: 100%;
-    background-color: #00ffff;
-    width: 0;
-    transition: none;
-    border-radius: 50px;
-    box-shadow: 0 0 10px #00ffff, 0 0 15px #ff00ff;
+    background-color: #00ffff; /* Neon color */
+    width: 0; /* Initial width (0%) */
+    transition: none; /* Remove transition for instant progress */
+    border-radius: 50px; /* Rounded fill */
+    box-shadow: 0 0 10px #00ffff, 0 0 15px #ff00ff; /* Neon glow effect */
 }
 
-h2, p, #result-description {
-    text-shadow: 0 0 5px #FF00FF, 0 0 10px #00FFFF;
-    font-size: 1.1rem;
-    color: #FFFFFF;
-    line-height: 1.5;
+/* Mobile adjustments */
+@media (max-width: 600px) {
+    body {
+        overflow: hidden; /* Prevent scroll on the body */
+    }
+
+    #quiz-container {
+        padding: 0.625rem;
+        max-width: 90%; /* Adjust width for mobile */
+        background-color: rgba(131, 56, 236, 0.4); /* More transparency on mobile */
+        border-radius: 8px;
+        backdrop-filter: blur(3px);
+    }
+
+    #quiz-container p, #quiz-container h1, #quiz-container h2 {
+        font-size: 1rem; /* Adjust font size for better readability on mobile */
+    }
 }
 
 button {
@@ -67,52 +77,40 @@ button {
     padding: 0.5rem 1rem;
     margin: 10px auto;
     cursor: pointer;
-    background-color: #00FFFF;
+    background-color: #00FFFF; /* Neon cyan */
     color: #000;
     font-family: 'LazyDog', sans-serif;
     font-size: 1rem;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 0 10px #00FFFF, 0 0 15px #FF00FF;
+    box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF; /* Glow effect */
     text-transform: uppercase;
-    transition: background-color 0.3s, transform 0.2s ease;
+    animation: none; /* Remove button-pulse animation */
 }
 
-/* Subtle button press feedback */
-button:active {
-    transform: scale(0.96);
-    transition: transform 0.1s ease-out;
+button:hover {
+    background-color: #FF00FF;
+    color: #FFF;
 }
 
-/* Neon button hover effect for desktops */
-@media (hover: hover) and (pointer: fine) {
-    button:hover {
-        animation: pulse 1s infinite alternate;
-    }
-
-    @keyframes pulse {
-        0% { box-shadow: 0 0 10px #00FFFF, 0 0 15px #FF00FF; }
-        100% { box-shadow: 0 0 15px #FF00FF, 0 0 20px #00FFFF; }
-    }
-}
-
-/* Remove hover effects on touch devices */
+/* Disable hover styles for touch devices */
 @media (hover: none) {
     button:hover {
-        background-color: inherit;
-        color: inherit;
+        background-color: inherit; /* Reset hover background */
+        color: inherit;            /* Reset hover color */
+        /* Add any other styles you'd like to reset */
     }
+}
 
-    button:active {
-        background-color: #FF00FF;
-        color: #FFF;
-    }
+button:active {
+    transform: scale(0.97);
+    box-shadow: 0 0 15px #FF00FF, 0 0 20px #00FFFF;
 }
 
 /* Larger screens - adjust button size */
 @media (min-width: 1600px) {
     button {
-        font-size: 1.5rem;
+        font-size: 1.5rem; /* Scalable with rem */
         padding: 0.75rem 1.25rem;
     }
 }
@@ -134,6 +132,7 @@ button:active {
     color: #FFF;
 }
 
+/* Image Styling */
 #cover-image, #question-illustration {
     width: 100%;
     max-width: 600px;
@@ -142,40 +141,87 @@ button:active {
 }
 
 #question-illustration:hover {
-    transform: none;
+    transform: none; /* Remove unnecessary hover transform */
 }
 
-/* Fade-in effect for question transitions */
+/* Subtle fade-in effect for question transitions */
 .fade-in {
     opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out; /* Shorten fade-in for performance */
 }
 
 .fade-in-active {
     opacity: 1;
 }
 
-/* Mobile adjustments */
-@media (max-width: 600px) {
-    body {
-        overflow: hidden;
-    }
+/* Result page with glitch background and translucent overlay */
+#result-page {
+    background-image: url('images/glitch.gif');  /* Glitch GIF background */
+    background-size: cover;  /* Cover the entire page */
+    background-repeat: no-repeat;  /* No repetition */
+    background-position: center;  /* Center the background */
+    background-attachment: fixed;  /* Keeps the background fixed during scroll */
+    position: relative;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    overflow: hidden;  /* Prevent unwanted scroll */
+}
 
-    #quiz-container {
-        padding: 0.625rem;
-        max-width: 90%;
-        background-color: rgba(131, 56, 236, 0.4);
-        border-radius: 8px;
-        backdrop-filter: blur(3px);
-    }
+/* Adding an overlay to make the background more subtle */
+#result-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);  /* Translucent black overlay */
+    z-index: 1;  /* This places it behind the content */
+}
 
-    #quiz-container p, #quiz-container h1, #quiz-container h2 {
-        font-size: 1rem;
-    }
+/* Ensure all content stays above the overlay */
+#result-page * {
+    position: relative;
+    z-index: 2;  /* Place content above the overlay */
+}
 
-    /* Increase button padding and font size for touch accuracy */
-    button {
-        padding: 0.75rem 1.25rem;
-        font-size: 1.1rem;
-    }
+#result-title {
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7);  /* Add some text glow */
+}
+
+#result-image {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: block;
+    box-shadow: 0px 0px 20px 5px rgba(255, 0, 255, 0.5);  /* Neon glow effect around the image */
+}
+
+#result-description {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    line-height: 1.5;
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);  /* Make text stand out */
+}
+
+/* Button styling specific to result page */
+button {
+    margin-top: 20px;
+    background-color: #FF00FF;
+    color: #FFF;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.8), 0 0 15px rgba(0, 255, 255, 0.8);
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #00FFFF;
+    color: #000;
 }
