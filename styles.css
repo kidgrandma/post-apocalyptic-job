@@ -31,7 +31,38 @@ body {
     max-height: 90vh; /* Prevent overflow beyond viewport height */
     position: relative;
 }
+/* Name Input Container styling */
+#name-input-container {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
 
+/* Input field styling */
+#name-input {
+    width: 80%;
+    max-width: 300px;
+    padding: 0.5rem;
+    background-color: rgba(131, 56, 236, 0.5); /* Semi-transparent purple */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-family: 'LazyDog', sans-serif;
+    font-size: 1rem;
+    box-shadow: 0px 0px 10px 2px #00FFFF, 0px 0px 10px 2px #FF00FF; /* Neon glow */
+}
+
+/* Placeholder text styling */
+#name-input::placeholder {
+    color: rgba(255, 255, 255, 0.7); /* Faded white placeholder */
+}
+
+/* Input field focus styling */
+#name-input:focus {
+    outline: none;
+    box-shadow: 0 0 15px #00FFFF, 0 0 15px #FF00FF; /* Enhanced glow on focus */
+}
 /* Clean and modern progress bar */
 #progress-bar {
     width: 100%;
