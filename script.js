@@ -248,32 +248,43 @@ function showQuestion9() {
 }
 // Function to handle branching logic and navigation for Question 10
 function showQuestion10() {
-    const current = questions[9];  // Question 10 index
+    const current = questions[9];  // Accessing Question 10
+
+    // Display the question and associated GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";
+    answersContainer.innerHTML = "";  // Clear previous answers
 
+    // Create buttons for each answer in Question 10
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
+
         answerButton.addEventListener("click", () => {
             console.log(`Question 10 Answer Selected: ${index}`);
             userAnswers.push(current.scores[index]);  // Push score for Question 10
 
+            // Check if "Meet your new gang" is selected (index 0)
             if (index === 0) {
-                console.log("Going to results...");
-                showResults();  // Show results
-            } else {
+                console.log("Going directly to results for 'Meet your new gang'...");
+                showResults();  // Should go directly to results
+            } 
+            // If "Hot yoga matcha baptism" (index 1) is selected, go to Bonus Question 11
+            else if (index === 1) {
                 console.log("Going to Bonus Question 11...");
-                showBonusQuestion11();  // Go to Bonus Question 11
+                showBonusQuestion11();
+            } 
+            // Fallback if index is unexpected
+            else {
+                console.error("Unexpected answer index in Question 10.");
             }
         });
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar when showing Question 10
+    updateProgressBar();  // Update the progress bar when showing Question 10
 }
 
 // Function to show Bonus Question 11
