@@ -245,47 +245,37 @@ function showQuestion9() {
     updateProgressBar();  // Update progress bar after showing Question 9
 }
 // Function to handle branching logic and navigation for Question 10
+// Function to handle branching logic and navigation for Question 10
 function showQuestion10() {
-    const current = questions[9];  // Accessing Question 10
-
-    // Display the question and associated GIF
+    const current = questions[9];  // Question 10 index
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clear previous answers
 
-    // Log answers for Question 10
-    console.log("Question 10 Answers: ", current.answers);
-
-    // Create buttons for each answer in Question 10
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
-
+        
         answerButton.addEventListener("click", () => {
-            console.log(`Question 10 Answer Selected: ${answer}, Index: ${index}`);
             userAnswers.push(current.scores[index]);  // Push score for Question 10
 
-            // If answer is "Meet your new gang" (index 0)
+            // "Meet your new gang" should go directly to results (this is index 0)
             if (index === 0) {
-                console.log("Going directly to results for 'Meet your new gang'...");
-                showResults();  // Should go directly to results
+                console.log("Selected 'Meet your new gang'. Going to results.");
+                showResults();  // Directly show results
             } 
-            // If "Hot yoga matcha baptism" (index 1) is selected, go to Bonus Question 11
+            // If not "Meet your new gang", go to Bonus Question 11 (index 1)
             else if (index === 1) {
-                console.log("Going to Bonus Question 11...");
-                showBonusQuestion11();
-            } 
-            // Fallback if index is unexpected
-            else {
-                console.error("Unexpected answer index in Question 10.");
+                console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
+                showBonusQuestion11();  // Go to Bonus Question 11
             }
         });
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update the progress bar when showing Question 10
+    updateProgressBar();  // Update progress bar when showing Question 10
 }
 
 // Function to show Bonus Question 11
