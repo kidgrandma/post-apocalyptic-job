@@ -1,6 +1,6 @@
 let currentQuestion = 0;  // Tracks the current question index
 let userAnswers = [];  // Stores the user's answers
-const totalQuestions = 11;  // Total number of questions including branching
+const totalQuestions = 11;  // Total number of questions
 let progressBar = document.getElementById("progress-fill");
 
 // Define the questions, answers, scores, and GIFs
@@ -67,6 +67,25 @@ const questions = [
         gif: "images/question11-illustration.gif"
     }
 ];
+// Define custom Question 6A, 6B, 6C
+const question6A = {
+    question: "Post-apocalyptic club kids have kidnapped you! The bag's out, and they've been carpet farming for months. How do you escape?",
+    answers: ["Agua gun", "Bible", "Butter knife"],
+    scores: [2, 4, 5],
+    gif: "images/question6a-illustration.gif"
+};
+const question6B = {
+    question: "Ahh, the good old Olsen bait and switch. You're tied to the bed while they take turns reading your birth chart. How do you escape?",
+    answers: ["Bible", "Agua gun", "Butter knife"],
+    scores: [4, 2, 4],
+    gif: "images/question6b-illustration.gif"
+};
+const question6C = {
+    question: "We’re never closing!! You’re trapped inside an out-of-season Spirit Halloween with the Homicidal Power Ranger. How do you escape?",
+    answers: ["Agua gun", "Butter knife", "Bible"],
+    scores: [2, 2, 4],
+    gif: "images/question6c-illustration.gif"
+};
 
 // Start the quiz
 function startQuiz() {
@@ -77,7 +96,7 @@ function startQuiz() {
 
 // Update the progress bar with optional completion percentage
 function updateProgressBar(completion = null) {
-    const progressPercent = completion || ((currentQuestion / totalQuestions) * 100);
+    const progressPercent = completion || (currentQuestion / totalQuestions) * 100;
     console.log(`Progress: ${progressPercent}%`);
     if (progressBar) {
         progressBar.style.width = `${progressPercent}%`;
@@ -106,9 +125,7 @@ function selectAnswer(index) {
     } else {
         showResults();  // If no more questions, show results
     }
-    updateProgressBar();  // Only update after moving to the next question
 }
-
 // Function to show the current question from the main array
 function showQuestion() {
     const current = questions[currentQuestion];
@@ -118,6 +135,7 @@ function showQuestion() {
         return;
     }
 
+    // Clear previous question's answers before rendering new ones
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Make sure container is cleared
 
@@ -130,19 +148,103 @@ function showQuestion() {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
-        // Event listener to handle answer selection
+        // Ensure that the event listener is added only once
         answerButton.addEventListener("click", () => {
+            // Push the selected answer's score to the userAnswers array
             console.log(`Answer selected: ${answer}, Index: ${index}`);
-            selectAnswer(index);  // Call selectAnswer function
+            userAnswers.push(current.scores[index]);
+
+            // Move to the next question
+            currentQuestion++;  // Increment to the next question
+
+            if (currentQuestion < questions.length) {
+                showQuestion();  // Show the next question
+            } else {
+                showResults();  // No more questions, so show results
+            }
+
+            updateProgressBar();  // Update progress bar
         });
 
+        answersContainer.appendChild(answerButton);  // Append button to container
+    });
+
+    updateProgressBar();  // Update the progress bar after showing the question
+}
+
+// Function to show custom questions (6A, 6B, or 6C)
+function showCustomQuestion(customQuestion) {
+    document.getElementById("question-text").innerText = customQuestion.question;
+    document.getElementById("question-illustration").src = customQuestion.gif;
+
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";
+
+    customQuestion.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => {
+            userAnswers.push(customQuestion.scores[index]);
+            moveToNextAfterCustom();  // After custom question, go to Question 7
+        });
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Only update once when showing the question
+    updateProgressBar();
 }
 
-// Function to handle Question 10 flow
+// Function to move to Question 7 after custom questions
+function moveToNextAfterCustom() {
+    currentQuestion = 5;  // Manually reset to index 5 for Question 7
+    showQuestion();  // Show Question 7
+    updateProgressBar();
+}
+// Function to show Question 8
+function showQuestion8() {
+    const current = questions[7];  // Accessing question 8 based on array index
+
+    document.getElementById("question-text").innerText = current.question;
+    document.getElementById("question-illustration").src = current.gif;
+
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";  // Clears previous answers
+
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => {
+            userAnswers.push(current.scores[index]);  // Record answer
+            showQuestion9();  // Move to Question 9
+        });
+        answersContainer.appendChild(answerButton);
+    });
+
+    updateProgressBar();  // Update progress bar after showing Question 8
+}
+
+// Function to show Question 9
+function showQuestion9() {
+    const current = questions[8];  // Accessing question 9 based on array index
+
+    document.getElementById("question-text").innerText = current.question;
+    document.getElementById("question-illustration").src = current.gif;
+
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";  // Clears previous answers
+
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => {
+            userAnswers.push(current.scores[index]);  // Record answer
+            showQuestion10();  // Move to Question 10
+        });
+        answersContainer.appendChild(answerButton);
+    });
+
+    updateProgressBar();  // Update progress bar after showing Question 9
+}
+// Function to handle branching logic and navigation for Question 10
 function showQuestion10() {
     const current = questions[9];  // Question 10 index
     document.getElementById("question-text").innerText = current.question;
@@ -173,16 +275,52 @@ function showQuestion10() {
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Only update once when showing the question
+    // Only update the progress bar once, when showing the question
+    updateProgressBar();
 }
 
-// Function to show the results page
+// Function to update the progress bar with optional completion percentage
+function updateProgressBar(completion = null) {
+    const progressPercent = completion || ((currentQuestion / totalQuestions) * 100);
+    console.log(`Progress: ${progressPercent}%`);
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
+}
+
+// Ensure results page properly ends the quiz and resets the UI after
 function showResults() {
     document.getElementById("question-page").style.display = "none";  // Hide the question page
     document.getElementById("result-page").style.display = "block";  // Show the result page
 
     const totalScore = userAnswers.reduce((a, b) => a + b, 0);  // Calculate total score
     console.log("Total score:", totalScore);  // Log the total score
+
+    const outcome = determineOutcome(totalScore);  // Determine outcome based on score
+    console.log("Determined outcome:", outcome);  // Log the outcome
+
+    const crewColor = getCrewColor(outcome);
+    document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
+    document.getElementById("result-title").style.color = crewColor;
+
+    const resultImageSrc = outcome === "Unknown" 
+        ? "images/unknown.gif"
+        : `images/outcome${getOutcomeImage(outcome)}.png`;
+    document.getElementById("result-image").src = resultImageSrc;
+
+    // Set progress to 100% when results are shown
+    updateProgressBar(100);  // Set progress bar to 100% at the results page
+}
+// Function to show results and calculate the outcome
+function showResults() {
+    console.log("Showing results...");  // Log this to see if results page is shown
+
+    document.getElementById("question-page").style.display = "none";  // Hide the question page
+    document.getElementById("result-page").style.display = "block";  // Show the result page
+
+    const totalScore = userAnswers.reduce((a, b) => a + b, 0);  // Calculate total score
+    console.log("Total score:", totalScore);  // Log the total score
+
     const outcome = determineOutcome(totalScore);  // Determine outcome based on score
     console.log("Determined outcome:", outcome);  // Log the outcome
 
@@ -196,30 +334,6 @@ function showResults() {
     document.getElementById("result-image").src = resultImageSrc;
 
     updateProgressBar(100);  // Set progress bar to 100% at the results page
-}
-
-// Function to show Bonus Question 11
-function showBonusQuestion11() {
-    const current = questions[10];  // Accessing question 11
-
-    document.getElementById("question-text").innerText = current.question;
-    document.getElementById("question-illustration").src = current.gif;
-
-    const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Clear previous answers
-
-    current.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
-
-        answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
-            showResults();  // Go to results after Bonus Question 11
-        });
-        answersContainer.appendChild(answerButton);
-    });
-
-    updateProgressBar();  // Update progress bar when showing Bonus Question 11
 }
 
 // Function to determine the outcome based on total score
@@ -252,7 +366,7 @@ function getOutcomeImage(outcome) {
         case "Radioactive Radio Media Empire": return 10;
         case "The Olsen Twins": return 4;
         case "Museum of Car Parts": return 13;
-        default: return "unknown";  // Fallback to "unknown.gif"
+        default: return "unknown";  // Now the fallback is "unknown.gif"
     }
 }
 
