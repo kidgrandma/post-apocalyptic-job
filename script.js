@@ -98,6 +98,9 @@ function startQuiz() {
     document.getElementById("start-page").style.display = "none";  // Hide the start page
     document.getElementById("question-page").style.display = "block";  // Show the question page
     showQuestion();
+    
+    // Prevent scroll jump by focusing on the container
+    document.getElementById("quiz-container").scrollIntoView({ behavior: 'smooth' });
 }
 // Event listener for Start Quiz button
 document.addEventListener("DOMContentLoaded", function() {
