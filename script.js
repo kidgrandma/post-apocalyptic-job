@@ -233,67 +233,56 @@ function showQuestion9() {
     updateProgressBar();  // Update progress bar after showing Question 9
 }
 
-// Function to show Question 10
+// Function to show Question 10 and handle branching to Bonus Question 11 or Results
 function showQuestion10() {
     const current = questions[9];  // Accessing question 10 based on array index
-
-    // Display Question 10 and its GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
-    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";
 
-    // Create buttons for each answer in Question 10
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
-        // Logic for answers
         answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Push score for Question 10
+            userAnswers.push(current.scores[index]);
 
-            // "Meet your new gang" should go directly to results
             if (index === 0) {
-                showResults();  // Directly show results
-            } 
-            // "Hot yoga matcha baptism" should go to Bonus Question 11
-            else if (index === 1) {
-                showBonusQuestion11();  // Go to Bonus Question 11
+                showResults();  // "Meet your new gang" leads to results
+            } else {
+                showBonusQuestion11();  // "Hot yoga matcha baptism" leads to Bonus Question 11
             }
         });
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar after showing Question 10
+    updateProgressBar();  // Update progress bar
 }
 
 // Function to show Bonus Question 11
 function showBonusQuestion11() {
     const current = questions[10];  // Accessing question 11 based on array index
 
-    // Display Bonus Question 11 and its GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
-    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clears previous answers
 
-    // Create buttons for each answer in Bonus Question 11
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
         answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
+            userAnswers.push(current.scores[index]);
             showResults();  // After Bonus Question 11, show results
         });
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar after showing Bonus Question 11
+    updateProgressBar();  // Update progress bar
 }
 
 // Function to show the results based on user's answers
