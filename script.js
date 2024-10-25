@@ -131,7 +131,6 @@ function showQuestion() {
     });
     
     updateProgressBar();  // Update progress bar after showing question
-}
 function selectAnswer(index) {
     console.log('Selected answer for question:', currentQuestion, 'Index:', index);  // Debugging log
 
@@ -163,9 +162,9 @@ function selectAnswer(index) {
 
 // Function to show custom Question 6A, 6B, or 6C
 function showCustomQuestion(customQuestion) {
-    console.log('Showing custom question:', customQuestion.question);
+    console.log('Showing custom question:', customQuestion.question);  // Debugging log
 
-    // Display custom question and its associated GIF
+    // Display custom question and its GIF
     document.getElementById("question-text").innerText = customQuestion.question;
     document.getElementById("question-illustration").src = customQuestion.gif;
 
@@ -179,19 +178,18 @@ function showCustomQuestion(customQuestion) {
         answerButton.innerText = answer;
 
         answerButton.addEventListener("click", () => {
-            userAnswers.push(customQuestion.scores[index]);  // Store the answer
-            moveToNextAfterCustom();  // After answering the custom question, move to Question 7
+            userAnswers.push(customQuestion.scores[index]);  // Record score for custom question
+            moveToQuestion7();  // After answering custom question, move to Question 7
         });
         answersContainer.appendChild(answerButton);
     });
 
     updateProgressBar();  // Update progress bar after showing custom question
 }
-
 // Function to move from custom question to the next main question (Question 7)
-function moveToNextAfterCustom() {
+function moveToQuestion7() {
     console.log("Moving to Question 7 after custom question");
-    currentQuestion = 6;  // Set to index 6 to ensure next is Question 7 (which is index 6)
+    currentQuestion = 5;  // Set to index 5 because Question 7 is the 6th entry (index 5)
     showQuestion();  // Show Question 7
     updateProgressBar();  // Ensure progress bar updates correctly
 }
