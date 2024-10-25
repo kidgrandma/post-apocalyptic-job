@@ -85,7 +85,12 @@ const question6C = {
 
 // Start the quiz
 function startQuiz() {
-    document.getElementById("start-page").style.display = "none";  // Hides the start page
+    const nameInput = document.getElementById("name-input").value.trim();
+    if (nameInput) {
+        userName = nameInput; // Save the user's name
+    }
+    
+    document.getElementById("start-page").style.display = "none";  // Hide the start page
     document.getElementById("question-page").style.display = "block";  // Show the question page
     showQuestion();
 }
@@ -268,22 +273,22 @@ function showQuestion10() {
     updateProgressBar();  // Update progress bar when showing Question 10
 }
 // Function to handle showing the results
+// Function to handle showing the results
 function showResults() {
-    console.log("Showing results...");
+    document.getElementById("question-page").style.display = "none";
+    document.getElementById("result-page").style.display = "block";
 
-    document.getElementById("question-page").style.display = "none";  // Hide the question page
-    document.getElementById("result-page").style.display = "block";  // Show the result page
+    const totalScore = userAnswers.reduce((a, b) => a + b, 0);
+    const outcome = determineOutcome(totalScore);
 
-    const totalScore = userAnswers.reduce((a, b) => a + b, 0);  // Calculate total score
-    console.log("Total score:", totalScore);
-
-    const outcome = determineOutcome(totalScore);  // Determine the outcome based on score
-    console.log("Determined outcome:", outcome);
-
+    // Get crew color based on outcome
     const crewColor = getCrewColor(outcome);
-    document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
-    document.getElementById("result-title").style.color = crewColor;
 
+    // Display personalized message with the outcome and set the crew color
+    document.getElementById("result-title").innerHTML = userName
+        ? `Saddle up, ${userName}, because rollin' with <span style="color:${crewColor};">${outcome}</span> till u die OR WORSE`
+        : `Saddle up, because rollin' with <span style="color:${crewColor};">${outcome}</span> till u die OR WORSE`;
+}
     const resultImageSrc = outcome === "Unknown"
         ? "images/unknown.gif"
         : `images/outcome${getOutcomeImage(outcome)}.png`;
