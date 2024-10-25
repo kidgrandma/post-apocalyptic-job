@@ -96,6 +96,13 @@ function startQuiz() {
 }
 // Function to show the current question from the main array
 function showQuestion() {
+    // Handle main questions or branch to custom questions based on currentQuestion index
+    if (currentQuestion === 4) {  // After Question 4 (index 4), decide next question
+        // Branch based on the answer selected in Question 5
+        selectAnswer(currentQuestion);
+        return; // Exit to prevent further processing
+    }
+
     const current = questions[currentQuestion];
     if (!current) {
         console.error("Question not found for index", currentQuestion);
@@ -110,58 +117,32 @@ function showQuestion() {
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
- // Create buttons for each answer in the current question
-current.answers.forEach((answer, index) => {
-    const answerButton = document.createElement("button");
-    answerButton.innerText = answer;
+    // Create buttons for each answer in the current question
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
 
-    // Add click event listener for the button
-    answerButton.addEventListener("click", () => {
-        // Log the button click and the score recorded
-        console.log(`Answer button clicked: ${answer} (Index: ${index})`);
-        console.log(`Score recorded: ${current.scores[index]}`);
+        // Add click event listener for the button
+        answerButton.addEventListener("click", () => {
+            console.log(`Answer button clicked: ${answer} (Index: ${index})`);
+            userAnswers.push(current.scores[index]);  // Record score
 
-        // Push the selected answer's score to the userAnswers array
-        userAnswers.push(current.scores[index]);
+            // Increment to the next question
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();  // Show the next question
+            } else {
+                showResults();  // No more questions, show the results
+            }
+        });
 
-        // Move to the next question
-        currentQuestion++;  // Increment to the next question
-
-        if (currentQuestion < questions.length) {
-            showQuestion();  // Show the next question
-        } else {
-            showResults();  // No more questions, show the results
-        }
+        answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // This line should be outside the event listener function
-    answersContainer.appendChild(answerButton);  // Append button to the container
-});
+    updateProgressBar(); // Call at the end of `showQuestion` to update once
+}
     
-// Updated function to ensure correct progress bar update
-function updateProgressBar(completion = null) {
-    let progressPercent;
-
-    // Use the passed-in completion value if it exists
-    if (completion !== null) {
-        progressPercent = completion;
-    } else {
-        // Adjust for custom questions (6A, 6B, 6C) and calculate progress based on currentQuestion
-        let adjustedQuestionIndex = currentQuestion;
-        if (currentQuestion >= 6 && currentQuestion <= 9) {
-            adjustedQuestionIndex--;  // Adjust the index for custom questions if needed
-        }
-        
-        // Calculate progress percentage based on the adjusted question index
-        progressPercent = ((adjustedQuestionIndex + 1) / totalQuestions) * 100;  // +1 because index is 0-based
-    }
-
-    // Update the progress bar's width
-    console.log(`Progress: ${progressPercent}%`);  // Log progress for debugging
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
-    }
-}// Function to handle answer selection and branching logic
+// Function to handle answer selection and branching logic
 function selectAnswer(index) {
     // Branching logic for custom questions
     if (currentQuestion === 4) {  // Branching at Question 5
@@ -205,7 +186,20 @@ function showCustomQuestion(customQuestion) {
 
     updateProgressBar();
 }
+// function to update progress bar 
+function updateProgressBar(completion = null) {
+    let progressPercent;
 
+    if (completion !== null) {
+        progressPercent = completion;
+    } else {
+        progressPercent = ((currentQuestion + 1) / totalQuestions) * 100;
+    }
+
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
+}
 // Function to move to Question 7 after custom questions
 function moveToNextAfterCustom() {
     currentQuestion = 5;  // Manually set to index 5 (Question 7) after custom question
@@ -377,7 +371,13 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("start-page").style.display = "block";
         });
     }
-
+retakeButton.addEventListener("click", () => {
+    userAnswers = [];
+    currentQuestion = 0;
+    document.getElementById("result-page").style.display = "none";
+    document.getElementById("start-page").style.display = "block";
+    updateProgressBar(0);  // Reset progress bar
+});
     const meetModeratorButton = document.getElementById("meet-moderator");
     if (meetModeratorButton) {
         meetModeratorButton.addEventListener("click", () => {
