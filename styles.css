@@ -102,7 +102,6 @@ body {
         font-size: 1rem;
     }
 }
-
 button {
     display: block;
     width: 100%;
@@ -118,6 +117,8 @@ button {
     border-radius: 5px;
     box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF;
     text-transform: uppercase;
+    outline: none; /* Removes the outline on focus */
+    transition: background-color 0.2s, transform 0.1s;
 }
 
 button:hover {
@@ -125,12 +126,10 @@ button:hover {
     color: #FFF;
 }
 
-/* Disable hover styles for touch devices */
-@media (hover: none) {
-    button:hover {
-        background-color: inherit;
-        color: inherit;
-    }
+button:focus {
+    outline: none; /* Ensures no outline appears */
+    box-shadow: none; /* Removes any shadow on focus */
+    background-color: #00FFFF; /* Retains the regular color on focus */
 }
 
 button:active {
@@ -138,6 +137,14 @@ button:active {
     box-shadow: 0 0 15px #FF00FF, 0 0 20px #00FFFF;
 }
 
+/* Disable hover styles for touch devices */
+@media (hover: none) {
+    button:hover {
+        background-color: inherit;
+        color: inherit;
+        box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF; /* Reset glow */
+    }
+}
 #share-buttons button {
     display: inline-block;
     margin: 10px;
