@@ -237,7 +237,6 @@ function moveToNextAfterCustom() {
     showQuestion();  // Show Question 7
     updateProgressBar();  // Update progress bar after showing Question 7
 }
-
 // Function to handle Question 10
 function showQuestion10() {
     const current = questions[9];  // Question 10 is at index 9 in your array
@@ -278,56 +277,52 @@ function showQuestion10() {
 
     updateProgressBar();  // Update progress bar when showing Question 10
 }
-// Function to show Bonus Question 11 if selected from Question 10
-function showBonusQuestion11() {
-    const current = questions[10];  // Access Question 11 directly
+
+// Function to handle transitioning from Question 9 to Question 10
+function showQuestion() {
+    const answersContainer = document.getElementById("answers-container");
+    const current = questions[currentQuestion];
+
+    if (!answersContainer || !current) {
+        console.error("Question not found or answers container missing.");
+        return;
+    }
+
+    // Clear previous question's answers
+    answersContainer.innerHTML = "";  
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
-
-    const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Clear previous answers
 
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
-        // Add click event listener for the button
         answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
-            showResults();  // Go to results after Bonus Question 11
+            console.log(`Answer button clicked: ${answer} (Index: ${index})`);
+            userAnswers.push(current.scores[index]);  // Record score for current question
+
+            // Special handling for Question 10
+            if (currentQuestion === 9) {  // If this is Question 10, use custom handling
+                showQuestion10();  // Show Question 10's flow
+                return;
+            }
+
+            // Move to the next question normally
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();  // Show the next question
+            } else {
+                showResults();  // Show results if no more questions
+            }
         });
 
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar when showing Bonus Question 11
+    updateProgressBar();  // Update progress bar after each question
 }
 
-// Function to show results and calculate the outcome
-function showResults() {
-    console.log("Showing results...");
-
-    document.getElementById("question-page").style.display = "none";  // Hide the question page
-    document.getElementById("result-page").style.display = "block";  // Show the result page
-
-    const totalScore = userAnswers.reduce((a, b) => a + b, 0);  // Calculate total score
-    console.log("Total score:", totalScore);
-
-    const outcome = determineOutcome(totalScore);  // Determine the outcome based on score
-    console.log("Determined outcome:", outcome);
-
-    const crewColor = getCrewColor(outcome);
-    document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
-    document.getElementById("result-title").style.color = crewColor;
-
-    const resultImageSrc = outcome === "Unknown"
-        ? "images/unknown.gif"
-        : `images/outcome${getOutcomeImage(outcome)}.png`;
-    document.getElementById("result-image").src = resultImageSrc;
-
-    // Set progress bar to 100% when showing results
-    updateProgressBar(100);
-}
+// Function to handle showing the results
 function showResults() {
     console.log("Showing results...");
 
