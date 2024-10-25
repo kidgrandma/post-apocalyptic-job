@@ -125,10 +125,30 @@ function selectAnswer(index) {
     } else {
         showResults();  // If no more questions, show results
     }
-
-    updateProgressBar();
 }
+function showQuestion() {
+    const current = questions[currentQuestion];
 
+    if (!current) {
+        console.error("Question not found for index", currentQuestion);
+        return;
+    }
+
+    document.getElementById("question-text").innerText = current.question;
+    document.getElementById("question-illustration").src = current.gif;
+
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";
+
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+        answerButton.addEventListener("click", () => selectAnswer(index));
+        answersContainer.appendChild(answerButton);
+    });
+
+    updateProgressBar();  // Update the progress bar ONLY here, after loading a question
+}
 // Function to show the current question from the main array
 function showQuestion() {
     const current = questions[currentQuestion];
@@ -239,12 +259,14 @@ function showQuestion10() {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
         answerButton.addEventListener("click", () => {
+            console.log(`Question 10 Answer Selected: ${index}`);
             userAnswers.push(current.scores[index]);  // Push score for Question 10
 
-            // If answer is "Meet your new gang", go directly to results
             if (index === 0) {
+                console.log("Going to results...");
                 showResults();  // Show results
             } else {
+                console.log("Going to Bonus Question 11...");
                 showBonusQuestion11();  // Go to Bonus Question 11
             }
         });
