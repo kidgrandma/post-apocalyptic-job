@@ -1,6 +1,6 @@
 let currentQuestion = 0;  // Tracks the current question index
 let userAnswers = [];  // Stores the user's answers
-const totalQuestions = 11;  // Total number of questions
+const totalQuestions = 10;  // Total number of questions
 let progressBar = document.getElementById("progress-fill");
 
 // Define the questions, answers, scores, and GIFs
