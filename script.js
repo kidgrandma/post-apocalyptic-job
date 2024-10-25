@@ -131,6 +131,7 @@ function showQuestion() {
     });
     
     updateProgressBar();  // Update progress bar after showing question
+}
 function selectAnswer(index) {
     console.log('Selected answer for question:', currentQuestion, 'Index:', index);  // Debugging log
 
