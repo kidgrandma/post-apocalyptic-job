@@ -138,32 +138,30 @@ function selectAnswer(index) {
     console.log('Selected answer for question:', currentQuestion, 'Index:', index);
 
     // Special branching logic for Question 5
-    if (currentQuestion === 4) {  // If we are at Question 5 (index 4)
-        console.log('Branching from Question 5 to custom question');
-
-        // Branch to custom Question 6A, 6B, or 6C
+if (currentQuestion === 4) {  // Handle branching from Question 5
         if (index === 0) {
-            showCustomQuestion(question6A);  // Go to custom question 6A
+            showCustomQuestion(question6A);  // Show Question 6A
         } else if (index === 1) {
-            showCustomQuestion(question6B);  // Go to custom question 6B
+            showCustomQuestion(question6B);  // Show Question 6B
         } else {
-            showCustomQuestion(question6C);  // Go to custom question 6C
+            showCustomQuestion(question6C);  // Show Question 6C
         }
-        return;  // Stop further execution here
+        return;  // Stop further execution to prevent issues
     }
 
-    // Default behavior for all other questions
-    userAnswers.push(questions[currentQuestion].scores[index]);  // Store the user's answer
-    currentQuestion++;  // Move to the next question
-
-    // Check if there are more questions to show
-    if (currentQuestion < questions.length) {
-        showQuestion();  // Show the next question
+    // For other questions (non-custom):
+    if (questions[currentQuestion]) {
+        userAnswers.push(questions[currentQuestion].scores[index]);
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            showQuestion();
+        } else {
+            showResults();
+        }
     } else {
-        showResults();  // If no more questions, show the results
+        console.error("Question not found at index", currentQuestion);
     }
-
-    updateProgressBar();  // Always update the progress bar
+    updateProgressBar();  // Always update progress bar
 }
 
 // Function to show custom Question 6A, 6B, or 6C
@@ -193,12 +191,11 @@ function showCustomQuestion(customQuestion) {
     updateProgressBar();  // Update progress bar after showing custom question
 }
 
-// Function to move from a custom question to Question 7
 function moveToNextAfterCustom() {
     console.log("Moving to Question 7 after custom question");
-    showQuestion();  // Explicitly call showQuestion(7)
-    currentQuestion = 6;  // Set to index 6 to ensure next is Question 7
-    updateProgressBar();  // Update the progress bar
+    currentQuestion = 6;  // Set to index 6 for Question 7
+    showQuestion();  // Show Question 7
+    updateProgressBar();  // Update progress bar after moving to next question
 }
 // Function to show Question 8
 function showQuestion8() {
