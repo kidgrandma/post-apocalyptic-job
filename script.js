@@ -226,6 +226,8 @@ function showQuestion10() {
         answerButton.innerText = answer;
 
         // Add more detailed logging
+        console.log(`Creating button: ${answer} (Index: ${index})`);
+        
         answerButton.addEventListener("click", () => {
             userAnswers.push(current.scores[index]);  // Push score for Question 10
             console.log(`Answer clicked: ${answer}, Index: ${index}`);  // Log answer and index
@@ -242,7 +244,7 @@ function showQuestion10() {
             }
         });
 
-        answersContainer.appendChild(answerButton);
+        answersContainer.appendChild(answerButton);  // Add button to answers container
     });
 
     updateProgressBar();  // Update progress bar when showing Question 10
