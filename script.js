@@ -393,13 +393,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("start-page").style.display = "block";
         });
     }
-retakeButton.addEventListener("click", () => {
-    userAnswers = [];
-    currentQuestion = 0;
-    document.getElementById("result-page").style.display = "none";
-    document.getElementById("start-page").style.display = "block";
-    updateProgressBar(0);  // Reset progress bar
-});
+    
     const meetModeratorButton = document.getElementById("meet-moderator");
     if (meetModeratorButton) {
         meetModeratorButton.addEventListener("click", () => {
