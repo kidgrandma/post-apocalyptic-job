@@ -189,7 +189,7 @@ function moveToNextAfterCustom() {
 }
 // Function to show Question 8
 function showQuestion8() {
-    const current = question8;
+    const current = questions[7];  // Accessing question 8 based on array index
 
     // Display Question 8 and its GIF
     document.getElementById("question-text").innerText = current.question;
@@ -215,42 +215,48 @@ function showQuestion8() {
 
 // Function to show Question 9
 function showQuestion9() {
-    const current = question9;
+    const current = questions[8];  // Accessing question 9 based on array index
+
+    // Display Question 9 and its GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
+    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";
+    answersContainer.innerHTML = "";  // Clears previous answers
 
+    // Create buttons for each answer in Question 9
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
         answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Push score for Question 9
-            console.log('User Answer:', current.scores[index], 'Current userAnswers:', userAnswers);
-            showQuestion10();  // After Question 9, go to Question 10
+            userAnswers.push(current.scores[index]);  // Record answer
+            showQuestion10();  // Move to Question 10
         });
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar
+    updateProgressBar();  // Update progress bar after showing Question 9
 }
 
 // Function to show Question 10
 function showQuestion10() {
-    const current = question10;
+    const current = questions[9];  // Accessing question 10 based on array index
+
+    // Display Question 10 and its GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
+    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";
+    answersContainer.innerHTML = "";  // Clears previous answers
 
+    // Create buttons for each answer in Question 10
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
         answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Push score for Question 10
-            console.log('User Answer:', current.scores[index], 'Current userAnswers:', userAnswers);
+            userAnswers.push(current.scores[index]);  // Record answer
             if (index === 1) {
                 showBonusQuestion11();  // Go to Bonus Question 11 if they select the second answer
             } else {
@@ -260,30 +266,33 @@ function showQuestion10() {
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar
+    updateProgressBar();  // Update progress bar after showing Question 10
 }
 
 // Function to show Bonus Question 11
 function showBonusQuestion11() {
-    const current = question11;
+    const current = questions[10];  // Accessing question 11 based on array index
+
+    // Display Bonus Question 11 and its GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
+    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";
+    answersContainer.innerHTML = "";  // Clears previous answers
 
+    // Create buttons for each answer in Bonus Question 11
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
         answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
-            console.log('User Answer:', current.scores[index], 'Current userAnswers:', userAnswers);
+            userAnswers.push(current.scores[index]);  // Record answer
             showResults();  // After Bonus Question 11, show results
         });
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar
+    updateProgressBar();  // Update progress bar after showing Bonus Question 11
 }
 
 // Function to determine the outcome based on total score
