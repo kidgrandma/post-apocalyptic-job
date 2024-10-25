@@ -296,15 +296,15 @@ function showResults() {
 // Function to determine the outcome based on total score
 function determineOutcome(score) {
     if (score <= 20) return "Soap Saviors";
-    if (score <= 25) return "Caffeine Nicotine Cartel";
+    if (score <= 28) return "Caffeine Nicotine Cartel";
     if (score <= 26) return "Hermes Shredders";
-    if (score <= 30) return "Homicidal Power Ranger";
-    if (score <= 27) return "The DMV (Club Kids)";
-    if (score <= 35) return "Internet Preservation Society";
-    if (score <= 36) return "Tupperware Tammy";
-    if (score <= 37) return "Protein Priest";
-    if (score <= 38) return "Radioactive Radio Media Empire";
-    if (score <= 50) return "The Olsen Twins";
+    if (score <= 35) return "Homicidal Power Ranger";
+    if (score <= 30) return "The DMV (Club Kids)";
+    if (score <= 38) return "Internet Preservation Society";
+    if (score <= 33) return "Tupperware Tammy";
+    if (score <= 32) return "Protein Priest";
+    if (score <= 40) return "Radioactive Radio Media Empire";
+    if (score <= 45) return "The Olsen Twins";
     if (score === 58) return "Museum of Car Parts";
     return "Unknown";  // Fallback for unexpected scores
 }
