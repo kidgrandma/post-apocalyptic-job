@@ -216,34 +216,32 @@ function showQuestion10() {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
-        // Make sure only one path executes and blocks further execution
+        // Add only one event listener
         answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Push score for Question 10
+            // Push score for Question 10
+            userAnswers.push(current.scores[index]);
+            
+            // Log the current flow based on selection
+            console.log(`Selected: ${answer} (Index: ${index})`);
 
             // If "Meet your new gang" (index 0) is selected, go to results
             if (index === 0) {
-                console.log("Selected 'Meet your new gang'. Going to results.");
-                showResults();  // Directly show results
-                
-                // Add a return to prevent any further action after showing results
-                return;  // Exit the function entirely here
+                console.log("Going to results - 'Meet your new gang' selected");
+                showResults();  // Show results directly
             } 
             // If "Hot yoga matcha baptism" (index 1), go to Bonus Question 11
             else if (index === 1) {
-                console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
+                console.log("Going to bonus question - 'Hot yoga matcha baptism' selected");
                 showBonusQuestion11();  // Go to Bonus Question 11
-                
-                // No return needed here, because we want this path to continue
             }
         });
 
         answersContainer.appendChild(answerButton);
     });
 
-    // Only update the progress bar once, when showing the question
+    // Update progress bar once when the question is shown
     updateProgressBar();
 }
-
 // Function to show Bonus Question 11
 function showBonusQuestion11() {
     const current = questions[10];  // Access Question 11
