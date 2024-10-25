@@ -2,64 +2,57 @@
     font-family: 'LazyDog';
     src: url('images/Lazydog.otf') format('opentype');
 }
+
 body {
     font-family: 'LazyDog', sans-serif;
     background-image: url('images/quiz-background.gif');
     background-size: cover;
     background-position: center;
-    background-repeat: repeat; /* Ensures background repeats if viewport is larger */
-    background-attachment: fixed; /* Keep background fixed */
+    background-repeat: repeat;
+    background-attachment: fixed;
     color: white;
     text-align: center;
     padding: 0;
     margin: 0;
     min-height: 100vh;
-    overflow: hidden; /* Prevent scrolling on the body itself */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #quiz-container {
     padding: 1rem;
     max-width: 600px;
     width: 90%;
-    margin: 0 auto;
-    background-color: rgba(131, 56, 236, 0.6); /* Transparent container */
+    background-color: rgba(131, 56, 236, 0.6);
     border-radius: 10px;
     text-align: center;
-    backdrop-filter: blur(5px); /* Blurred background */
-    overflow-y: auto; /* Enable scrolling inside the container */
-    max-height: 90vh; /* Keep the container within the viewport */
+    backdrop-filter: blur(5px);
+    overflow-y: auto;
+    max-height: 90vh;
     position: relative;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Optional shadow for emphasis */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin: 10px auto; /* Keeps it centered without jumping */
 }
 
 @media (max-width: 600px) {
-    body {
-        background-image: url('images/quiz-background.gif');
-        background-size: cover;
-        background-repeat: repeat;
-        background-color: #000; /* Fallback background color */
-    }
-
     #quiz-container {
         padding: 0.625rem;
         max-width: 90%;
-        background-color: rgba(131, 56, 236, 0.4); /* More transparency on mobile */
+        background-color: rgba(131, 56, 236, 0.4);
         border-radius: 8px;
         backdrop-filter: blur(3px);
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
     }
 
-    /* Ensure the container can scroll on mobile */
+    /* Body adjustments for smooth mobile scrolling */
     html, body {
-        overflow: hidden; /* Prevent scroll on body */
         height: 100%;
-    }
-
-    #quiz-container {
-        max-height: 90vh;
-        overflow-y: scroll; /* Allow the container to scroll independently */
-        -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+        overflow: hidden;
     }
 }
+
 /* Name Input Container styling */
 #name-input-container {
     margin-top: 10px;
@@ -72,64 +65,47 @@ body {
     width: 80%;
     max-width: 300px;
     padding: 0.5rem;
-    background-color: rgba(131, 56, 236, 0.5); /* Semi-transparent purple */
+    background-color: rgba(131, 56, 236, 0.5);
     color: #ffffff;
     border: none;
     border-radius: 5px;
     text-align: center;
     font-family: 'LazyDog', sans-serif;
     font-size: 1rem;
-    box-shadow: 0px 0px 10px 2px #00FFFF, 0px 0px 10px 2px #FF00FF; /* Neon glow */
+    box-shadow: 0px 0px 10px 2px #00FFFF, 0px 0px 10px 2px #FF00FF;
 }
 
 /* Placeholder text styling */
 #name-input::placeholder {
-    color: rgba(255, 255, 255, 0.7); /* Faded white placeholder */
+    color: rgba(255, 255, 255, 0.7);
 }
 
 /* Input field focus styling */
 #name-input:focus {
     outline: none;
-    box-shadow: 0 0 15px #00FFFF, 0 0 15px #FF00FF; /* Enhanced glow on focus */
+    box-shadow: 0 0 15px #00FFFF, 0 0 15px #FF00FF;
 }
+
 /* Clean and modern progress bar */
 #progress-bar {
     width: 100%;
     height: 8px;
     background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 50px; /* Rounded corners */
+    border-radius: 50px;
     margin-top: 20px;
     overflow: hidden;
 }
 
 #progress-fill {
     height: 100%;
-    background-color: #00ffff; /* Neon color */
-    width: 0; /* Initial width (0%) */
-    transition: none; /* Remove transition for instant progress */
-    border-radius: 50px; /* Rounded fill */
-    box-shadow: 0 0 10px #00ffff, 0 0 15px #ff00ff; /* Neon glow effect */
+    background-color: #00ffff;
+    width: 0;
+    transition: width 0.3s ease-in-out;
+    border-radius: 50px;
+    box-shadow: 0 0 10px #00ffff, 0 0 15px #ff00ff;
 }
 
-/* Mobile adjustments */
-@media (max-width: 600px) {
-    body {
-        overflow: hidden; /* Prevent scroll on the body */
-    }
-
-    #quiz-container {
-        padding: 0.625rem;
-        max-width: 90%; /* Adjust width for mobile */
-        background-color: rgba(131, 56, 236, 0.4); /* More transparency on mobile */
-        border-radius: 8px;
-        backdrop-filter: blur(3px);
-    }
-
-    #quiz-container p, #quiz-container h1, #quiz-container h2 {
-        font-size: 1rem; /* Adjust font size for better readability on mobile */
-    }
-}
-
+/* Button Styling */
 button {
     display: block;
     width: 100%;
@@ -137,15 +113,15 @@ button {
     padding: 0.5rem 1rem;
     margin: 10px auto;
     cursor: pointer;
-    background-color: #00FFFF; /* Neon cyan */
+    background-color: #00FFFF;
     color: #000;
     font-family: 'LazyDog', sans-serif;
     font-size: 1rem;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF; /* Glow effect */
+    box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF;
     text-transform: uppercase;
-    animation: none; /* Remove button-pulse animation */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button:hover {
@@ -156,9 +132,8 @@ button:hover {
 /* Disable hover styles for touch devices */
 @media (hover: none) {
     button:hover {
-        background-color: inherit; /* Reset hover background */
-        color: inherit;            /* Reset hover color */
-        /* Add any other styles you'd like to reset */
+        background-color: inherit;
+        color: inherit;
     }
 }
 
@@ -167,115 +142,24 @@ button:active {
     box-shadow: 0 0 15px #FF00FF, 0 0 20px #00FFFF;
 }
 
-/* Larger screens - adjust button size */
-@media (min-width: 1600px) {
-    button {
-        font-size: 1.5rem; /* Scalable with rem */
-        padding: 0.75rem 1.25rem;
-    }
-}
-
-#share-buttons button {
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    background-color: #00FFFF;
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#share-buttons button:hover {
-    background-color: #FF00FF;
-    color: #FFF;
-}
-
 /* Image Styling */
-#cover-image, #question-illustration {
+#cover-image, #question-illustration, #result-image {
     width: 100%;
     max-width: 600px;
     display: block;
     margin: 0 auto;
 }
 
-#question-illustration:hover {
-    transform: none; /* Remove unnecessary hover transform */
+#question-illustration:hover, #result-image:hover {
+    transform: none;
 }
 
-/* Subtle fade-in effect for question transitions */
+/* Smooth transition for question and result displays */
 .fade-in {
     opacity: 0;
-    transition: opacity 0.3s ease-in-out; /* Shorten fade-in for performance */
+    transition: opacity 0.3s ease-in-out;
 }
 
 .fade-in-active {
     opacity: 1;
-}
-/* Celebratory glow effect for the results container */
-#result-page #quiz-container {
-    box-shadow: 0 0 20px rgba(255, 0, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.6);
-    animation: glowPulse 1.5s infinite alternate; /* Pulse effect */
-}
-
-/* Pulse animation for the glow */
-@keyframes glowPulse {
-    from {
-        box-shadow: 0 0 15px rgba(255, 0, 255, 0.4), 0 0 25px rgba(0, 255, 255, 0.4);
-    }
-    to {
-        box-shadow: 0 0 25px rgba(255, 0, 255, 0.7), 0 0 35px rgba(0, 255, 255, 0.7);
-    }
-}
-
-#result-title {
-    font-size: 2rem;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7);  /* Add some text glow */
-}
-/* Soft glow for outcome text */
-#result-title span {
-    text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5), /* Soft inner glow */
-                0px 0px 8px rgba(0, 0, 0, 0.3);        /* Slight dark outer glow for contrast */
-}
-#result-image {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    display: block;
-    box-shadow: 0px 0px 20px 5px rgba(255, 0, 255, 0.5);  /* Neon glow effect around the image */
-    animation: borderGlow 3s linear infinite; /* Gradient animation */
-}
-
-/* Animated gradient border */
-@keyframes borderGlow {
-    0% { border-image-source: linear-gradient(45deg, #ff00ff, #00ffff); }
-    50% { border-image-source: linear-gradient(135deg, #00ffff, #ff00ff); }
-    100% { border-image-source: linear-gradient(45deg, #ff00ff, #00ffff); }
-}
-#result-description {
-    font-size: 1.2rem;
-    margin-top: 20px;
-    line-height: 1.5;
-    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);  /* Make text stand out */
-}
-
-/* Button styling specific to result page */
-button {
-    margin-top: 20px;
-    background-color: #FF00FF;
-    color: #FFF;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    box-shadow: 0 0 10px rgba(255, 0, 255, 0.8), 0 0 15px rgba(0, 255, 255, 0.8);
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #00FFFF;
-    color: #000;
 }
