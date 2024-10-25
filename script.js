@@ -119,83 +119,6 @@ function updateProgressBar(completion = null) {
         progressBar.style.width = `${progressPercent}%`;
     }
 }
-
-// Function to handle answer selection and branching logic
-function selectAnswer(index) {
-    // Branching logic for custom questions
-    if (currentQuestion === 4) {  // Branching at Question 5
-        if (index === 0) {
-            showCustomQuestion(question6A);
-        } else if (index === 1) {
-            showCustomQuestion(question6B);
-        } else {
-            showCustomQuestion(question6C);
-        }
-        return;
-    }
-
-    // Logic for handling Question 10 (index 9)
-    if (currentQuestion === 9) {  // Question 10 index
-        if (index === 0) {  // If "Meet your new gang" is selected
-            console.log("Selected 'Meet your new gang'. Going to results.");
-            showResults();  // Show results and end quiz
-            return;  // Stop execution here to prevent progression
-        } else if (index === 1) {  // "Hot yoga matcha baptism" case
-            console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
-            showBonusQuestion11();  // Move to Bonus Question 11
-            return;  // Exit function to prevent moving to next question
-        }
-    }
-
-    // General question handling
-    userAnswers.push(questions[currentQuestion].scores[index]);  // Store the answer
-    currentQuestion++;  // Move to the next question
-
-    if (currentQuestion < questions.length) {
-        showQuestion();  // Show the next question
-    } else {
-        showResults();  // End quiz and show results if no more questions
-    }
-
-    updateProgressBar();  // Always update the progress bar
-}
-
-// Function to show custom questions (6A, 6B, or 6C)
-function showCustomQuestion(customQuestion) {
-    document.getElementById("question-text").innerText = customQuestion.question;
-    document.getElementById("question-illustration").src = customQuestion.gif;
-
-    const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";
-
-    customQuestion.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
-
-        answerButton.addEventListener("click", () => {
-            // Log the button click and the score recorded
-            console.log(`Answer button clicked: ${answer} (Index: ${index})`);
-            console.log(`Score recorded: ${customQuestion.scores[index]}`);
-
-            // Push the score for this answer (done only once)
-            userAnswers.push(customQuestion.scores[index]);
-
-            moveToNextAfterCustom();  // After custom question, go to Question 7
-        });
-
-        answersContainer.appendChild(answerButton);
-    });
-
-    updateProgressBar();
-}
-
-// Function to move to Question 7 after custom questions
-function moveToNextAfterCustom() {
-    currentQuestion = 5;  // Manually set to index 5 (Question 7) after custom question
-    showQuestion();  // Show Question 7
-    updateProgressBar();
-}
-
 // Function to show the current question from the main array
 function showQuestion() {
     const current = questions[currentQuestion];
@@ -242,6 +165,55 @@ function showQuestion() {
     });
 
     updateProgressBar();  // Update progress bar after rendering the question
+}
+
+// Function to handle answer selection and branching logic
+function selectAnswer(index) {
+    // Branching logic for custom questions
+    if (currentQuestion === 4) {  // Branching at Question 5
+        if (index === 0) {
+            showCustomQuestion(question6A);
+        } else if (index === 1) {
+            showCustomQuestion(question6B);
+        } else {
+            showCustomQuestion(question6C);
+        }
+        return;
+    }
+// Function to show custom questions (6A, 6B, or 6C)
+function showCustomQuestion(customQuestion) {
+    document.getElementById("question-text").innerText = customQuestion.question;
+    document.getElementById("question-illustration").src = customQuestion.gif;
+
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";
+
+    customQuestion.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+
+        answerButton.addEventListener("click", () => {
+            // Log the button click and the score recorded
+            console.log(`Answer button clicked: ${answer} (Index: ${index})`);
+            console.log(`Score recorded: ${customQuestion.scores[index]}`);
+
+            // Push the score for this answer (done only once)
+            userAnswers.push(customQuestion.scores[index]);
+
+            moveToNextAfterCustom();  // After custom question, go to Question 7
+        });
+
+        answersContainer.appendChild(answerButton);
+    });
+
+    updateProgressBar();
+}
+
+// Function to move to Question 7 after custom questions
+function moveToNextAfterCustom() {
+    currentQuestion = 5;  // Manually set to index 5 (Question 7) after custom question
+    showQuestion();  // Show Question 7
+    updateProgressBar();
 }
 
 // Function to handle Question 10
