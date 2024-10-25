@@ -15,67 +15,63 @@ body {
     padding: 0;
     margin: 0;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
 }
 
 #quiz-container {
-    padding: 2vh 2vw;  /* Responsive padding */
+    padding: 1rem;
     max-width: 600px;
     width: 90%;
+    margin: 0 auto;
     background-color: rgba(131, 56, 236, 0.6);
     border-radius: 10px;
     text-align: center;
     backdrop-filter: blur(5px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
     position: relative;
-    margin-top: 5vh;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 600px) {
-    #quiz-container {
-        padding: 1vh 2vw;
-        background-color: rgba(131, 56, 236, 0.4);
-        border-radius: 8px;
-    }
-}
-
+/* Style for input container */
 #name-input-container {
-    margin-top: 2vh;
-    margin-bottom: 3vh;
+    margin-top: 10px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
+/* Input field styling */
 #name-input {
     width: 80%;
     max-width: 300px;
-    padding: 1.5vh 1vw;
+    padding: 0.5rem;
     background-color: rgba(131, 56, 236, 0.5);
     color: #ffffff;
     border: none;
     border-radius: 5px;
     text-align: center;
     font-family: 'LazyDog', sans-serif;
-    font-size: 2.5vw;  /* Scales with viewport */
+    font-size: 1rem;
     box-shadow: 0px 0px 10px 2px #00FFFF, 0px 0px 10px 2px #FF00FF;
 }
 
+/* Placeholder text styling */
 #name-input::placeholder {
     color: rgba(255, 255, 255, 0.7);
 }
 
+/* Input field focus styling */
 #name-input:focus {
     outline: none;
     box-shadow: 0 0 15px #00FFFF, 0 0 15px #FF00FF;
 }
 
+/* Clean and modern progress bar */
 #progress-bar {
     width: 100%;
-    height: 0.8vh;
+    height: 8px;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 50px;
-    margin-top: 2vh;
+    margin-top: 20px;
     overflow: hidden;
 }
 
@@ -83,27 +79,45 @@ body {
     height: 100%;
     background-color: #00ffff;
     width: 0;
-    transition: width 0.3s ease-in-out;
+    transition: width 0.3s;
     border-radius: 50px;
     box-shadow: 0 0 10px #00ffff, 0 0 15px #ff00ff;
 }
 
+/* Mobile adjustments */
+@media (max-width: 600px) {
+    body {
+        overflow: hidden;
+    }
+
+    #quiz-container {
+        padding: 0.625rem;
+        max-width: 90%;
+        background-color: rgba(131, 56, 236, 0.4);
+        border-radius: 8px;
+        backdrop-filter: blur(3px);
+    }
+
+    #quiz-container p, #quiz-container h1, #quiz-container h2 {
+        font-size: 1rem;
+    }
+}
+
 button {
     display: block;
-    width: 80%;
+    width: 100%;
     max-width: 300px;
-    padding: 1.5vh 1vw;
-    margin: 3vh auto;
+    padding: 0.5rem 1rem;
+    margin: 10px auto;
     cursor: pointer;
     background-color: #00FFFF;
     color: #000;
     font-family: 'LazyDog', sans-serif;
-    font-size: 2.5vw;  /* Responsive font size */
+    font-size: 1rem;
     border: none;
     border-radius: 5px;
     box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF;
     text-transform: uppercase;
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button:hover {
@@ -111,6 +125,7 @@ button:hover {
     color: #FFF;
 }
 
+/* Disable hover styles for touch devices */
 @media (hover: none) {
     button:hover {
         background-color: inherit;
@@ -123,18 +138,36 @@ button:active {
     box-shadow: 0 0 15px #FF00FF, 0 0 20px #00FFFF;
 }
 
-#cover-image, #question-illustration, #result-image {
+#share-buttons button {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #00FFFF;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#share-buttons button:hover {
+    background-color: #FF00FF;
+    color: #FFF;
+}
+
+/* Image Styling */
+#cover-image, #question-illustration {
     width: 100%;
-    max-width: 90vw;  /* Scale with viewport */
+    max-width: 600px;
     display: block;
     margin: 0 auto;
 }
 
-#question-text, #result-title {
-    font-size: 3.5vw;  /* Scales with viewport */
-    margin: 2vh 0;
+#question-illustration:hover {
+    transform: none;
 }
 
+/* Subtle fade-in effect for question transitions */
 .fade-in {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
@@ -142,4 +175,69 @@ button:active {
 
 .fade-in-active {
     opacity: 1;
+}
+
+/* Result Title Styling with Neon Effect */
+#result-title {
+    font-size: 2rem;
+    font-family: 'LazyDog', sans-serif;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin-bottom: 20px;
+}
+
+/* Specific color and glow for each outcome */
+#result-title.outcome-homicidal-power-ranger {
+    color: #ff6f61;
+    text-shadow: 0 0 15px rgba(255, 111, 97, 0.7);
+}
+
+#result-title.outcome-caffeine-nicotine-cartel {
+    color: #ffc107;
+    text-shadow: 0 0 15px rgba(255, 193, 7, 0.7);
+}
+
+#result-title.outcome-hermes-shredders {
+    color: #00e5ff;
+    text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+}
+
+#result-title.outcome-the-dmv-club-kids {
+    color: #e040fb;
+    text-shadow: 0 0 15px rgba(224, 64, 251, 0.7);
+}
+
+#result-title.outcome-internet-preservation-society {
+    color: #42a5f5;
+    text-shadow: 0 0 15px rgba(66, 165, 245, 0.7);
+}
+
+#result-title.outcome-protein-priest {
+    color: #ff8a65;
+    text-shadow: 0 0 15px rgba(255, 138, 101, 0.7);
+}
+
+#result-title.outcome-tupperware-tammy {
+    color: #ffb74d;
+    text-shadow: 0 0 15px rgba(255, 183, 77, 0.7);
+}
+
+#result-title.outcome-soap-saviors {
+    color: #26c6da;
+    text-shadow: 0 0 15px rgba(38, 198, 218, 0.7);
+}
+
+#result-title.outcome-radioactive-radio-media-empire {
+    color: #cddc39;
+    text-shadow: 0 0 15px rgba(205, 220, 57, 0.7);
+}
+
+#result-title.outcome-the-olsen-twins {
+    color: #ce93d8;
+    text-shadow: 0 0 15px rgba(206, 147, 216, 0.7);
+}
+
+#result-title.outcome-museum-of-car-parts {
+    color: #ffd54f;
+    text-shadow: 0 0 15px rgba(255, 213, 79, 0.7);
 }
