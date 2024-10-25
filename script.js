@@ -216,6 +216,7 @@ function showQuestion10() {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
+        // Make sure only one path executes and blocks further execution
         answerButton.addEventListener("click", () => {
             userAnswers.push(current.scores[index]);  // Push score for Question 10
 
@@ -223,12 +224,16 @@ function showQuestion10() {
             if (index === 0) {
                 console.log("Selected 'Meet your new gang'. Going to results.");
                 showResults();  // Directly show results
-                return;  // Prevent any further execution
+                
+                // Add a return to prevent any further action after showing results
+                return;  // Exit the function entirely here
             } 
             // If "Hot yoga matcha baptism" (index 1), go to Bonus Question 11
             else if (index === 1) {
                 console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
                 showBonusQuestion11();  // Go to Bonus Question 11
+                
+                // No return needed here, because we want this path to continue
             }
         });
 
