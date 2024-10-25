@@ -102,6 +102,7 @@ body {
         font-size: 1rem;
     }
 }
+/* Reset focus styles after the question change */
 button {
     display: block;
     width: 100%;
@@ -109,7 +110,7 @@ button {
     padding: 0.5rem 1rem;
     margin: 10px auto;
     cursor: pointer;
-    background-color: #00FFFF;
+    background-color: #00FFFF; /* Initial neon cyan color */
     color: #000;
     font-family: 'LazyDog', sans-serif;
     font-size: 1rem;
@@ -117,24 +118,22 @@ button {
     border-radius: 5px;
     box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF;
     text-transform: uppercase;
-    outline: none; /* Removes the outline on focus */
+    outline: none;
     transition: background-color 0.2s, transform 0.1s;
 }
 
-button:hover {
-    background-color: #FF00FF;
-    color: #FFF;
-}
-
+/* Reset styles on buttons for new questions */
+button:focus-visible,
 button:focus {
-    outline: none; /* Ensures no outline appears */
-    box-shadow: none; /* Removes any shadow on focus */
-    background-color: #00FFFF; /* Retains the regular color on focus */
+    outline: none;
+    box-shadow: none;
 }
 
-button:active {
-    transform: scale(0.97);
-    box-shadow: 0 0 15px #FF00FF, 0 0 20px #00FFFF;
+button:active, .selected {
+    background-color: #FF69B4; /* Bright pink for selected */
+    color: #FFF;
+    box-shadow: 0 0 10px #FF69B4;
+    transform: scale(0.98);
 }
 
 /* Disable hover styles for touch devices */
@@ -142,7 +141,6 @@ button:active {
     button:hover {
         background-color: inherit;
         color: inherit;
-        box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF; /* Reset glow */
     }
 }
 #share-buttons button {
