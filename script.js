@@ -221,30 +221,34 @@ function showQuestion10() {
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clear previous answers
 
+    // Track if score has already been recorded to prevent double scoring
+    let scoreRecorded = false;
+
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
-        // Add more detailed logging
-        console.log(`Creating button: ${answer} (Index: ${index})`);
-        
-        answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Push score for Question 10
-            console.log(`Answer clicked: ${answer}, Index: ${index}`);  // Log answer and index
+        console.log(`Creating button for '${answer}' (Index: ${index})`);
 
-            // If "Meet your new gang" (index 0) is selected, go to results
-            if (index === 0) {
-                console.log("Selected 'Meet your new gang'. Going to results.");
-                showResults();  // Directly show results
-            } 
-            // If "Hot yoga matcha baptism" (index 1), go to Bonus Question 11
-            else if (index === 1) {
-                console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
-                showBonusQuestion11();  // Go to Bonus Question 11
+        answerButton.addEventListener("click", () => {
+            if (!scoreRecorded) {
+                console.log(`Answer selected: ${answer} (Index: ${index})`);
+                userAnswers.push(current.scores[index]);  // Push score for Question 10
+                scoreRecorded = true;  // Prevent multiple scores
+
+                if (index === 0) {
+                    console.log("Selected 'Meet your new gang'. Going to results.");
+                    showResults();  // Show results for index 0
+                } else {
+                    console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
+                    showBonusQuestion11();  // Go to Bonus Question 11
+                }
+            } else {
+                console.log("Score already recorded, skipping...");
             }
         });
 
-        answersContainer.appendChild(answerButton);  // Add button to answers container
+        answersContainer.appendChild(answerButton);
     });
 
     updateProgressBar();  // Update progress bar when showing Question 10
