@@ -126,29 +126,6 @@ function selectAnswer(index) {
         showResults();  // If no more questions, show results
     }
 }
-function showQuestion() {
-    const current = questions[currentQuestion];
-
-    if (!current) {
-        console.error("Question not found for index", currentQuestion);
-        return;
-    }
-
-    document.getElementById("question-text").innerText = current.question;
-    document.getElementById("question-illustration").src = current.gif;
-
-    const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";
-
-    current.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
-        answerButton.addEventListener("click", () => selectAnswer(index));
-        answersContainer.appendChild(answerButton);
-    });
-
-    updateProgressBar();  // Update the progress bar ONLY here, after loading a question
-}
 // Function to show the current question from the main array
 function showQuestion() {
     const current = questions[currentQuestion];
@@ -158,17 +135,38 @@ function showQuestion() {
         return;
     }
 
+    // Clear previous question's answers before rendering new ones
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";  // Make sure container is cleared
+
+    // Display question text and associated GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
-    const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";
-
+    // Create buttons for each answer in the current question
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
-        answerButton.addEventListener("click", () => selectAnswer(index));
-        answersContainer.appendChild(answerButton);
+
+        // Ensure that the event listener is added only once
+        answerButton.addEventListener("click", () => {
+            // Push the selected answer's score to the userAnswers array
+            console.log(`Answer selected: ${answer}, Index: ${index}`);
+            userAnswers.push(current.scores[index]);
+
+            // Move to the next question
+            currentQuestion++;  // Increment to the next question
+
+            if (currentQuestion < questions.length) {
+                showQuestion();  // Show the next question
+            } else {
+                showResults();  // No more questions, so show results
+            }
+
+            updateProgressBar();  // Update progress bar
+        });
+
+        answersContainer.appendChild(answerButton);  // Append button to container
     });
 
     updateProgressBar();  // Update the progress bar after showing the question
