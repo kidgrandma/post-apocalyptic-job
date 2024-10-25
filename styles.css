@@ -206,10 +206,10 @@ button:active {
     margin-bottom: 20px;
     text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7);  /* Add some text glow */
 }
-/* Outcome name glow effect */
+/* Soft glow for outcome text */
 #result-title span {
-    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6), /* Soft white glow */
-                0px 0px 10px rgba(255, 255, 255, 0.4); /* Outer dim glow */
+    text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5), /* Soft inner glow */
+                0px 0px 8px rgba(0, 0, 0, 0.3);        /* Slight dark outer glow for contrast */
 }
 #result-image {
     width: 100%;
