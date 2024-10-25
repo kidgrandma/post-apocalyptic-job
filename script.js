@@ -226,41 +226,36 @@ function moveToNextAfterCustom() {
     updateProgressBar();
 }
 
-// Function to handle Question 10
 function showQuestion10() {
-    const current = questions[9];  // Question 10 index
+    const current = questions[9];  // Access Question 10 directly
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clear previous answers
 
-    // Track if score has already been recorded to prevent double scoring
-    let scoreRecorded = false;
+    let scoreRecorded = false;  // Prevents double scoring
 
     // Create answer buttons
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
-        console.log(`Creating button for '${answer}' (Index: ${index})`);
-
         // Add click event listener for the button
         answerButton.addEventListener("click", () => {
             if (!scoreRecorded) {
-                console.log(`Answer selected: ${answer} (Index: ${index})`);
-                userAnswers.push(current.scores[index]);  // Push score for Question 10
-                scoreRecorded = true;  // Prevent multiple scores
+                userAnswers.push(current.scores[index]);  // Record score for Question 10
+                scoreRecorded = true;
 
                 if (index === 0) {
+                    // Option that should go directly to results
                     console.log("Selected 'Meet your new gang'. Going to results.");
-                    showResults();  // Directly show results for this option
+                    showResults();
                 } else if (index === 1) {
+                    // Option that leads to Bonus Question 11
                     console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
-                    showBonusQuestion11();  // Go to bonus question
+                    showBonusQuestion11();
                 }
-            } else {
-                console.log("Score already recorded, skipping...");
             }
         });
 
@@ -269,7 +264,6 @@ function showQuestion10() {
 
     updateProgressBar();  // Update progress bar when showing Question 10
 }
-
 // Function to show Bonus Question 11
 function showBonusQuestion11() {
     const current = questions[10];  // Access Question 11
