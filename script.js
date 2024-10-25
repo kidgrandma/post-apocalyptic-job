@@ -110,34 +110,34 @@ function showQuestion() {
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
-    // Create buttons for each answer in the current question
-    current.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
+ // Create buttons for each answer in the current question
+current.answers.forEach((answer, index) => {
+    const answerButton = document.createElement("button");
+    answerButton.innerText = answer;
 
-        // Add click event listener for the button
-        answerButton.addEventListener("click", () => {
-            // Log the button click and the score recorded
-            console.log(`Answer button clicked: ${answer} (Index: ${index})`);
-            console.log(`Score recorded: ${current.scores[index]}`);
+    // Add click event listener for the button
+    answerButton.addEventListener("click", () => {
+        // Log the button click and the score recorded
+        console.log(`Answer button clicked: ${answer} (Index: ${index})`);
+        console.log(`Score recorded: ${current.scores[index]}`);
 
-            // Push the selected answer's score to the userAnswers array
-            userAnswers.push(current.scores[index]);
+        // Push the selected answer's score to the userAnswers array
+        userAnswers.push(current.scores[index]);
 
-            // Move to the next question
-            currentQuestion++;  // Increment to the next question
+        // Move to the next question
+        currentQuestion++;  // Increment to the next question
 
-            if (currentQuestion < questions.length) {
-                showQuestion();  // Show the next question
-            } else {
-                showResults();  // No more questions, show the results
-            }
-        });
-    updateProgressBar();
-}
-        answersContainer.appendChild(answerButton);  // Append button to the container
+        if (currentQuestion < questions.length) {
+            showQuestion();  // Show the next question
+        } else {
+            showResults();  // No more questions, show the results
+        }
     });
 
+    updateProgressBar();  // This line should be outside the event listener function
+    answersContainer.appendChild(answerButton);  // Append button to the container
+});
+    
 // Updated function to ensure correct progress bar update
 function updateProgressBar(completion = null) {
     let progressPercent;
