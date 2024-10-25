@@ -238,17 +238,18 @@ function moveToNextAfterCustom() {
     updateProgressBar();  // Update progress bar after showing Question 7
 }
 
-// Function to show Question 10 and branch to either results or Bonus Question 11
+// Function to handle Question 10
 function showQuestion10() {
-    const current = questions[9];  // Access Question 10 directly
+    const current = questions[9];  // Question 10 is at index 9 in your array
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clear previous answers
 
-    let scoreRecorded = false;  // Prevent double scoring
+    let scoreRecorded = false;  // Prevents double scoring
 
+    // Create answer buttons for Question 10
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
@@ -256,17 +257,18 @@ function showQuestion10() {
         // Add click event listener for the button
         answerButton.addEventListener("click", () => {
             if (!scoreRecorded) {
+                console.log(`Answer selected: ${answer} (Index: ${index})`);
                 userAnswers.push(current.scores[index]);  // Record score for Question 10
-                scoreRecorded = true;
+                scoreRecorded = true;  // Prevent multiple scores
 
                 if (index === 0) {
-                    // If the first option is selected, go directly to results
+                    // First answer leads directly to results
                     console.log("Selected 'Meet your new gang'. Going to results.");
-                    showResults();  // Show results
+                    showResults();  // Show results and exit
                 } else if (index === 1) {
-                    // If the second option is selected, go to Bonus Question 11
+                    // Second answer leads to bonus Question 11
                     console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
-                    showBonusQuestion11();  // Go to Bonus Question 11
+                    showBonusQuestion11();  // Go to bonus question
                 }
             }
         });
@@ -274,9 +276,8 @@ function showQuestion10() {
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar after showing Question 10
+    updateProgressBar();  // Update progress bar when showing Question 10
 }
-
 // Function to show Bonus Question 11 if selected from Question 10
 function showBonusQuestion11() {
     const current = questions[10];  // Access Question 11 directly
