@@ -344,7 +344,28 @@ function getCrewColor(outcome) {
         default: return "#000000";  // Fallback
     }
 }
+// Function to copy the quiz link to the clipboard
+function copyQuizLink() {
+    const quizLink = window.location.href;  // Get the current quiz URL
 
+    // Create a temporary input element to copy the link
+    const tempInput = document.createElement("input");
+    tempInput.value = quizLink;
+    document.body.appendChild(tempInput);
+
+    // Select and copy the value
+    tempInput.select();
+    document.execCommand("copy");
+
+    // Remove the temporary input
+    document.body.removeChild(tempInput);
+
+    // Notify the user that the link has been copied
+    alert("Quiz link copied to clipboard!");
+}
+
+// Attach the event listener to the Copy Link button
+document.getElementById("copy-link-button").addEventListener("click", copyQuizLink);
 // Event listeners for buttons to start quiz, retake quiz, etc.
 document.addEventListener("DOMContentLoaded", function() {
     const startButton = document.getElementById("start-quiz");
