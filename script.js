@@ -85,22 +85,20 @@ const question6C = {
 
 let userName = ""; // Global variable to store the user's name
 
-// Start quiz function to capture name input and begin quiz
+// Start the quiz
 function startQuiz() {
-    // Retrieve the name from the input field
     const nameInput = document.getElementById("name-input").value.trim();
     
-    // Set the user's name or a default name if empty
-    userName = nameInput ? nameInput : "Stranger";
+    if (!nameInput) {
+        alert("TELL ME WHO U R NOW!");  // Show alert if name is empty
+        return;  // Exit function if no name provided
+    }
 
-    // Transition from start page to question page
-    document.getElementById("start-page").style.display = "none";  // Hide start page
-    document.getElementById("question-page").style.display = "block";  // Show question page
-
-    // Begin quiz by showing the first question
+    userName = nameInput; // Save the user's name if provided
+    document.getElementById("start-page").style.display = "none";  // Hide the start page
+    document.getElementById("question-page").style.display = "block";  // Show the question page
     showQuestion();
 }
-
 // Event listener for Start Quiz button
 document.addEventListener("DOMContentLoaded", function() {
     const startButton = document.getElementById("start-quiz");
@@ -346,21 +344,21 @@ function getOutcomeImage(outcome) {
     }
 }
 
-// Function to get dynamic crew color based on the outcome
+// Function to get brighter crew colors and apply a softer glow
 function getCrewColor(outcome) {
     switch (outcome) {
-        case "Homicidal Power Ranger": return "#ff0000";  // Red
-        case "Caffeine Nicotine Cartel": return "#ff9900";  // Orange
-        case "Hermes Shredders": return "#00ffcc";  // Turquoise
-        case "The DMV (Club Kids)": return "#ff00ff";  // Magenta
-        case "Internet Preservation Society": return "#3399ff";  // Blue
-        case "Protein Priest": return "#ffcc00";  // Yellow
-        case "Tupperware Tammy": return "#ff66ff";  // Pink
-        case "Soap Saviors": return "#33cc33";  // Green
-        case "Radioactive Radio Media Empire": return "#cc3300";  // Dark Red
-        case "The Olsen Twins": return "#9966ff";  // Purple
-        case "Museum of Car Parts": return "#666666";  // Grey
-        default: return "#000000";  // Fallback
+        case "Homicidal Power Ranger": return "#ff4500";  // Bright orange-red
+        case "Caffeine Nicotine Cartel": return "#ffd700";  // Bright gold
+        case "Hermes Shredders": return "#00ff7f";  // Spring green
+        case "The DMV (Club Kids)": return "#ff69b4";  // Hot pink
+        case "Internet Preservation Society": return "#1e90ff";  // Dodger blue
+        case "Protein Priest": return "#ff6347";  // Coral
+        case "Tupperware Tammy": return "#ffb6c1";  // Light pink
+        case "Soap Saviors": return "#00ced1";  // Dark turquoise
+        case "Radioactive Radio Media Empire": return "#adff2f";  // Green yellow
+        case "The Olsen Twins": return "#dda0dd";  // Plum
+        case "Museum of Car Parts": return "#ffff00";  // Yellow
+        default: return "#ffffff";  // Fallback to white if needed
     }
 }
 // Function to copy the quiz link to the clipboard
