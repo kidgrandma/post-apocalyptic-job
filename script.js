@@ -347,17 +347,17 @@ function getOutcomeImage(outcome) {
 // Function to get brighter crew colors and apply a softer glow
 function getCrewColor(outcome) {
     switch (outcome) {
-        case "Homicidal Power Ranger": return "#ff4500";  // Bright orange-red
-        case "Caffeine Nicotine Cartel": return "#ffd700";  // Bright gold
-        case "Hermes Shredders": return "#00ff7f";  // Spring green
-        case "The DMV (Club Kids)": return "#ff69b4";  // Hot pink
-        case "Internet Preservation Society": return "#1e90ff";  // Dodger blue
-        case "Protein Priest": return "#ff6347";  // Coral
-        case "Tupperware Tammy": return "#ffb6c1";  // Light pink
-        case "Soap Saviors": return "#00ced1";  // Dark turquoise
-        case "Radioactive Radio Media Empire": return "#adff2f";  // Green yellow
-        case "The Olsen Twins": return "#dda0dd";  // Plum
-        case "Museum of Car Parts": return "#ffff00";  // Yellow
+        case "Homicidal Power Ranger": return "#ff6f61";  // Bright coral
+        case "Caffeine Nicotine Cartel": return "#ffc107";  // Amber yellow
+        case "Hermes Shredders": return "#00e5ff";  // Bright turquoise
+        case "The DMV (Club Kids)": return "#e040fb";  // Vivid magenta
+        case "Internet Preservation Society": return "#42a5f5";  // Sky blue
+        case "Protein Priest": return "#ff8a65";  // Peachy coral
+        case "Tupperware Tammy": return "#ffb74d";  // Soft orange
+        case "Soap Saviors": return "#26c6da";  // Aqua blue
+        case "Radioactive Radio Media Empire": return "#cddc39";  // Lime green
+        case "The Olsen Twins": return "#ce93d8";  // Lavender purple
+        case "Museum of Car Parts": return "#ffd54f";  // Golden yellow
         default: return "#ffffff";  // Fallback to white if needed
     }
 }
