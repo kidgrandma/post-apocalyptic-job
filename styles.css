@@ -21,78 +21,61 @@ body {
 }
 
 #quiz-container {
-    padding: 1rem;
+    padding: 2vh 2vw;  /* Responsive padding */
     max-width: 600px;
     width: 90%;
     background-color: rgba(131, 56, 236, 0.6);
     border-radius: 10px;
     text-align: center;
     backdrop-filter: blur(5px);
-    overflow-y: auto;
-    max-height: 90vh;
-    position: relative;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    margin: 10px auto; /* Keeps it centered without jumping */
+    position: relative;
+    margin-top: 5vh;
 }
 
 @media (max-width: 600px) {
     #quiz-container {
-        padding: 0.625rem;
-        max-width: 90%;
+        padding: 1vh 2vw;
         background-color: rgba(131, 56, 236, 0.4);
         border-radius: 8px;
-        backdrop-filter: blur(3px);
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    /* Body adjustments for smooth mobile scrolling */
-    html, body {
-        height: 100%;
-        overflow: hidden;
     }
 }
 
-/* Name Input Container styling */
 #name-input-container {
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 2vh;
+    margin-bottom: 3vh;
     text-align: center;
 }
 
-/* Input field styling */
 #name-input {
     width: 80%;
     max-width: 300px;
-    padding: 0.5rem;
+    padding: 1.5vh 1vw;
     background-color: rgba(131, 56, 236, 0.5);
     color: #ffffff;
     border: none;
     border-radius: 5px;
     text-align: center;
     font-family: 'LazyDog', sans-serif;
-    font-size: 1rem;
+    font-size: 2.5vw;  /* Scales with viewport */
     box-shadow: 0px 0px 10px 2px #00FFFF, 0px 0px 10px 2px #FF00FF;
 }
 
-/* Placeholder text styling */
 #name-input::placeholder {
     color: rgba(255, 255, 255, 0.7);
 }
 
-/* Input field focus styling */
 #name-input:focus {
     outline: none;
     box-shadow: 0 0 15px #00FFFF, 0 0 15px #FF00FF;
 }
 
-/* Clean and modern progress bar */
 #progress-bar {
     width: 100%;
-    height: 8px;
+    height: 0.8vh;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 50px;
-    margin-top: 20px;
+    margin-top: 2vh;
     overflow: hidden;
 }
 
@@ -105,18 +88,17 @@ body {
     box-shadow: 0 0 10px #00ffff, 0 0 15px #ff00ff;
 }
 
-/* Button Styling */
 button {
     display: block;
-    width: 100%;
+    width: 80%;
     max-width: 300px;
-    padding: 0.5rem 1rem;
-    margin: 10px auto;
+    padding: 1.5vh 1vw;
+    margin: 3vh auto;
     cursor: pointer;
     background-color: #00FFFF;
     color: #000;
     font-family: 'LazyDog', sans-serif;
-    font-size: 1rem;
+    font-size: 2.5vw;  /* Responsive font size */
     border: none;
     border-radius: 5px;
     box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF;
@@ -129,7 +111,6 @@ button:hover {
     color: #FFF;
 }
 
-/* Disable hover styles for touch devices */
 @media (hover: none) {
     button:hover {
         background-color: inherit;
@@ -142,19 +123,18 @@ button:active {
     box-shadow: 0 0 15px #FF00FF, 0 0 20px #00FFFF;
 }
 
-/* Image Styling */
 #cover-image, #question-illustration, #result-image {
     width: 100%;
-    max-width: 600px;
+    max-width: 90vw;  /* Scale with viewport */
     display: block;
     margin: 0 auto;
 }
 
-#question-illustration:hover, #result-image:hover {
-    transform: none;
+#question-text, #result-title {
+    font-size: 3.5vw;  /* Scales with viewport */
+    margin: 2vh 0;
 }
 
-/* Smooth transition for question and result displays */
 .fade-in {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
