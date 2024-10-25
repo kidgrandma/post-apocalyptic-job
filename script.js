@@ -83,19 +83,32 @@ const question6C = {
     gif: "images/question6c-illustration.gif"
 };
 
-// Start the quiz
+let userName = ""; // Global variable to store the user's name
+
+// Start quiz function to capture name input and begin quiz
 function startQuiz() {
+    // Retrieve the name from the input field
     const nameInput = document.getElementById("name-input").value.trim();
-    if (nameInput) {
-        userName = nameInput; // Save the user's name
-    }
     
-    document.getElementById("start-page").style.display = "none";  // Hide the start page
-    document.getElementById("question-page").style.display = "block";  // Show the question page
+    // Set the user's name or a default name if empty
+    userName = nameInput ? nameInput : "Stranger";
+
+    // Transition from start page to question page
+    document.getElementById("start-page").style.display = "none";  // Hide start page
+    document.getElementById("question-page").style.display = "block";  // Show question page
+
+    // Begin quiz by showing the first question
     showQuestion();
 }
 
-// Function to show the current question from the main array
+// Event listener for Start Quiz button
+document.addEventListener("DOMContentLoaded", function() {
+    const startButton = document.getElementById("start-quiz");
+    if (startButton) {
+        startButton.addEventListener("click", startQuiz);
+    }
+});
+
 // Function to show the current question from the main array
 function showQuestion() {
     // Define answersContainer and check if it exists (moved outside the if block)
