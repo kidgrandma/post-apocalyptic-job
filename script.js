@@ -235,9 +235,10 @@ function updateProgressBar(completion = null) {
 function moveToNextAfterCustom() {
     currentQuestion = 5;  // Manually set to index 5 (Question 7) after custom question
     showQuestion();  // Show Question 7
-    updateProgressBar();
+    updateProgressBar();  // Update progress bar after showing Question 7
 }
-// function to show question 10 and 11
+
+// Function to show Question 10 and branch to either results or Bonus Question 11
 function showQuestion10() {
     const current = questions[9];  // Access Question 10 directly
     document.getElementById("question-text").innerText = current.question;
@@ -246,9 +247,8 @@ function showQuestion10() {
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clear previous answers
 
-    let scoreRecorded = false;  // Prevents double scoring
+    let scoreRecorded = false;  // Prevent double scoring
 
-    // Create answer buttons
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
@@ -260,13 +260,13 @@ function showQuestion10() {
                 scoreRecorded = true;
 
                 if (index === 0) {
-                    // Option that should go directly to results
+                    // If the first option is selected, go directly to results
                     console.log("Selected 'Meet your new gang'. Going to results.");
-                    showResults();
+                    showResults();  // Show results
                 } else if (index === 1) {
-                    // Option that leads to Bonus Question 11
+                    // If the second option is selected, go to Bonus Question 11
                     console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
-                    showBonusQuestion11();
+                    showBonusQuestion11();  // Go to Bonus Question 11
                 }
             }
         });
@@ -274,13 +274,12 @@ function showQuestion10() {
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar when showing Question 10
+    updateProgressBar();  // Update progress bar after showing Question 10
 }
 
 // Function to show Bonus Question 11 if selected from Question 10
 function showBonusQuestion11() {
-    const current = questions[10];  // Access Question 11
-
+    const current = questions[10];  // Access Question 11 directly
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
@@ -291,7 +290,7 @@ function showBonusQuestion11() {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
-        // Add click event listener
+        // Add click event listener for the button
         answerButton.addEventListener("click", () => {
             userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
             showResults();  // Go to results after Bonus Question 11
@@ -304,6 +303,30 @@ function showBonusQuestion11() {
 }
 
 // Function to show results and calculate the outcome
+function showResults() {
+    console.log("Showing results...");
+
+    document.getElementById("question-page").style.display = "none";  // Hide the question page
+    document.getElementById("result-page").style.display = "block";  // Show the result page
+
+    const totalScore = userAnswers.reduce((a, b) => a + b, 0);  // Calculate total score
+    console.log("Total score:", totalScore);
+
+    const outcome = determineOutcome(totalScore);  // Determine the outcome based on score
+    console.log("Determined outcome:", outcome);
+
+    const crewColor = getCrewColor(outcome);
+    document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
+    document.getElementById("result-title").style.color = crewColor;
+
+    const resultImageSrc = outcome === "Unknown"
+        ? "images/unknown.gif"
+        : `images/outcome${getOutcomeImage(outcome)}.png`;
+    document.getElementById("result-image").src = resultImageSrc;
+
+    // Set progress bar to 100% when showing results
+    updateProgressBar(100);
+}
 function showResults() {
     console.log("Showing results...");
 
