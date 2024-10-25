@@ -94,31 +94,6 @@ function startQuiz() {
     document.getElementById("question-page").style.display = "block";  // Show the question page
     showQuestion();
 }
-
-// Updated function to ensure correct progress bar update
-function updateProgressBar(completion = null) {
-    let progressPercent;
-
-    // Use the passed-in completion value if it exists
-    if (completion !== null) {
-        progressPercent = completion;
-    } else {
-        // Adjust for custom questions (6A, 6B, 6C) and calculate progress based on currentQuestion
-        let adjustedQuestionIndex = currentQuestion;
-        if (currentQuestion >= 6 && currentQuestion <= 9) {
-            adjustedQuestionIndex--;  // Adjust the index for custom questions if needed
-        }
-        
-        // Calculate progress percentage based on the adjusted question index
-        progressPercent = ((adjustedQuestionIndex + 1) / totalQuestions) * 100;  // +1 because index is 0-based
-    }
-
-    // Update the progress bar's width
-    console.log(`Progress: ${progressPercent}%`);  // Log progress for debugging
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
-    }
-}
 // Function to show the current question from the main array
 function showQuestion() {
     const current = questions[currentQuestion];
@@ -157,17 +132,36 @@ function showQuestion() {
             } else {
                 showResults();  // No more questions, show the results
             }
-
-            updateProgressBar();  // Update progress bar
         });
-
+    updateProgressBar();
+}
         answersContainer.appendChild(answerButton);  // Append button to the container
     });
 
-    updateProgressBar();  // Update progress bar after rendering the question
-}
+// Updated function to ensure correct progress bar update
+function updateProgressBar(completion = null) {
+    let progressPercent;
 
-// Function to handle answer selection and branching logic
+    // Use the passed-in completion value if it exists
+    if (completion !== null) {
+        progressPercent = completion;
+    } else {
+        // Adjust for custom questions (6A, 6B, 6C) and calculate progress based on currentQuestion
+        let adjustedQuestionIndex = currentQuestion;
+        if (currentQuestion >= 6 && currentQuestion <= 9) {
+            adjustedQuestionIndex--;  // Adjust the index for custom questions if needed
+        }
+        
+        // Calculate progress percentage based on the adjusted question index
+        progressPercent = ((adjustedQuestionIndex + 1) / totalQuestions) * 100;  // +1 because index is 0-based
+    }
+
+    // Update the progress bar's width
+    console.log(`Progress: ${progressPercent}%`);  // Log progress for debugging
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
+}// Function to handle answer selection and branching logic
 function selectAnswer(index) {
     // Branching logic for custom questions
     if (currentQuestion === 4) {  // Branching at Question 5
@@ -178,8 +172,11 @@ function selectAnswer(index) {
         } else {
             showCustomQuestion(question6C);
         }
+            updateProgressBar();
+}
         return;
     }
+
 // Function to show custom questions (6A, 6B, or 6C)
 function showCustomQuestion(customQuestion) {
     document.getElementById("question-text").innerText = customQuestion.question;
@@ -388,4 +385,3 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-   
