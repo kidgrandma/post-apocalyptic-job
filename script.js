@@ -60,12 +60,7 @@ const questions = [
         scores: [6, 3],
         gif: "images/question10-illustration.gif"
     },
-    {
-        question: "Wellness club was a decoy. Order up before you meet your crew.",
-        answers: ["Big Macintosh meal", "Pedialyte", "Straight-up bleach"],
-        scores: [2, 1, 3],
-        gif: "images/question11-illustration.gif"
-    }
+
 ];
 
 // Define custom Question 6A, 6B, 6C
@@ -238,16 +233,18 @@ function moveToNextAfterCustom() {
     updateProgressBar();  // Update progress bar after showing Question 7
 }
 
-// Function to handle Question 10
+// Function to handle Question 10 and go directly to results
 function showQuestion10() {
-    const answersContainer = document.getElementById("answers-container");
-    const current = questions[9];  // Question 10 (index 9)
-    answersContainer.innerHTML = "";  // Clear previous answers
+    const current = questions[9];  // Question 10 is at index 9 in your array
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";  // Clear previous answers
+
     let scoreRecorded = false;  // Prevents double scoring
 
+    // Create answer buttons for Question 10
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
@@ -255,18 +252,13 @@ function showQuestion10() {
         // Add click event listener for the button
         answerButton.addEventListener("click", () => {
             if (!scoreRecorded) {
+                console.log(`Answer selected: ${answer} (Index: ${index})`);
                 userAnswers.push(current.scores[index]);  // Record score for Question 10
-                scoreRecorded = true;
+                scoreRecorded = true;  // Prevent multiple scores
 
-                if (index === 0) {
-                    // First answer leads directly to results
-                    console.log("Selected 'Meet your new gang'. Going to results.");
-                    showResults();  // Show results and exit
-                } else if (index === 1) {
-                    // Second answer leads to bonus Question 11
-                    console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
-                    showBonusQuestion11();  // Go to bonus question
-                }
+                // After answering, go directly to results regardless of the answer selected
+                console.log("Going directly to results after Question 10.");
+                showResults();  // Show results and exit
             }
         });
 
@@ -274,30 +266,6 @@ function showQuestion10() {
     });
 
     updateProgressBar();  // Update progress bar when showing Question 10
-}
-
-// Function to show Bonus Question 11 if selected from Question 10
-function showBonusQuestion11() {
-    const answersContainer = document.getElementById("answers-container");
-    const current = questions[10];  // Question 11 (index 10)
-    answersContainer.innerHTML = "";  // Clear previous answers
-    document.getElementById("question-text").innerText = current.question;
-    document.getElementById("question-illustration").src = current.gif;
-
-    current.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
-
-        // Add click event listener for the button
-        answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Record score for Question 11
-            showResults();  // Go to results after Bonus Question 11
-        });
-
-        answersContainer.appendChild(answerButton);
-    });
-
-    updateProgressBar();  // Update progress bar when showing Bonus Question 11
 }
 // Function to handle showing the results
 function showResults() {
