@@ -237,12 +237,15 @@ function showQuestion9() {
 function showQuestion10() {
     const current = questions[9];  // Accessing question 10 based on array index
 
+    // Display Question 10 and its GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
+    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Clear previous answers
+    answersContainer.innerHTML = "";
 
+    // Create buttons for each answer in Question 10
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
@@ -270,12 +273,15 @@ function showQuestion10() {
 function showBonusQuestion11() {
     const current = questions[10];  // Accessing question 11 based on array index
 
+    // Display Bonus Question 11 and its GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
+    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clears previous answers
 
+    // Create buttons for each answer in Bonus Question 11
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
@@ -288,6 +294,37 @@ function showBonusQuestion11() {
     });
 
     updateProgressBar();  // Update progress bar after showing Bonus Question 11
+}
+
+// Function to show the results based on user's answers
+function showResults() {
+    document.getElementById("question-page").style.display = "none";  // Hide the question page
+    document.getElementById("result-page").style.display = "block";  // Show the result page
+
+    const totalScore = userAnswers.reduce((a, b) => a + b, 0);  // Calculate total score
+    const outcome = determineOutcome(totalScore);  // Determine outcome based on score
+
+    // Display the result and dynamic crew color
+    const crewColor = getCrewColor(outcome);
+    document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
+    document.getElementById("result-title").style.color = crewColor;
+
+    // Set the image for the result
+    const resultImageSrc = outcome === "Unknown" 
+        ? "images/unknown.gif"  // New fallback GIF 
+        : `images/outcome${getOutcomeImage(outcome)}.png`;
+
+    document.getElementById("result-image").src = resultImageSrc;
+
+    updateProgressBar(100);  // Set progress bar to 100% on results page
+}
+
+// Update the progress bar with optional completion percentage
+function updateProgressBar(completion = null) {
+    const progressPercent = completion || (currentQuestion / totalQuestions) * 100;
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
 }
 // Function to show the results based on user's answers
 function showResults() {
