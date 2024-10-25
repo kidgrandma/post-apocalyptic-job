@@ -121,16 +121,16 @@ function updateProgressBar(completion = null) {
 
 // Function to handle answer selection and branching logic
 function selectAnswer(index) {
-    if (currentQuestion === 4) {  // Branching at Question 5
-        if (index === 0) {
-            showCustomQuestion(question6A);
-        } else if (index === 1) {
-            showCustomQuestion(question6B);
-        } else {
-            showCustomQuestion(question6C);
-        }
-        return;
+if (currentQuestion === 4) {  // Branching at Question 5
+    if (index === 0) {
+        showCustomQuestion(question6A);
+    } else if (index === 1) {
+        showCustomQuestion(question6B);
+    } else {
+        showCustomQuestion(question6C);
     }
+    return;
+}
 
     userAnswers.push(questions[currentQuestion].scores[index]);  // Store the answer
     currentQuestion++;  // Move to the next question
@@ -240,25 +240,29 @@ function showQuestion10() {
     // Track if score has already been recorded to prevent double scoring
     let scoreRecorded = false;
 
+    // Create answer buttons
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
         console.log(`Creating button for '${answer}' (Index: ${index})`);
 
+        // Add click event listener for the button
         answerButton.addEventListener("click", () => {
             if (!scoreRecorded) {
                 console.log(`Answer selected: ${answer} (Index: ${index})`);
                 userAnswers.push(current.scores[index]);  // Push score for Question 10
                 scoreRecorded = true;  // Prevent multiple scores
 
-               if (index === 0) {
-    console.log("Selected 'Meet your new gang'. Going to results.");
-    showResults();  // Directly show results for this option
-} else {
-    console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
-    showBonusQuestion11();  // Go to the next question for index 1
-}
+                if (index === 0) {
+                    console.log("Selected 'Meet your new gang'. Going to results.");
+                    showResults();  // Directly show results for this option
+                } else if (index === 1) {
+                    console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
+                    showBonusQuestion11();  // Go to the next question for index 1
+                } else {
+                    console.log(`Unexpected index ${index}, no action defined.`);
+                }
             } else {
                 console.log("Score already recorded, skipping...");
             }
