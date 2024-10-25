@@ -213,7 +213,6 @@ function showQuestion() {
     updateProgressBar();  // Update progress bar after showing the question
 }
 
-// Function to handle branching logic and navigation for Question 10
 function showQuestion10() {
     const current = questions[9];  // Question 10 index
     document.getElementById("question-text").innerText = current.question;
@@ -226,18 +225,15 @@ function showQuestion10() {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
-        // Ensure fresh button with a clean event listener
-        answerButton.replaceWith(answerButton.cloneNode(true));
-
+        // Add more detailed logging
         answerButton.addEventListener("click", () => {
-            console.log(`Selected: ${answer} (Index: ${index})`);
-
-            userAnswers.push(current.scores[index]);
+            userAnswers.push(current.scores[index]);  // Push score for Question 10
+            console.log(`Answer clicked: ${answer}, Index: ${index}`);  // Log answer and index
 
             // If "Meet your new gang" (index 0) is selected, go to results
             if (index === 0) {
                 console.log("Selected 'Meet your new gang'. Going to results.");
-                showResults();  // Show results directly
+                showResults();  // Directly show results
             } 
             // If "Hot yoga matcha baptism" (index 1), go to Bonus Question 11
             else if (index === 1) {
@@ -249,8 +245,7 @@ function showQuestion10() {
         answersContainer.appendChild(answerButton);
     });
 
-    // Only update the progress bar once, when showing the question
-    updateProgressBar();
+    updateProgressBar();  // Update progress bar when showing Question 10
 }
 // Function to show Bonus Question 11
 function showBonusQuestion11() {
