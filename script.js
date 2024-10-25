@@ -92,23 +92,26 @@ const question6C = {
 function startQuiz() {
     document.getElementById("start-page").style.display = "none";  // Hides the start page
     document.getElementById("question-page").style.display = "block";  // Show the question page
-    currentQuestion = 0;  // Reset to first question
-    userAnswers = [];  // Reset answers
-    showQuestion();  // Show first question
+    showQuestion();
 }
-
-// Function to show a question from the main array
+// Function to show the current question from the main array
 function showQuestion() {
     const answersContainer = document.getElementById("answers-container");
-    const current = questions[currentQuestion];  // Get the current question
+    if (!answersContainer) {
+        console.error("Element with ID 'answers-container' not found.");
+        return;  // Exit if the element doesn't exist
+    }
 
-    if (!answersContainer || !current) {
-        console.error("Question not found or answers container missing.");
+    const current = questions[currentQuestion];  // Get current question
+
+    if (!current) {
+        console.error("Question not found for index", currentQuestion);
         return;
     }
 
     // Clear previous question's answers
     answersContainer.innerHTML = "";  
+
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
@@ -117,28 +120,21 @@ function showQuestion() {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
-        // Add event listener to handle answer selection
+        // Add click event listener for the button
         answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Record the score
+            console.log(`Answer selected: ${answer} (Index: ${index})`);
+            userAnswers.push(current.scores[index]);  // Record score
 
-            // Handle special logic for Question 5 (Branching)
+            // Handle special logic for Question 5 (branching)
             if (currentQuestion === 4) {
                 handleQuestion5Branching(index);
-                return;  // Exit to prevent further question progression
+                return;  // Stop further question progression after Question 5
             }
 
             // Move to the next question
             currentQuestion++;
-
-            // Special handling for Question 10
-            if (currentQuestion === 9) {
-                showQuestion10();
-                return;  // Prevent further question progression
-            }
-
-            // Show the next question or show results if finished
             if (currentQuestion < questions.length) {
-                showQuestion();  // Show next question
+                showQuestion();  // Show the next question
             } else {
                 showResults();  // Show results if no more questions
             }
@@ -147,12 +143,14 @@ function showQuestion() {
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar after each question
+    updateProgressBar();  // Update progress bar after displaying a question
 }
 
-// Function to handle Question 5 branching to 6A, 6B, or 6C
+// Handle branching from Question 5 to custom questions 6A, 6B, or 6C
 function handleQuestion5Branching(index) {
     console.log(`Branching from Question 5 based on answer index ${index}`);
+    
+    // Check answer index and show corresponding custom question
     if (index === 0) {
         showCustomQuestion(question6A);
     } else if (index === 1) {
@@ -169,26 +167,28 @@ function showCustomQuestion(customQuestion) {
     document.getElementById("question-text").innerText = customQuestion.question;
     document.getElementById("question-illustration").src = customQuestion.gif;
 
-    // Create buttons for custom question answers
+    // Loop through answers and create buttons
     customQuestion.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
         answerButton.addEventListener("click", () => {
+            console.log(`Answer button clicked: ${answer} (Index: ${index})`);
             userAnswers.push(customQuestion.scores[index]);  // Record score for custom question
 
-            // After custom question, go to Question 7 (index 5)
+            // After the custom question, go to Question 7 (index 5)
             currentQuestion = 5;
             showQuestion();  // Show Question 7
         });
 
+        // Add the button to the container
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();
+    updateProgressBar();  // Update progress bar after displaying the custom question
 }
 
-// Function to handle Question 10 separately (branch to results or bonus question)
+// Function to handle Question 10
 function showQuestion10() {
     const answersContainer = document.getElementById("answers-container");
     const current = questions[9];  // Question 10
@@ -209,9 +209,13 @@ function showQuestion10() {
                 scoreRecorded = true;
 
                 if (index === 0) {
-                    showResults();  // Direct to results
-                } else {
-                    showBonusQuestion11();  // Show Question 11
+                    // First answer leads directly to results
+                    console.log("Selected 'Meet your new gang'. Going to results.");
+                    showResults();  // Show results and exit
+                } else if (index === 1) {
+                    // Second answer leads to bonus Question 11
+                    console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
+                    showBonusQuestion11();  // Go to bonus question
                 }
             }
         });
@@ -222,10 +226,10 @@ function showQuestion10() {
     updateProgressBar();  // Update progress bar when showing Question 10
 }
 
-// Function to show Bonus Question 11
+// Function to show Bonus Question 11 if selected from Question 10
 function showBonusQuestion11() {
     const answersContainer = document.getElementById("answers-container");
-    const current = questions[10];  // Question 11
+    const current = questions[10];  // Access Question 11 directly
     answersContainer.innerHTML = "";  // Clear previous answers
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
@@ -237,13 +241,13 @@ function showBonusQuestion11() {
         // Add click event listener for the button
         answerButton.addEventListener("click", () => {
             userAnswers.push(current.scores[index]);  // Record score for Question 11
-            showResults();  // Go to results
+            showResults();  // Go to results after Bonus Question 11
         });
 
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar when showing Question 11
+    updateProgressBar();  // Update progress bar when showing Bonus Question 11
 }
 // Function to handle showing the results
 function showResults() {
