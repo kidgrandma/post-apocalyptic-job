@@ -96,6 +96,7 @@ function startQuiz() {
 }
 
 // Function to show the current question from the main array
+// Function to show the current question from the main array
 function showQuestion() {
     // Define answersContainer and check if it exists (moved outside the if block)
     const answersContainer = document.getElementById("answers-container");
