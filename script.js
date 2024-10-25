@@ -257,16 +257,19 @@ function showQuestion10() {
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clear previous answers
 
+    // Log answers for Question 10
+    console.log("Question 10 Answers: ", current.answers);
+
     // Create buttons for each answer in Question 10
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
         answerButton.addEventListener("click", () => {
-            console.log(`Question 10 Answer Selected: ${index}`);
+            console.log(`Question 10 Answer Selected: ${answer}, Index: ${index}`);
             userAnswers.push(current.scores[index]);  // Push score for Question 10
 
-            // Check if "Meet your new gang" is selected (index 0)
+            // If answer is "Meet your new gang" (index 0)
             if (index === 0) {
                 console.log("Going directly to results for 'Meet your new gang'...");
                 showResults();  // Should go directly to results
@@ -313,6 +316,8 @@ function showBonusQuestion11() {
 
 // Function to show results and calculate the outcome
 function showResults() {
+    console.log("Showing results...");  // Log this to see if results page is shown
+
     document.getElementById("question-page").style.display = "none";  // Hide the question page
     document.getElementById("result-page").style.display = "block";  // Show the result page
 
@@ -330,7 +335,7 @@ function showResults() {
         ? "images/unknown.gif"
         : `images/outcome${getOutcomeImage(outcome)}.png`;
     document.getElementById("result-image").src = resultImageSrc;
-    
+
     updateProgressBar(100);  // Set progress bar to 100% at the results page
 }
 
