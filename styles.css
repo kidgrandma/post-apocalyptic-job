@@ -2,42 +2,38 @@
     font-family: 'LazyDog';
     src: url('images/Lazydog.otf') format('opentype');
 }
-/* Body setup with flexbox for centering */
 body {
     font-family: 'LazyDog', sans-serif;
-    background-image: url('images/quiz-background.gif');  /* Path to existing GIF */
-    background-size: contain;
-    background-repeat: repeat;
+    background-image: url('images/quiz-background.gif');
+    background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-repeat: repeat; /* Ensures background repeats if viewport is larger */
     color: white;
-    margin: 0;
+    text-align: center;
     padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 0;
     min-height: 100vh;
-    text-align: center;
+    overflow: hidden;
 }
 
-/* Responsive container centered within the viewport */
-#quiz-container {
-    padding: 1rem;
-    width: 90%;  /* Responsive width to prevent overflow */
-    max-width: 600px;
-    max-height: 90vh;  /* Prevents overflow beyond viewport height */
-    background-color: rgba(131, 56, 236, 0.6);  /* Translucent purple */
-    border-radius: 10px;
-    text-align: center;
-    backdrop-filter: blur(5px);
-    overflow-y: auto;  /* Allows vertical scrolling if content exceeds container height */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+@media (max-width: 600px) {
+    body {
+        background-image: url('images/quiz-background.gif'); /* Ensure GIF background is applied on mobile */
+        background-size: cover;
+        background-repeat: repeat; /* Ensure it repeats on taller screens */
+        background-color: #000; /* Fallback color under the GIF */
+    }
+
+    #quiz-container {
+        padding: 0.625rem;
+        max-width: 90%; /* Adjust width for mobile */
+        background-color: rgba(131, 56, 236, 0.4); /* More transparency on mobile */
+        border-radius: 8px;
+        backdrop-filter: blur(3px);
+    }
 }
 
-
+/* Ensuring that the container remains centered and scrollable */
 #quiz-container {
     padding: 1rem;
     max-width: 600px;
