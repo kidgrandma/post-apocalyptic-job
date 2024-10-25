@@ -245,7 +245,6 @@ function showQuestion9() {
     updateProgressBar();  // Update progress bar after showing Question 9
 }
 // Function to handle branching logic and navigation for Question 10
-// Function to handle branching logic and navigation for Question 10
 function showQuestion10() {
     const current = questions[9];  // Question 10 index
     document.getElementById("question-text").innerText = current.question;
@@ -257,51 +256,61 @@ function showQuestion10() {
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
-        
+
         answerButton.addEventListener("click", () => {
             userAnswers.push(current.scores[index]);  // Push score for Question 10
 
-            // "Meet your new gang" should go directly to results (this is index 0)
+            // If "Meet your new gang" (index 0) is selected, go to results
             if (index === 0) {
                 console.log("Selected 'Meet your new gang'. Going to results.");
                 showResults();  // Directly show results
             } 
-            // If not "Meet your new gang", go to Bonus Question 11 (index 1)
+            // If "Hot yoga matcha baptism" (index 1), go to Bonus Question 11
             else if (index === 1) {
                 console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
                 showBonusQuestion11();  // Go to Bonus Question 11
             }
         });
+
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar when showing Question 10
+    // Only update the progress bar once, when showing the question
+    updateProgressBar();
 }
 
-// Function to show Bonus Question 11
-function showBonusQuestion11() {
-    const current = questions[10];  // Accessing question 11
-
-    document.getElementById("question-text").innerText = current.question;
-    document.getElementById("question-illustration").src = current.gif;
-
-    const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Clear previous answers
-
-    current.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
-
-        answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
-            showResults();  // Go to results after Bonus Question 11
-        });
-        answersContainer.appendChild(answerButton);
-    });
-
-    updateProgressBar();  // Update progress bar when showing Bonus Question 11
+// Function to update the progress bar with optional completion percentage
+function updateProgressBar(completion = null) {
+    const progressPercent = completion || ((currentQuestion / totalQuestions) * 100);
+    console.log(`Progress: ${progressPercent}%`);
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
 }
 
+// Ensure results page properly ends the quiz and resets the UI after
+function showResults() {
+    document.getElementById("question-page").style.display = "none";  // Hide the question page
+    document.getElementById("result-page").style.display = "block";  // Show the result page
+
+    const totalScore = userAnswers.reduce((a, b) => a + b, 0);  // Calculate total score
+    console.log("Total score:", totalScore);  // Log the total score
+
+    const outcome = determineOutcome(totalScore);  // Determine outcome based on score
+    console.log("Determined outcome:", outcome);  // Log the outcome
+
+    const crewColor = getCrewColor(outcome);
+    document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
+    document.getElementById("result-title").style.color = crewColor;
+
+    const resultImageSrc = outcome === "Unknown" 
+        ? "images/unknown.gif"
+        : `images/outcome${getOutcomeImage(outcome)}.png`;
+    document.getElementById("result-image").src = resultImageSrc;
+
+    // Set progress to 100% when results are shown
+    updateProgressBar(100);  // Set progress bar to 100% at the results page
+}
 // Function to show results and calculate the outcome
 function showResults() {
     console.log("Showing results...");  // Log this to see if results page is shown
