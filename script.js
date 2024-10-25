@@ -191,15 +191,12 @@ function moveToNextAfterCustom() {
 function showQuestion8() {
     const current = questions[7];  // Accessing question 8 based on array index
 
-    // Display Question 8 and its GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
-    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clears previous answers
 
-    // Create buttons for each answer in Question 8
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
@@ -217,15 +214,12 @@ function showQuestion8() {
 function showQuestion9() {
     const current = questions[8];  // Accessing question 9 based on array index
 
-    // Display Question 9 and its GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
-    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clears previous answers
 
-    // Create buttons for each answer in Question 9
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
@@ -243,15 +237,12 @@ function showQuestion9() {
 function showQuestion10() {
     const current = questions[9];  // Accessing question 10 based on array index
 
-    // Display Question 10 and its GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
-    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";
+    answersContainer.innerHTML = "";  // Clear previous answers
 
-    // Create buttons for each answer in Question 10
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
@@ -262,8 +253,6 @@ function showQuestion10() {
 
             // "Meet your new gang" should go directly to results
             if (index === 0) {
-                // Complete the progress bar and show results
-                updateProgressBar(100);
                 showResults();  // Directly show results
             } 
             // "Hot yoga matcha baptism" should go to Bonus Question 11
@@ -281,24 +270,18 @@ function showQuestion10() {
 function showBonusQuestion11() {
     const current = questions[10];  // Accessing question 11 based on array index
 
-    // Display Bonus Question 11 and its GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
-    // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clears previous answers
 
-    // Create buttons for each answer in Bonus Question 11
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
         answerButton.addEventListener("click", () => {
             userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
-            
-            // After Bonus Question 11, show results and complete the progress bar
-            updateProgressBar(100);  // Complete the progress bar at the end
             showResults();  // After Bonus Question 11, show results
         });
         answersContainer.appendChild(answerButton);
@@ -306,7 +289,30 @@ function showBonusQuestion11() {
 
     updateProgressBar();  // Update progress bar after showing Bonus Question 11
 }
+// Function to show the results based on user's answers
+function showResults() {
+    document.getElementById("question-page").style.display = "none";  // Hide the question page
+    document.getElementById("result-page").style.display = "block";  // Show the result page
 
+    const totalScore = userAnswers.reduce((a, b) => a + b, 0);  // Calculate total score
+    const outcome = determineOutcome(totalScore);  // Determine outcome based on score
+
+    // Display the result and dynamic crew color
+    const crewColor = getCrewColor(outcome);
+    document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
+    document.getElementById("result-title").style.color = crewColor;
+
+    // Set the image for the result
+    const resultImageSrc = outcome === "Unknown" 
+        ? "images/unknown.gif"  // New fallback GIF 
+        : `images/outcome${getOutcomeImage(outcome)}.png`;
+
+    document.getElementById("result-image").src = resultImageSrc;
+
+    updateProgressBar(100);  // Set progress bar to 100% on results page
+}
+
+// Function to determine the outcome based on total score
 function determineOutcome(score) {
     if (score <= 20) return "Soap Saviors"; // Rare, very high score
     if (score <= 30) return "Caffeine Nicotine Cartel"; // Mid-range outcome
@@ -339,6 +345,7 @@ function getOutcomeImage(outcome) {
         default: return "unknown";  // Now the fallback is "unknown.gif"
     }
 }
+
 // Function to get dynamic crew color based on the outcome
 function getCrewColor(outcome) {
     switch (outcome) {
@@ -354,38 +361,6 @@ function getCrewColor(outcome) {
         case "The Olsen Twins": return "#9966ff";  // Purple
         case "Museum of Car Parts": return "#666666";  // Grey
         default: return "#000000";  // Black (fallback)
-    }
-}
-// Function to show quiz results based on total score
-function showResults() {
-    // Hide question page and show result page
-    document.getElementById("question-page").style.display = "none";
-    document.getElementById("result-page").style.display = "block";
-
-    const totalScore = userAnswers.reduce((a, b) => a + b, 0);
-    const outcome = determineOutcome(totalScore);
-
-    console.log('Outcome:', outcome);
-    console.log('Image path:', `images/outcome${getOutcomeImage(outcome)}.png`);
-
-    // Set dynamic crew color and update results
-    const crewColor = getCrewColor(outcome);
-    document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
-    document.getElementById("result-title").style.color = crewColor;
-
-    // Set the image for the result
-    const resultImageSrc = outcome === "Unknown" 
-        ? "images/unknown.gif"  // New fallback GIF
-        : `images/outcome${getOutcomeImage(outcome)}.png`;
-
-    document.getElementById("result-image").src = resultImageSrc;
-}
-
-// Update the progress bar
-function updateProgressBar(completion = null) {
-    const progressPercent = completion !== null ? completion : (currentQuestion / totalQuestions) * 100;
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
     }
 }
 // Functionality to copy quiz link to clipboard
