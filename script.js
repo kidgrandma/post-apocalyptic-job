@@ -143,7 +143,7 @@ function selectAnswer(index) {
     }
 }
 
-// Function to show a custom question (6A, 6B, or 6C)
+// Function to show custom questions (6A, 6B, or 6C)
 function showCustomQuestion(customQuestion) {
     document.getElementById("question-text").innerText = customQuestion.question;
     document.getElementById("question-illustration").src = customQuestion.gif;
@@ -151,17 +151,27 @@ function showCustomQuestion(customQuestion) {
     const answersContainer = document.getElementById("answers-container");
     answersContainer.innerHTML = "";  // Clear previous answers
 
+    // Ensure event listeners are added only once for each question
     customQuestion.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
+
+        // Clear any existing event listeners on answer buttons before adding a new one
+        answerButton.replaceWith(answerButton.cloneNode(true));  // This ensures fresh buttons without prior listeners
+
         answerButton.addEventListener("click", () => {
+            console.log(`Selected: ${answer} (Index: ${index})`);
+
             userAnswers.push(customQuestion.scores[index]);
-            moveToNextAfterCustom();  // After answering custom question, go to Question 7
+
+            // Move to the next main question after custom question
+            moveToNextAfterCustom();
         });
+
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar
+    updateProgressBar();
 }
 
 // Function to move to Question 7 after custom questions
@@ -216,22 +226,22 @@ function showQuestion10() {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
-        // Add only one event listener
+        // Ensure fresh button with a clean event listener
+        answerButton.replaceWith(answerButton.cloneNode(true));
+
         answerButton.addEventListener("click", () => {
-            // Push score for Question 10
-            userAnswers.push(current.scores[index]);
-            
-            // Log the current flow based on selection
             console.log(`Selected: ${answer} (Index: ${index})`);
+
+            userAnswers.push(current.scores[index]);
 
             // If "Meet your new gang" (index 0) is selected, go to results
             if (index === 0) {
-                console.log("Going to results - 'Meet your new gang' selected");
+                console.log("Selected 'Meet your new gang'. Going to results.");
                 showResults();  // Show results directly
             } 
             // If "Hot yoga matcha baptism" (index 1), go to Bonus Question 11
             else if (index === 1) {
-                console.log("Going to bonus question - 'Hot yoga matcha baptism' selected");
+                console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
                 showBonusQuestion11();  // Go to Bonus Question 11
             }
         });
@@ -239,7 +249,7 @@ function showQuestion10() {
         answersContainer.appendChild(answerButton);
     });
 
-    // Update progress bar once when the question is shown
+    // Only update the progress bar once, when showing the question
     updateProgressBar();
 }
 // Function to show Bonus Question 11
