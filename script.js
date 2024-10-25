@@ -262,6 +262,8 @@ function showQuestion10() {
 
             // "Meet your new gang" should go directly to results
             if (index === 0) {
+                // Complete the progress bar and show results
+                updateProgressBar(100);
                 showResults();  // Directly show results
             } 
             // "Hot yoga matcha baptism" should go to Bonus Question 11
@@ -294,6 +296,9 @@ function showBonusQuestion11() {
 
         answerButton.addEventListener("click", () => {
             userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
+            
+            // After Bonus Question 11, show results and complete the progress bar
+            updateProgressBar(100);  // Complete the progress bar at the end
             showResults();  // After Bonus Question 11, show results
         });
         answersContainer.appendChild(answerButton);
@@ -302,20 +307,6 @@ function showBonusQuestion11() {
     updateProgressBar();  // Update progress bar after showing Bonus Question 11
 }
 
-// Function to determine the outcome based on total score
-function showResults() {
-    // Display results page logic (this part you already have)
-
-    updateProgressBar(100);  // Set progress bar to 100% on results page
-}
-
-// Update the progress bar with optional completion percentage
-function updateProgressBar(completion = null) {
-    const progressPercent = completion || (currentQuestion / totalQuestions) * 100;
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
-    }
-}
 function determineOutcome(score) {
     if (score <= 20) return "Soap Saviors"; // Rare, very high score
     if (score <= 30) return "Caffeine Nicotine Cartel"; // Mid-range outcome
@@ -365,29 +356,37 @@ function getCrewColor(outcome) {
         default: return "#000000";  // Black (fallback)
     }
 }
-// Function to display the quiz results
+// Function to show quiz results based on total score
 function showResults() {
+    // Hide question page and show result page
     document.getElementById("question-page").style.display = "none";
-    document.getElementById("result-page").style.display = "block";  // Ensure the result page is shown
+    document.getElementById("result-page").style.display = "block";
 
-    const totalScore = userAnswers.reduce((a, b) => a + b, 0);  // Initialize 'totalScore' here
+    const totalScore = userAnswers.reduce((a, b) => a + b, 0);
     const outcome = determineOutcome(totalScore);
 
     console.log('Outcome:', outcome);
     console.log('Image path:', `images/outcome${getOutcomeImage(outcome)}.png`);
 
-    // Set dynamic color for crew name and update results
+    // Set dynamic crew color and update results
     const crewColor = getCrewColor(outcome);
     document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
     document.getElementById("result-title").style.color = crewColor;
 
     // Set the image for the result
     const resultImageSrc = outcome === "Unknown" 
-        ? "images/unknown.gif"  // New fallback GIF 
+        ? "images/unknown.gif"  // New fallback GIF
         : `images/outcome${getOutcomeImage(outcome)}.png`;
-        
+
     document.getElementById("result-image").src = resultImageSrc;
-    updateProgressBar();  // Final update to the progress bar
+}
+
+// Update the progress bar
+function updateProgressBar(completion = null) {
+    const progressPercent = completion !== null ? completion : (currentQuestion / totalQuestions) * 100;
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
 }
 // Functionality to copy quiz link to clipboard
 document.addEventListener("DOMContentLoaded", function() {
