@@ -180,13 +180,6 @@ function moveToNextAfterCustom() {
     showQuestion();  // Show Question 7
     updateProgressBar();
 }
-
-// Function to move to Question 7 after custom questions
-function moveToNextAfterCustom() {
-    currentQuestion = 5;  // Manually reset to index 5 for Question 7
-    showQuestion();  // Show Question 7
-    updateProgressBar();
-}
 // Function to show Question 8
 function showQuestion8() {
     const current = questions[7];  // Accessing question 8 based on array index
@@ -232,10 +225,9 @@ function showQuestion9() {
 
     updateProgressBar();  // Update progress bar after showing Question 9
 }
-
-// Function to show Question 10 and handle branching to Bonus Question 11 or Results
+// Function to handle branching logic and navigation for Question 10
 function showQuestion10() {
-    const current = questions[9];  // Accessing question 10 based on array index
+    const current = questions[9];  // Question 10 index
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
@@ -245,47 +237,47 @@ function showQuestion10() {
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
-
         answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);
+            userAnswers.push(current.scores[index]);  // Push score for Question 10
 
+            // If answer is "Meet your new gang", go directly to results
             if (index === 0) {
-                showResults();  // "Meet your new gang" leads to results
+                showResults();
             } else {
-                showBonusQuestion11();  // "Hot yoga matcha baptism" leads to Bonus Question 11
+                showBonusQuestion11();  // Go to Bonus Question 11 if the second option is selected
             }
         });
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar
+    updateProgressBar();  // Update progress bar when showing Question 10
 }
 
 // Function to show Bonus Question 11
 function showBonusQuestion11() {
-    const current = questions[10];  // Accessing question 11 based on array index
+    const current = questions[10];  // Accessing question 11
 
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Clears previous answers
+    answersContainer.innerHTML = "";  // Clear previous answers
 
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
         answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);
-            showResults();  // After Bonus Question 11, show results
+            userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
+            showResults();  // Go to results after Bonus Question 11
         });
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar
+    updateProgressBar();  // Update progress bar when showing Bonus Question 11
 }
 
-// Function to show the results based on user's answers
+// Function to show results and calculate the outcome
 function showResults() {
     document.getElementById("question-page").style.display = "none";  // Hide the question page
     document.getElementById("result-page").style.display = "block";  // Show the result page
@@ -293,65 +285,32 @@ function showResults() {
     const totalScore = userAnswers.reduce((a, b) => a + b, 0);  // Calculate total score
     const outcome = determineOutcome(totalScore);  // Determine outcome based on score
 
-    // Display the result and dynamic crew color
     const crewColor = getCrewColor(outcome);
     document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
     document.getElementById("result-title").style.color = crewColor;
 
-    // Set the image for the result
     const resultImageSrc = outcome === "Unknown" 
-        ? "images/unknown.gif"  // New fallback GIF 
+        ? "images/unknown.gif"
         : `images/outcome${getOutcomeImage(outcome)}.png`;
 
     document.getElementById("result-image").src = resultImageSrc;
-
-    updateProgressBar(100);  // Set progress bar to 100% on results page
-}
-
-// Update the progress bar with optional completion percentage
-function updateProgressBar(completion = null) {
-    const progressPercent = completion || (currentQuestion / totalQuestions) * 100;
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
-    }
-}
-// Function to show the results based on user's answers
-function showResults() {
-    document.getElementById("question-page").style.display = "none";  // Hide the question page
-    document.getElementById("result-page").style.display = "block";  // Show the result page
-
-    const totalScore = userAnswers.reduce((a, b) => a + b, 0);  // Calculate total score
-    const outcome = determineOutcome(totalScore);  // Determine outcome based on score
-
-    // Display the result and dynamic crew color
-    const crewColor = getCrewColor(outcome);
-    document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
-    document.getElementById("result-title").style.color = crewColor;
-
-    // Set the image for the result
-    const resultImageSrc = outcome === "Unknown" 
-        ? "images/unknown.gif"  // New fallback GIF 
-        : `images/outcome${getOutcomeImage(outcome)}.png`;
-
-    document.getElementById("result-image").src = resultImageSrc;
-
-    updateProgressBar(100);  // Set progress bar to 100% on results page
+    updateProgressBar(100);  // Set progress bar to 100% at the results page
 }
 
 // Function to determine the outcome based on total score
 function determineOutcome(score) {
-    if (score <= 20) return "Soap Saviors"; // Rare, very high score
-    if (score <= 30) return "Caffeine Nicotine Cartel"; // Mid-range outcome
-    if (score <= 35) return "Hermes Shredders"; // Mid-range, likely outcome
-    if (score <= 37) return "Homicidal Power Ranger"; // Very high score, lowest probability
-    if (score <= 38) return "The DMV (Club Kids)"; // Upper range, likely outcome
-    if (score <= 40) return "Internet Preservation Society"; // Higher range, less common
-    if (score <= 45) return "Tupperware Tammy"; // Higher range, less common
-    if (score <= 54) return "Protein Priest"; // Upper-mid range outcome
-    if (score <= 56) return "Radioactive Radio Media Empire"; // Rare, very high score
-    if (score <= 57) return "The Olsen Twins"; // Rare, near-perfect score
-    if (score === 58) return "Museum of Car Parts"; // Extremely rare, perfect score
-    return "Unknown"; // Fallback for unexpected scores
+    if (score <= 20) return "Soap Saviors";
+    if (score <= 30) return "Caffeine Nicotine Cartel";
+    if (score <= 35) return "Hermes Shredders";
+    if (score <= 37) return "Homicidal Power Ranger";
+    if (score <= 38) return "The DMV (Club Kids)";
+    if (score <= 40) return "Internet Preservation Society";
+    if (score <= 45) return "Tupperware Tammy";
+    if (score <= 54) return "Protein Priest";
+    if (score <= 56) return "Radioactive Radio Media Empire";
+    if (score <= 57) return "The Olsen Twins";
+    if (score === 58) return "Museum of Car Parts";
+    return "Unknown";  // Fallback for unexpected scores
 }
 
 // Function to map the outcome to the corresponding image
@@ -389,37 +348,13 @@ function getCrewColor(outcome) {
         default: return "#000000";  // Black (fallback)
     }
 }
-// Functionality to copy quiz link to clipboard
+
+// Event listeners for buttons to start quiz, retake quiz, etc.
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("Page loaded");  // Check if the script is loading correctly
-
-    progressBar = document.getElementById("progress-fill");
-    if (progressBar) {
-        console.log("Progress bar initialized");
-    } else {
-        console.error("Progress bar not found");
-    }
-
     const startButton = document.getElementById("start-quiz");
     if (startButton) {
         startButton.addEventListener("click", startQuiz);
-        console.log("Start button event listener added");
-    } else {
-        console.error("Start button not found");
     }
-
-// Copy Link button functionality
-const copyLinkBtn = document.getElementById("copy-link-btn");
-if (copyLinkBtn) {
-    copyLinkBtn.addEventListener("click", () => {
-        const quizLink = window.location.href;  // Copy current quiz URL
-        navigator.clipboard.writeText(quizLink).then(() => {
-            alert("Quiz link copied to clipboard!");
-        }).catch(err => {
-            console.error("Failed to copy link: ", err);
-        });
-    });
-}
 
     const retakeButton = document.getElementById("retake-quiz");
     if (retakeButton) {
