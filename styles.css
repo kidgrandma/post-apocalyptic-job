@@ -5,17 +5,31 @@
 
 body {
     font-family: 'LazyDog', sans-serif;
-    background-image: url('images/quiz-background.gif');
-    background-size: cover;
+    background-image: url('images/quiz-background.gif');  /* Use your existing background GIF */
+    background-size: contain;  /* Fits the GIF without stretching */
+    background-repeat: repeat; /* Repeats the background for larger viewports */
     background-position: center;
-    background-repeat: repeat; /* Repeat for longer viewports */
-    background-attachment: fixed; /* Keep background fixed */
+    background-attachment: fixed; /* Keeps background fixed in place */
     color: white;
     text-align: center;
     padding: 0;
     margin: 0;
     min-height: 100vh;
-    overflow-x: hidden; /* Prevent horizontal scroll on mobile */
+}
+
+/* Container settings to allow scrolling */
+#quiz-container {
+    padding: 1rem;
+    max-width: 600px;
+    width: 90%;  /* Prevents it from exceeding the viewport width */
+    margin: 0 auto;
+    background-color: rgba(131, 56, 236, 0.6);  /* Translucent background */
+    border-radius: 10px;
+    text-align: center;
+    backdrop-filter: blur(5px);  /* Adds blur behind the container */
+    overflow-y: auto;  /* Allows scrolling within the container */
+    max-height: 90vh;  /* Ensures it doesn’t exceed viewport height */
+    position: relative;
 }
 
 #quiz-container {
