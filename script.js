@@ -249,18 +249,24 @@ function showQuestion10() {
 
     // Clear previous answers
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Clears previous answers
+    answersContainer.innerHTML = "";
 
     // Create buttons for each answer in Question 10
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
+
+        // Logic for answers
         answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Record answer
-            if (index === 1) {
-                showBonusQuestion11();  // Go to Bonus Question 11 if they select the second answer
-            } else {
-                showResults();  // End the quiz and show results for any other answer
+            userAnswers.push(current.scores[index]);  // Push score for Question 10
+
+            // "Meet your new gang" should go directly to results
+            if (index === 0) {
+                showResults();  // Directly show results
+            } 
+            // "Hot yoga matcha baptism" should go to Bonus Question 11
+            else if (index === 1) {
+                showBonusQuestion11();  // Go to Bonus Question 11
             }
         });
         answersContainer.appendChild(answerButton);
@@ -285,8 +291,9 @@ function showBonusQuestion11() {
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
+
         answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);  // Record answer
+            userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
             showResults();  // After Bonus Question 11, show results
         });
         answersContainer.appendChild(answerButton);
@@ -294,7 +301,6 @@ function showBonusQuestion11() {
 
     updateProgressBar();  // Update progress bar after showing Bonus Question 11
 }
-
 // Function to determine the outcome based on total score
 function determineOutcome(score) {
     if (score <= 20) return "Soap Saviors"; // Rare, very high score
