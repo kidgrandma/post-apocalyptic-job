@@ -121,43 +121,17 @@ function updateProgressBar(completion = null) {
 
 // Function to handle answer selection and branching logic
 function selectAnswer(index) {
-if (currentQuestion === 4) {  // Branching at Question 5
-    if (index === 0) {
-        showCustomQuestion(question6A);
-    } else if (index === 1) {
-        showCustomQuestion(question6B);
-    } else {
-        showCustomQuestion(question6C);
-    }
-    return;
-}
-// Function to handle answer selection and branching logic
-function selectAnswer(index) {
-    // Question 10 logic: handle final question and go to results
-    if (currentQuestion === 9) {  // This is question 10 (index 9)
-        if (index === 0) {  // If "Meet your new gang" is selected
-            console.log("Selected 'Meet your new gang'. Going to results.");
-            showResults();  // Show results
-            return;  // Exit function to prevent moving to next question
-        } else if (index === 1) {  // If "Hot yoga matcha baptism" is selected
-            console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
-            showBonusQuestion11();  // Move to bonus question 11
-            return;  // Exit function to prevent further execution
+    // Branching logic for custom questions
+    if (currentQuestion === 4) {  // Branching at Question 5
+        if (index === 0) {
+            showCustomQuestion(question6A);
+        } else if (index === 1) {
+            showCustomQuestion(question6B);
+        } else {
+            showCustomQuestion(question6C);
         }
+        return;
     }
-
-    // General question handling (not for Question 10)
-    userAnswers.push(questions[currentQuestion].scores[index]);  // Store the answer
-    currentQuestion++;  // Move to the next question
-
-    if (currentQuestion < questions.length) {
-        showQuestion();  // Show the next question
-    } else {
-        showResults();  // End quiz and show results if no more questions
-    }
-
-    updateProgressBar();  // Always update the progress bar
-}
 
 // Function to show custom questions (6A, 6B, or 6C)
 function showCustomQuestion(customQuestion) {
@@ -176,7 +150,9 @@ function showCustomQuestion(customQuestion) {
             console.log(`Answer button clicked: ${answer} (Index: ${index})`);
             console.log(`Score recorded: ${customQuestion.scores[index]}`);
 
+            // Push the score for this answer (done only once)
             userAnswers.push(customQuestion.scores[index]);
+
             moveToNextAfterCustom();  // After custom question, go to Question 7
         });
 
@@ -239,7 +215,7 @@ function showQuestion() {
         answersContainer.appendChild(answerButton);  // Append button to container
     });
 
-    updateProgressBar();  // Update the progress bar after showing the question
+    // Removed the second `updateProgressBar()` call here
 }
 
 function showQuestion10() {
