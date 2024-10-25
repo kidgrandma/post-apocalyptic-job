@@ -34,9 +34,39 @@ const questions = [
         answers: ["Abandoned DMV", "Mojo Dojo Casa House", "Spirit Halloween"],
         scores: [3, 5, 3],
         gif: "images/question5-illustration.gif"
+    },
+    {
+          // Question 7 after custom questions 6A, 6B, or 6C
+        question: "Now that you found shelter, food, and a weapon—you’ve become quite the dickhead. How will you repent?",
+        answers: ["Rehab", "Double down at the casino"],
+        scores: [3, 6],
+        gif: "images/question7-illustration.gif"
+    },
+    {
+        question: "Surprise! It’s a water witch and they've granted you three wishes in exchange for all your supplies.",
+        answers: ["Wishy wish", "No deal", "Amateur massage"],
+        scores: [6, 3, 4],
+        gif: "images/question8-illustration.gif"
+    },
+    {
+        question: "Oh no! You’ve been ROBBED. How do you go out?",
+        answers: ["OD on cigarettes", "Hadouken"],
+        scores: [3, 6],
+        gif: "images/question9-illustration.gif"
+    },
+    {
+        question: "The Protein Priest has saved you. You can join his wellness club or pledge your life to an apocalypse crew.",
+        answers: ["Meet your new gang", "Hot yoga matcha baptism"],
+        scores: [6, 3],
+        gif: "images/question10-illustration.gif"
+    },
+    {
+        question: "Wellness club was a decoy. Order up before you meet your crew.",
+        answers: ["Big Macintosh meal", "Pedialyte", "Straight-up bleach"],
+        scores: [2, 1, 3],
+        gif: "images/question11-illustration.gif"
     }
 ];
-
 // Define custom Question 6A, 6B, 6C
 const question6A = {
     question: "Post-apocalyptic club kids have kidnapped you! The bag's out, and they've been carpet farming for months. How do you escape?",
@@ -57,48 +87,14 @@ const question6C = {
     gif: "images/question6c-illustration.gif"
 };
 
-// Regular question after the custom branching
-const question7 = {
-    question: "Now that you found shelter, food, and a weapon—you’ve become quite the dickhead. How will you repent?",
-    answers: ["Rehab", "Double down at the casino"],
-    scores: [3, 6],
-    gif: "images/question7-illustration.gif"
-};
-
-const question8 = {
-    question: "Surprise! It’s a water witch and they've granted you three wishes in exchange for all your supplies.",
-    answers: ["Wishy wish", "No deal", "Amateur massage"],
-    scores: [6, 3, 4],
-    gif: "images/question8-illustration.gif"
-};
-
-const question9 = {
-    question: "Oh no! You’ve been ROBBED. How do you go out?",
-    answers: ["OD on cigarettes", "Hadouken"],
-    scores: [3, 6],
-    gif: "images/question9-illustration.gif"
-};
-const question10 = {
-    question: "The Protein Priest has saved you. You can join his wellness club or pledge your life to an apocalypse crew.",
-    answers: ["Meet your new gang", "Hot yoga matcha baptism"],
-    scores: [6, 3],
-    gif: "images/question10-illustration.gif"
-};
-const question11 = {
-    question: "Wellness club was a decoy. Order up before you meet your crew.",
-    answers: ["Big Macintosh meal", "Pedialyte", "Straight-up bleach"],
-    scores: [2, 1, 3],
-    gif: "images/question11-illustration.gif"
-};
-
-// Function to start the quiz and show the first question
+// Start the quiz
 function startQuiz() {
-    document.getElementById("start-page").style.display = "none";  // Hide the start page
+    document.getElementById("start-page").style.display = "none";  // Hides the start page
     document.getElementById("question-page").style.display = "block";  // Show the question page
-    showQuestion();  // Show the first question
+    showQuestion();
 }
 
-// Update progress bar
+// Update the progress bar
 function updateProgressBar() {
     const progressPercent = (currentQuestion / totalQuestions) * 100;
     if (progressBar) {
@@ -132,7 +128,7 @@ function selectAnswer(index) {
     updateProgressBar();
 }
 
-// Function to show the current question
+// Function to show the current question from the main array
 function showQuestion() {
     const current = questions[currentQuestion];
 
@@ -170,7 +166,7 @@ function showCustomQuestion(customQuestion) {
         answerButton.innerText = answer;
         answerButton.addEventListener("click", () => {
             userAnswers.push(customQuestion.scores[index]);
-            moveToNextAfterCustom();  // Move to Question 7 after answering a custom question
+            moveToNextAfterCustom();  // After custom question, go to Question 7
         });
         answersContainer.appendChild(answerButton);
     });
@@ -178,9 +174,16 @@ function showCustomQuestion(customQuestion) {
     updateProgressBar();
 }
 
-// Function to move from custom question to Question 7
+// Function to move to Question 7 after custom questions
 function moveToNextAfterCustom() {
-    currentQuestion = 6;  // Manually set to index 6 for Question 7
+    currentQuestion = 5;  // Manually reset to index 5 for Question 7
+    showQuestion();  // Show Question 7
+    updateProgressBar();
+}
+
+// Function to move to Question 7 after custom questions
+function moveToNextAfterCustom() {
+    currentQuestion = 5;  // Manually reset to index 5 for Question 7
     showQuestion();  // Show Question 7
     updateProgressBar();
 }
