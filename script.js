@@ -304,7 +304,7 @@ function determineOutcome(score) {
     if (score <= 36) return "Tupperware Tammy";
     if (score <= 37) return "Protein Priest";
     if (score <= 38) return "Radioactive Radio Media Empire";
-    if (score <= 39) return "The Olsen Twins";
+    if (score <= 50) return "The Olsen Twins";
     if (score === 58) return "Museum of Car Parts";
     return "Unknown";  // Fallback for unexpected scores
 }
