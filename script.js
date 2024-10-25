@@ -96,13 +96,46 @@ function startQuiz() {
 }
 // Function to show the current question from the main array
 function showQuestion() {
-    // Handle main questions or branch to custom questions based on currentQuestion index
-    if (currentQuestion === 4) {  // After Question 4 (index 4), decide next question
-        // Branch based on the answer selected in Question 5
-        selectAnswer(currentQuestion);
-        return; // Exit to prevent further processing
+    // Branch after Question 5
+    if (currentQuestion === 4) {  // Question 5 is at index 4
+        const current = questions[currentQuestion];
+        if (!current) {
+            console.error("Question not found for index", currentQuestion);
+            return;
+        }
+
+        // Display Question 5 without branching yet
+        const answersContainer = document.getElementById("answers-container");
+        answersContainer.innerHTML = "";  // Clear the answers container
+
+        document.getElementById("question-text").innerText = current.question;
+        document.getElementById("question-illustration").src = current.gif;
+
+        current.answers.forEach((answer, index) => {
+            const answerButton = document.createElement("button");
+            answerButton.innerText = answer;
+
+            answerButton.addEventListener("click", () => {
+                userAnswers.push(current.scores[index]);  // Record score for Question 5
+
+                // After Question 5, branch to custom questions based on answer
+                if (index === 0) {
+                    showCustomQuestion(question6A);
+                } else if (index === 1) {
+                    showCustomQuestion(question6B);
+                } else {
+                    showCustomQuestion(question6C);
+                }
+            });
+
+            answersContainer.appendChild(answerButton);
+        });
+
+        updateProgressBar();  // Update progress bar after displaying Question 5
+        return;  // Exit here to prevent further processing
     }
 
+    // Regular question handling
     const current = questions[currentQuestion];
     if (!current) {
         console.error("Question not found for index", currentQuestion);
@@ -141,22 +174,8 @@ function showQuestion() {
 
     updateProgressBar(); // Call at the end of `showQuestion` to update once
 }
-    
-// Function to handle answer selection and branching logic
-function selectAnswer(index) {
-    // Branching logic for custom questions
-    if (currentQuestion === 4) {  // Branching at Question 5
-        if (index === 0) {
-            showCustomQuestion(question6A);
-        } else if (index === 1) {
-            showCustomQuestion(question6B);
-        } else {
-            showCustomQuestion(question6C);
-        }
-            updateProgressBar();
-}
-        return;
-    }
+
+// No need for selectAnswer() anymore since branching is handled directly in showQuestion
 
 // Function to show custom questions (6A, 6B, or 6C)
 function showCustomQuestion(customQuestion) {
