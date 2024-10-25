@@ -94,11 +94,12 @@ function startQuiz() {
     showQuestion();
 }
 
+// Update the progress bar with optional completion percentage
 function updateProgressBar(completion = null) {
-    const progressPercent = completion !== null ? completion : (currentQuestion / totalQuestions) * 100;
+    const progressPercent = completion || (currentQuestion / totalQuestions) * 100;
+    console.log(`Progress: ${progressPercent}%`);
     if (progressBar) {
         progressBar.style.width = `${progressPercent}%`;
-        console.log(`Progress: ${progressPercent}%`);  // Check the progress percentage
     }
 }
 
@@ -237,21 +238,16 @@ function showQuestion10() {
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
-
-        // Event listener for each answer
         answerButton.addEventListener("click", () => {
-            console.log("Answer selected:", answer);
             userAnswers.push(current.scores[index]);  // Push score for Question 10
 
+            // If answer is "Meet your new gang", go directly to results
             if (index === 0) {
-                console.log("Going to results");
-                showResults();  // "Meet your new gang" leads to results
+                showResults();  // Show results
             } else {
-                console.log("Going to bonus question");
-                showBonusQuestion11();  // "Hot yoga matcha baptism" leads to Bonus Question 11
+                showBonusQuestion11();  // Go to Bonus Question 11
             }
         });
-
         answersContainer.appendChild(answerButton);
     });
 
