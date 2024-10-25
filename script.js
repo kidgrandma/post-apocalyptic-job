@@ -93,7 +93,7 @@ const question11 = {
 function startQuiz() {
     document.getElementById("start-page").style.display = "none";  // Hides the start page
     document.getElementById("question-page").style.display = "block";  // Show the question page
-    showQuestion();  // Display the first question
+    showQuestion();
 }
 
 // Update the progress bar based on the current question
@@ -196,8 +196,8 @@ function showCustomQuestion(customQuestion) {
 // Function to move from a custom question to Question 7
 function moveToNextAfterCustom() {
     console.log("Moving to Question 7 after custom question");
-    currentQuestion = 6;  // Set the current question to 7 (index 6)
-    showQuestion();  // Display Question 7
+    showQuestion();  // Explicitly call showQuestion(7)
+    currentQuestion = 6;  // Set to index 6 to ensure next is Question 7
     updateProgressBar();  // Update the progress bar
 }
 // Function to show Question 8
