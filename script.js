@@ -131,19 +131,32 @@ if (currentQuestion === 4) {  // Branching at Question 5
     }
     return;
 }
+// Function to handle answer selection and branching logic
+function selectAnswer(index) {
+    // Question 10 logic: handle final question and go to results
+    if (currentQuestion === 9) {  // This is question 10 (index 9)
+        if (index === 0) {  // If "Meet your new gang" is selected
+            console.log("Selected 'Meet your new gang'. Going to results.");
+            showResults();  // Show results
+            return;  // Exit function to prevent moving to next question
+        } else if (index === 1) {  // If "Hot yoga matcha baptism" is selected
+            console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
+            showBonusQuestion11();  // Move to bonus question 11
+            return;  // Exit function to prevent further execution
+        }
+    }
 
+    // General question handling (not for Question 10)
     userAnswers.push(questions[currentQuestion].scores[index]);  // Store the answer
     currentQuestion++;  // Move to the next question
-    if (currentQuestion === 10 && index === 0) { // If on question 10 and option "Meet your new gang" is selected
-        showResults();
-        return;
-    }
 
     if (currentQuestion < questions.length) {
         showQuestion();  // Show the next question
     } else {
-        showResults();  // End quiz and show results
+        showResults();  // End quiz and show results if no more questions
     }
+
+    updateProgressBar();  // Always update the progress bar
 }
 
 // Function to show custom questions (6A, 6B, or 6C)
