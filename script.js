@@ -95,10 +95,22 @@ function startQuiz() {
     showQuestion();
 }
 
-// Update the progress bar with optional completion percentage
-function updateProgressBar() {
-    const progressPercent = (currentQuestion / totalQuestions) * 100;
+// Updated function to ensure correct progress bar update
+function updateProgressBar(completion = null) {
+    let progressPercent;
+    
+    // Calculate progress based on the current question or use the passed-in completion value
+    if (completion !== null) {
+        progressPercent = completion;
+    } else {
+        // If you're at a custom question, count that as a valid step forward in progress
+        let adjustedQuestionIndex = (currentQuestion >= 6 && currentQuestion <= 9) ? currentQuestion - 1 : currentQuestion;
+        progressPercent = ((adjustedQuestionIndex + 1) / totalQuestions) * 100; // +1 because index is 0-based
+    }
+    
     console.log(`Progress: ${progressPercent}%`);
+    
+    // Update the progress bar width
     if (progressBar) {
         progressBar.style.width = `${progressPercent}%`;
     }
@@ -191,9 +203,9 @@ function showQuestion() {
     updateProgressBar();  // Update progress bar after showing the question
 }
 
-// Function to show Question 10 with branching logic
+// Function to handle branching logic and navigation for Question 10
 function showQuestion10() {
-    const current = questions[9];  // Access Question 10 (index 9)
+    const current = questions[9];  // Question 10 index
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
@@ -207,21 +219,24 @@ function showQuestion10() {
         answerButton.addEventListener("click", () => {
             userAnswers.push(current.scores[index]);  // Push score for Question 10
 
-            // Branching logic for Question 10
-            if (index === 0) {  // "Meet your new gang" leads to results
+            // If "Meet your new gang" (index 0) is selected, go to results
+            if (index === 0) {
                 console.log("Selected 'Meet your new gang'. Going to results.");
                 showResults();  // Directly show results
-                return;
-            } else if (index === 1) {  // "Hot yoga matcha baptism" goes to Bonus Question 11
-                console.log("Selected 'Hot yoga matcha baptism'. Going to Bonus Question 11.");
-                showBonusQuestion11();  // Show Bonus Question 11
+                return;  // Prevent any further execution
+            } 
+            // If "Hot yoga matcha baptism" (index 1), go to Bonus Question 11
+            else if (index === 1) {
+                console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
+                showBonusQuestion11();  // Go to Bonus Question 11
             }
         });
 
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();  // Update progress bar when showing Question 10
+    // Only update the progress bar once, when showing the question
+    updateProgressBar();
 }
 
 // Function to show Bonus Question 11
