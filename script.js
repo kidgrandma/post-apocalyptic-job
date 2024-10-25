@@ -94,22 +94,22 @@ function startQuiz() {
     document.getElementById("question-page").style.display = "block";  // Show the question page
     showQuestion();
 }
-// Function to show the current question from the main array
+
 // Function to show the current question from the main array
 function showQuestion() {
+    // Define answersContainer and check if it exists (moved outside the if block)
+    const answersContainer = document.getElementById("answers-container");
+    if (!answersContainer) {
+        console.error("Element with ID 'answers-container' not found.");
+        return;  // Exit if the element doesn't exist
+    }
+
     // Check if we're at Question 5 (index 4) and handle branching
     if (currentQuestion === 4) {  // Question 5
         const current = questions[currentQuestion];
         if (!current) {
             console.error("Question not found for index", currentQuestion);
             return;
-        }
-
-        // Define answersContainer and check if it exists
-        const answersContainer = document.getElementById("answers-container");
-        if (!answersContainer) {
-            console.error("Element with ID 'answers-container' not found.");
-            return;  // Exit if the element doesn't exist
         }
 
         // Clear the answers container
@@ -150,7 +150,8 @@ function showQuestion() {
         return;
     }
 
-    answersContainer.innerHTML = "";  // Clear previous question's answers
+    // Clear previous question's answers
+    answersContainer.innerHTML = "";  
 
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
