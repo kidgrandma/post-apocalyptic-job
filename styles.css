@@ -183,14 +183,22 @@ button:active, .selected {
 }
 
 /* Result Title Styling with Neon Effect */
-#result-title {
-    font-size: 2rem;
-    font-family: 'LazyDog', sans-serif;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    margin-bottom: 20px;
-}
+@media (max-width: 600px) {
+    /* Adjust font size specifically for the results title on mobile */
+    #result-title {
+        font-size: 1.4rem; /* Increase size as desired */
+        line-height: 1.6rem;
+        padding: 0.5rem 1rem;
+        color: #ffffff;
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+    }
 
+    /* Adjust result description or other text on the results page */
+    #result-description {
+        font-size: 1.2rem; /* Slightly larger text for readability */
+        line-height: 1.4rem;
+    }
+}
 /* Specific color and glow for each outcome */
 #result-title.outcome-homicidal-power-ranger {
     color: #ff6f61;
