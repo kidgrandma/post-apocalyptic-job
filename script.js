@@ -237,23 +237,23 @@ function showQuestion10() {
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
+
+        // Event listener for each answer
         answerButton.addEventListener("click", () => {
+            console.log("Answer selected:", answer);
             userAnswers.push(current.scores[index]);  // Push score for Question 10
 
-            // If answer is "Meet your new gang", go directly to results
-           // Inside showQuestion10
-answerButton.addEventListener("click", () => {
-    console.log("Answer selected:", answer);
-    userAnswers.push(current.scores[index]);  // Push score for Question 10
+            if (index === 0) {
+                console.log("Going to results");
+                showResults();  // "Meet your new gang" leads to results
+            } else {
+                console.log("Going to bonus question");
+                showBonusQuestion11();  // "Hot yoga matcha baptism" leads to Bonus Question 11
+            }
+        });
 
-    if (index === 0) {
-        console.log("Going to results");
-        showResults();  // "Meet your new gang" leads to results
-    } else {
-        console.log("Going to bonus question");
-        showBonusQuestion11();  // "Hot yoga matcha baptism" leads to Bonus Question 11
-    }
-});
+        answersContainer.appendChild(answerButton);
+    });
 
     updateProgressBar();  // Update progress bar when showing Question 10
 }
