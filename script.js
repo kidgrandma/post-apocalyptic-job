@@ -301,7 +301,21 @@ function showBonusQuestion11() {
 
     updateProgressBar();  // Update progress bar after showing Bonus Question 11
 }
+
 // Function to determine the outcome based on total score
+function showResults() {
+    // Display results page logic (this part you already have)
+
+    updateProgressBar(100);  // Set progress bar to 100% on results page
+}
+
+// Update the progress bar with optional completion percentage
+function updateProgressBar(completion = null) {
+    const progressPercent = completion || (currentQuestion / totalQuestions) * 100;
+    if (progressBar) {
+        progressBar.style.width = `${progressPercent}%`;
+    }
+}
 function determineOutcome(score) {
     if (score <= 20) return "Soap Saviors"; // Rare, very high score
     if (score <= 30) return "Caffeine Nicotine Cartel"; // Mid-range outcome
