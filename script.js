@@ -299,9 +299,10 @@ function showResults() {
 
     // Display personalized message with the outcome and set the crew color
     document.getElementById("result-title").innerHTML = userName
-        ? `Saddle up, ${userName}, because rollin' with <span style="color:${crewColor};">${outcome}</span> till u die OR WORSE`
-        : `Saddle up, because rollin' with <span style="color:${crewColor};">${outcome}</span> till u die OR WORSE`;
-}
+        ? `Saddle up, ${userName}, because ur rollin' with <span style="color:${crewColor};">${outcome}</span> till u die OR WORSE`
+        : `Saddle up, because ur rollin' with <span style="color:${crewColor};">${outcome}</span> till u die OR WORSE`;
+
+    // Set the result image source based on the outcome
     const resultImageSrc = outcome === "Unknown"
         ? "images/unknown.gif"
         : `images/outcome${getOutcomeImage(outcome)}.png`;
