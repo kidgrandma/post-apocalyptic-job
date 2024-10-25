@@ -96,15 +96,14 @@ function startQuiz() {
 }
 // Function to show the current question from the main array
 function showQuestion() {
-    // Branch after Question 5
-    if (currentQuestion === 4) {  // Question 5 is at index 4
+    // Check if we're at Question 5 (index 4) and handle branching
+    if (currentQuestion === 4) {  // Question 5
         const current = questions[currentQuestion];
         if (!current) {
             console.error("Question not found for index", currentQuestion);
             return;
         }
 
-        // Display Question 5 without branching yet
         const answersContainer = document.getElementById("answers-container");
         answersContainer.innerHTML = "";  // Clear the answers container
 
@@ -115,10 +114,11 @@ function showQuestion() {
             const answerButton = document.createElement("button");
             answerButton.innerText = answer;
 
+            // Record score immediately upon selection before branching
             answerButton.addEventListener("click", () => {
                 userAnswers.push(current.scores[index]);  // Record score for Question 5
 
-                // After Question 5, branch to custom questions based on answer
+                // Branch to custom questions (6A, 6B, or 6C) based on the selected answer
                 if (index === 0) {
                     showCustomQuestion(question6A);
                 } else if (index === 1) {
@@ -132,51 +132,43 @@ function showQuestion() {
         });
 
         updateProgressBar();  // Update progress bar after displaying Question 5
-        return;  // Exit here to prevent further processing
+        return;  // Exit here to prevent further processing of other questions
     }
 
-    // Regular question handling
+    // Regular question handling for non-branching questions
     const current = questions[currentQuestion];
     if (!current) {
         console.error("Question not found for index", currentQuestion);
         return;
     }
 
-    // Clear previous question's answers before rendering new ones
-    const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Clear the answers container
+    answersContainer.innerHTML = "";  // Clear previous question's answers
 
-    // Display question text and associated GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
-    // Create buttons for each answer in the current question
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
-        // Add click event listener for the button
         answerButton.addEventListener("click", () => {
             console.log(`Answer button clicked: ${answer} (Index: ${index})`);
-            userAnswers.push(current.scores[index]);  // Record score
+            userAnswers.push(current.scores[index]);  // Record score for current question
 
-            // Increment to the next question
+            // Move to the next question
             currentQuestion++;
             if (currentQuestion < questions.length) {
                 showQuestion();  // Show the next question
             } else {
-                showResults();  // No more questions, show the results
+                showResults();  // Show results if no more questions
             }
         });
 
         answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar(); // Call at the end of `showQuestion` to update once
+    updateProgressBar(); // Update progress after displaying a question
 }
-
-// No need for selectAnswer() anymore since branching is handled directly in showQuestion
-
 // Function to show custom questions (6A, 6B, or 6C)
 function showCustomQuestion(customQuestion) {
     document.getElementById("question-text").innerText = customQuestion.question;
