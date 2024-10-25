@@ -94,11 +94,11 @@ function startQuiz() {
     showQuestion();
 }
 
-// Update the progress bar
-function updateProgressBar() {
-    const progressPercent = (currentQuestion / totalQuestions) * 100;
+function updateProgressBar(completion = null) {
+    const progressPercent = completion !== null ? completion : (currentQuestion / totalQuestions) * 100;
     if (progressBar) {
         progressBar.style.width = `${progressPercent}%`;
+        console.log(`Progress: ${progressPercent}%`);  // Check the progress percentage
     }
 }
 
@@ -241,14 +241,19 @@ function showQuestion10() {
             userAnswers.push(current.scores[index]);  // Push score for Question 10
 
             // If answer is "Meet your new gang", go directly to results
-            if (index === 0) {
-                showResults();
-            } else {
-                showBonusQuestion11();  // Go to Bonus Question 11 if the second option is selected
-            }
-        });
-        answersContainer.appendChild(answerButton);
-    });
+           // Inside showQuestion10
+answerButton.addEventListener("click", () => {
+    console.log("Answer selected:", answer);
+    userAnswers.push(current.scores[index]);  // Push score for Question 10
+
+    if (index === 0) {
+        console.log("Going to results");
+        showResults();  // "Meet your new gang" leads to results
+    } else {
+        console.log("Going to bonus question");
+        showBonusQuestion11();  // "Hot yoga matcha baptism" leads to Bonus Question 11
+    }
+});
 
     updateProgressBar();  // Update progress bar when showing Question 10
 }
@@ -283,7 +288,10 @@ function showResults() {
     document.getElementById("result-page").style.display = "block";  // Show the result page
 
     const totalScore = userAnswers.reduce((a, b) => a + b, 0);  // Calculate total score
+    console.log("Total score:", totalScore);  // Log the total score
+
     const outcome = determineOutcome(totalScore);  // Determine outcome based on score
+    console.log("Determined outcome:", outcome);  // Log the outcome
 
     const crewColor = getCrewColor(outcome);
     document.getElementById("result-title").innerHTML = `Congrats! You’re a member of the ${outcome}`;
@@ -292,8 +300,8 @@ function showResults() {
     const resultImageSrc = outcome === "Unknown" 
         ? "images/unknown.gif"
         : `images/outcome${getOutcomeImage(outcome)}.png`;
-
     document.getElementById("result-image").src = resultImageSrc;
+    
     updateProgressBar(100);  // Set progress bar to 100% at the results page
 }
 
