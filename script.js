@@ -225,7 +225,7 @@ function moveToNextAfterCustom() {
     showQuestion();  // Show Question 7
     updateProgressBar();
 }
-
+// function to show question 10 and 11
 function showQuestion10() {
     const current = questions[9];  // Access Question 10 directly
     document.getElementById("question-text").innerText = current.question;
@@ -264,7 +264,8 @@ function showQuestion10() {
 
     updateProgressBar();  // Update progress bar when showing Question 10
 }
-// Function to show Bonus Question 11
+
+// Function to show Bonus Question 11 if selected from Question 10
 function showBonusQuestion11() {
     const current = questions[10];  // Access Question 11
 
