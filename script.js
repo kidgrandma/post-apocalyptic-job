@@ -94,6 +94,7 @@ function startQuiz() {
     document.getElementById("question-page").style.display = "block";  // Show the question page
     showQuestion();
 }
+
 // Updated function to ensure correct progress bar update
 function updateProgressBar(completion = null) {
     let progressPercent;
@@ -132,6 +133,32 @@ function selectAnswer(index) {
         }
         return;
     }
+
+    // Logic for handling Question 10 (index 9)
+    if (currentQuestion === 9) {  // Question 10 index
+        if (index === 0) {  // If "Meet your new gang" is selected
+            console.log("Selected 'Meet your new gang'. Going to results.");
+            showResults();  // Show results and end quiz
+            return;  // Stop execution here to prevent progression
+        } else if (index === 1) {  // "Hot yoga matcha baptism" case
+            console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
+            showBonusQuestion11();  // Move to Bonus Question 11
+            return;  // Exit function to prevent moving to next question
+        }
+    }
+
+    // General question handling
+    userAnswers.push(questions[currentQuestion].scores[index]);  // Store the answer
+    currentQuestion++;  // Move to the next question
+
+    if (currentQuestion < questions.length) {
+        showQuestion();  // Show the next question
+    } else {
+        showResults();  // End quiz and show results if no more questions
+    }
+
+    updateProgressBar();  // Always update the progress bar
+}
 
 // Function to show custom questions (6A, 6B, or 6C)
 function showCustomQuestion(customQuestion) {
@@ -172,7 +199,6 @@ function moveToNextAfterCustom() {
 // Function to show the current question from the main array
 function showQuestion() {
     const current = questions[currentQuestion];
-
     if (!current) {
         console.error("Question not found for index", currentQuestion);
         return;
@@ -180,7 +206,7 @@ function showQuestion() {
 
     // Clear previous question's answers before rendering new ones
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Make sure container is cleared
+    answersContainer.innerHTML = "";  // Clear the answers container
 
     // Display question text and associated GIF
     document.getElementById("question-text").innerText = current.question;
@@ -191,7 +217,7 @@ function showQuestion() {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
-        // Ensure that the event listener is added only once
+        // Add click event listener for the button
         answerButton.addEventListener("click", () => {
             // Log the button click and the score recorded
             console.log(`Answer button clicked: ${answer} (Index: ${index})`);
@@ -206,18 +232,19 @@ function showQuestion() {
             if (currentQuestion < questions.length) {
                 showQuestion();  // Show the next question
             } else {
-                showResults();  // No more questions, so show results
+                showResults();  // No more questions, show the results
             }
 
             updateProgressBar();  // Update progress bar
         });
 
-        answersContainer.appendChild(answerButton);  // Append button to container
+        answersContainer.appendChild(answerButton);  // Append button to the container
     });
 
-    // Removed the second `updateProgressBar()` call here
+    updateProgressBar();  // Update progress bar after rendering the question
 }
 
+// Function to handle Question 10
 function showQuestion10() {
     const current = questions[9];  // Question 10 index
     document.getElementById("question-text").innerText = current.question;
@@ -248,9 +275,7 @@ function showQuestion10() {
                     showResults();  // Directly show results for this option
                 } else if (index === 1) {
                     console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
-                    showBonusQuestion11();  // Go to the next question for index 1
-                } else {
-                    console.log(`Unexpected index ${index}, no action defined.`);
+                    showBonusQuestion11();  // Go to bonus question
                 }
             } else {
                 console.log("Score already recorded, skipping...");
@@ -262,6 +287,7 @@ function showQuestion10() {
 
     updateProgressBar();  // Update progress bar when showing Question 10
 }
+
 // Function to show Bonus Question 11
 function showBonusQuestion11() {
     const current = questions[10];  // Access Question 11
@@ -276,6 +302,7 @@ function showBonusQuestion11() {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
+        // Add click event listener
         answerButton.addEventListener("click", () => {
             userAnswers.push(current.scores[index]);  // Push score for Bonus Question 11
             showResults();  // Go to results after Bonus Question 11
@@ -312,6 +339,7 @@ function showResults() {
     // Set progress bar to 100% when showing results
     updateProgressBar(100);
 }
+
 // Function to determine the outcome based on total score
 function determineOutcome(score) {
     if (score <= 20) return "Soap Saviors";
@@ -342,7 +370,7 @@ function getOutcomeImage(outcome) {
         case "Radioactive Radio Media Empire": return 10;
         case "The Olsen Twins": return 4;
         case "Museum of Car Parts": return 13;
-        default: return "unknown";  // Now the fallback is "unknown.gif"
+        default: return "unknown";  // Fallback
     }
 }
 
@@ -360,7 +388,7 @@ function getCrewColor(outcome) {
         case "Radioactive Radio Media Empire": return "#cc3300";  // Dark Red
         case "The Olsen Twins": return "#9966ff";  // Purple
         case "Museum of Car Parts": return "#666666";  // Grey
-        default: return "#000000";  // Black (fallback)
+        default: return "#000000";  // Fallback
     }
 }
 
@@ -388,3 +416,4 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+   
