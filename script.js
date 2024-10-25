@@ -94,23 +94,26 @@ function startQuiz() {
     document.getElementById("question-page").style.display = "block";  // Show the question page
     showQuestion();
 }
-
 // Updated function to ensure correct progress bar update
 function updateProgressBar(completion = null) {
     let progressPercent;
-    
-    // Calculate progress based on the current question or use the passed-in completion value
+
+    // Use the passed-in completion value if it exists
     if (completion !== null) {
         progressPercent = completion;
     } else {
-        // If you're at a custom question, count that as a valid step forward in progress
-        let adjustedQuestionIndex = (currentQuestion >= 6 && currentQuestion <= 9) ? currentQuestion - 1 : currentQuestion;
-        progressPercent = ((adjustedQuestionIndex + 1) / totalQuestions) * 100; // +1 because index is 0-based
+        // Adjust for custom questions (6A, 6B, 6C) and calculate progress based on currentQuestion
+        let adjustedQuestionIndex = currentQuestion;
+        if (currentQuestion >= 6 && currentQuestion <= 9) {
+            adjustedQuestionIndex--;  // Adjust the index for custom questions if needed
+        }
+        
+        // Calculate progress percentage based on the adjusted question index
+        progressPercent = ((adjustedQuestionIndex + 1) / totalQuestions) * 100;  // +1 because index is 0-based
     }
-    
-    console.log(`Progress: ${progressPercent}%`);
-    
-    // Update the progress bar width
+
+    // Update the progress bar's width
+    console.log(`Progress: ${progressPercent}%`);  // Log progress for debugging
     if (progressBar) {
         progressBar.style.width = `${progressPercent}%`;
     }
@@ -149,23 +152,19 @@ function showCustomQuestion(customQuestion) {
     document.getElementById("question-illustration").src = customQuestion.gif;
 
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";  // Clear previous answers
+    answersContainer.innerHTML = "";
 
-    // Ensure event listeners are added only once for each question
     customQuestion.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
-        // Clear any existing event listeners on answer buttons before adding a new one
-        answerButton.replaceWith(answerButton.cloneNode(true));  // This ensures fresh buttons without prior listeners
-
         answerButton.addEventListener("click", () => {
-            console.log(`Selected: ${answer} (Index: ${index})`);
+            // Log the button click and the score recorded
+            console.log(`Answer button clicked: ${answer} (Index: ${index})`);
+            console.log(`Score recorded: ${customQuestion.scores[index]}`);
 
             userAnswers.push(customQuestion.scores[index]);
-
-            // Move to the next main question after custom question
-            moveToNextAfterCustom();
+            moveToNextAfterCustom();  // After custom question, go to Question 7
         });
 
         answersContainer.appendChild(answerButton);
@@ -190,11 +189,11 @@ function showQuestion() {
         return;
     }
 
-    // Clear previous answers and update the progress bar before rendering new question
+    // Clear previous question's answers before rendering new ones
     const answersContainer = document.getElementById("answers-container");
-    answersContainer.innerHTML = "";
+    answersContainer.innerHTML = "";  // Make sure container is cleared
 
-    // Set the question text and associated GIF
+    // Display question text and associated GIF
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
@@ -203,14 +202,31 @@ function showQuestion() {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
+        // Ensure that the event listener is added only once
         answerButton.addEventListener("click", () => {
-            selectAnswer(index);  // Select answer and move forward
+            // Log the button click and the score recorded
+            console.log(`Answer button clicked: ${answer} (Index: ${index})`);
+            console.log(`Score recorded: ${current.scores[index]}`);
+
+            // Push the selected answer's score to the userAnswers array
+            userAnswers.push(current.scores[index]);
+
+            // Move to the next question
+            currentQuestion++;  // Increment to the next question
+
+            if (currentQuestion < questions.length) {
+                showQuestion();  // Show the next question
+            } else {
+                showResults();  // No more questions, so show results
+            }
+
+            updateProgressBar();  // Update progress bar
         });
 
-        answersContainer.appendChild(answerButton);
+        answersContainer.appendChild(answerButton);  // Append button to container
     });
 
-    updateProgressBar();  // Update progress bar after showing the question
+    updateProgressBar();  // Update the progress bar after showing the question
 }
 
 function showQuestion10() {
@@ -236,13 +252,13 @@ function showQuestion10() {
                 userAnswers.push(current.scores[index]);  // Push score for Question 10
                 scoreRecorded = true;  // Prevent multiple scores
 
-                if (index === 0) {
-                    console.log("Selected 'Meet your new gang'. Going to results.");
-                    showResults();  // Show results for index 0
-                } else {
-                    console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
-                    showBonusQuestion11();  // Go to Bonus Question 11
-                }
+               if (index === 0) {
+    console.log("Selected 'Meet your new gang'. Going to results.");
+    showResults();  // Directly show results for this option
+} else {
+    console.log("Selected 'Hot yoga matcha baptism'. Going to bonus question.");
+    showBonusQuestion11();  // Go to the next question for index 1
+}
             } else {
                 console.log("Score already recorded, skipping...");
             }
