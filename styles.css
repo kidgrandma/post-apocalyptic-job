@@ -58,7 +58,7 @@ body {
     text-align: center;
     font-family: 'LazyDog', sans-serif;
     font-size: 1rem;
-    box-shadow: 0px 0px 10px 2px #00FFFF, 0px 0px 10px 2px #FF00FF; /* Optional shadow for glow effect */
+    box-shadow: 0px 0px 10px 2px #00FFFF, 0px 0px 10px 2px #FF00FF;
 }
 
 #name-input::placeholder {
@@ -72,7 +72,7 @@ body {
 
 #progress-bar {
     width: 100%;
-    display: none;
+    display: none; /* Ensure it starts hidden */
     height: 8px;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 50px;
@@ -87,20 +87,10 @@ body {
     border-radius: 50px;
     box-shadow: 0 0 10px #00ffff, 0 0 15px #ff00ff;
 }
-#result-page {
-    padding: 20px; /* Consistent padding with quiz container */
-    max-width: 600px;
-    width: 90%; /* Ensure it doesn't exceed viewport */
-    margin: 0 auto;
-    background-color: none; /* Match the quiz container */
-    border-radius: 10px;
-    text-align: center;
-}
 
 button {
     display: block;
-    width: 100%; /* Make buttons full width */
-    max-width: none; /* Remove the max-width restriction */
+    width: 100%;
     padding: 0.5rem; /* Ensure adequate padding */
     margin: 10px auto; /* Adjust margins to avoid cutting off */
     cursor: pointer;
@@ -140,6 +130,17 @@ button:active {
     margin: 0 auto;
 }
 
+#result-page {
+    padding: 20px; /* Consistent padding with quiz container */
+    max-width: 600px;
+    width: 90%; /* Ensure it doesn't exceed viewport */
+    margin: 0 auto;
+    background-color: rgba(131, 56, 236, 0.7); /* Match the quiz container */
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    text-align: center;
+}
+
 #result-title {
     font-size: 1.8rem; /* Adjust as needed */
     color: #ffffff;
@@ -169,21 +170,6 @@ button:active {
         font-size: 1rem; /* Ensure it's the same as desktop */
     }
 
-    /* Other styles above remain unchanged */
-
-#result-page {
-    padding: 20px; /* Consistent padding with quiz container */
-    max-width: 600px;
-    width: 90%; /* Ensure it doesn't exceed viewport */
-    margin: 0 auto;
-    background-color: rgba(131, 56, 236, 0.7); /* Match the quiz container */
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
-    text-align: center;
-}
-
-/* Mobile Styling */
-@media (max-width: 600px) {
     /* Adjust result title and description sizes for mobile */
     #result-title {
         font-size: 1.4rem; /* Smaller for mobile */
@@ -193,10 +179,5 @@ button:active {
     #result-description {
         font-size: 1.2rem; /* Smaller for mobile */
         line-height: 1.4rem;
-    }
-
-    /* Ensure buttons are well spaced and centered */
-    button {
-        margin: 10px auto; /* Adjust spacing */
     }
 }
