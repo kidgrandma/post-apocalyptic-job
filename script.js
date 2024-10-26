@@ -1,7 +1,8 @@
 let currentQuestion = 0;  // Tracks the current question index
 let userAnswers = [];  // Stores the user's answers
 const totalQuestions = 10;  // Total number of questions
-let progressBar = document.getElementById("progress-fill");
+const progressBarContainer = document.getElementById("progress-bar"); // Reference to the progress bar container
+const progressFill = document.getElementById("progress-fill"); // Reference to the progress fill element
 
 // Define the questions, answers, scores, and GIFs
 const questions = [
@@ -85,7 +86,7 @@ const question6C = {
 
 let userName = ""; // Global variable to store the user's name
 
-// Start the quiz
+// Function to start the quiz
 function startQuiz() {
     const nameInput = document.getElementById("name-input").value.trim();
     
@@ -97,12 +98,16 @@ function startQuiz() {
     userName = nameInput; // Save the user's name if provided
     document.getElementById("start-page").style.display = "none";  // Hide the start page
     document.getElementById("question-page").style.display = "block";  // Show the question page
-    showQuestion();
+
+    // Show the progress bar
+    progressBarContainer.style.display = 'block'; // Show the progress bar
+    updateProgressBar(0); // Reset progress to 0%
     
+    showQuestion(); // Show the first question
+
     // Prevent scroll jump by focusing on the container
     document.getElementById("quiz-container").scrollIntoView({ behavior: 'smooth' });
 }
-
 // Event listener for Start Quiz button
 document.addEventListener("DOMContentLoaded", function() {
     const startButton = document.getElementById("start-quiz");
@@ -144,43 +149,47 @@ function showQuestion() {
         quizContainer.classList.remove("question-even");
     }
 
-    // Render new answer buttons
-    current.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
+current.answers.forEach((answer, index) => {
+    const answerButton = document.createElement("button");
+    answerButton.innerText = answer;
 
-        answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);
+    // Add click event listener for the button
+    answerButton.addEventListener("click", () => {
+        userAnswers.push(current.scores[index]);
 
-            // Reset hover state for all buttons
-            answersContainer.querySelectorAll('button').forEach(btn => {
-                btn.style.backgroundColor = ''; // Reset background color
-                btn.style.color = ''; // Reset text color
-            });
-
-     // Handle Question 5 branching to custom questions (6A, 6B, or 6C)
-            if (currentQuestion === 4) {  // Check if it's Question 5
-                updateProgressBar(); // Update progress bar before showing custom question
-                setTimeout(() => {
-                    if (index === 0) showCustomQuestion(question6A);
-                    else if (index === 1) showCustomQuestion(question6B);
-                    else showCustomQuestion(question6C);
-                }, 100);
-            } else {
-                // Progress to next question or results for non-branching questions
-                currentQuestion++;
-                if (currentQuestion < questions.length) {
-                    updateProgressBar(); // Update progress bar for non-custom questions
-                    showQuestion();
-                } else {
-                    showResults();
-                }
-            }
+        // Reset hover state for all buttons before applying the clicked button's state
+        answersContainer.querySelectorAll('button').forEach(btn => {
+            btn.classList.remove('hover'); // Remove hover class if using CSS classes
+            btn.style.backgroundColor = ''; // Reset background color
+            btn.style.color = ''; // Reset text color
         });
 
-        answersContainer.appendChild(answerButton);
+        // Apply the selected style to the clicked button
+        answerButton.style.backgroundColor = '#FF69B4'; // Change to pink when selected
+        answerButton.style.color = '#FFF'; // Set text color to white
+
+        // Handle Question 5 branching to custom questions (6A, 6B, or 6C)
+        if (currentQuestion === 4) {  // Check if it's Question 5
+            updateProgressBar(); // Update progress bar before showing custom question
+            setTimeout(() => {
+                if (index === 0) showCustomQuestion(question6A);
+                else if (index === 1) showCustomQuestion(question6B);
+                else showCustomQuestion(question6C);
+            }, 100);
+        } else {
+            // Progress to next question or results for non-branching questions
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                updateProgressBar(); // Update progress bar for non-custom questions
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
     });
 
+    answersContainer.appendChild(answerButton); // Append each answer button to the container
+});
     updateProgressBar(); // Ensure progress bar updates for each question
 }
 // Function to show custom questions (6A, 6B, or 6C)
@@ -270,11 +279,15 @@ function showQuestion10() {
 
     updateProgressBar();  // Update progress bar when showing Question 10
 }
-// Function to handle showing the results
-// Function to handle showing the results
+// Function to show results
 function showResults() {
+    // Hide the question page and show the results page
     document.getElementById("question-page").style.display = "none";
     document.getElementById("result-page").style.display = "block";
+
+    // Hide the progress bar when showing results
+    progressBarContainer.style.display = 'none'; // Hide the progress bar
+
     const totalScore = userAnswers.reduce((a, b) => a + b, 0);
     console.log(`Total Score: ${totalScore}`);  // Log the total score to the console
     const outcome = determineOutcome(totalScore);
