@@ -152,48 +152,51 @@ button:active {
     max-width: 600px;
     margin-bottom: 5px; /* Adjust as needed */
 }
-/* Mobile-specific adjustments */
-@media (max-width: 768px) {
+
+/* Mobile Styling */
+@media (max-width: 600px) {
     body {
-        padding: 0;
-        margin: 0;
-        overflow-x: hidden; /* Prevent horizontal scrolling */
+        background-color: #000; /* Fallback background color */
     }
 
-    #quiz-container, #result-page {
-        padding: 1rem;
-        max-width: 95%;
-        width: 95%;
-        margin: 0 auto;
-        max-height: 75vh; /* Adjusted height to avoid content cutoff */
-        border-radius: 8px;
-        overflow-y: auto; /* Enable scrolling within the container if content overflows */
-    }
-
-    #name-input {
-        font-size: 0.85rem; /* Smaller font for mobile */
+    #quiz-container {
+        background-color: rgba(131, 56, 236, 0.7); /* Match the desktop */
     }
 
     button {
-        padding: 0.5rem;
-        font-size: 0.9rem;
-        width: 90%; /* Keep buttons within viewable area */
-        margin: 0.5rem auto; /* Spacing between buttons */
+        background-color: #FF00FF; /* Pink background for mobile */
+        color: #000;
+        font-size: 1rem; /* Ensure it's the same as desktop */
     }
 
-    #progress-bar {
-        display: none; /* Initially hide on cover screen */
+    /* Other styles above remain unchanged */
+
+#result-page {
+    padding: 20px; /* Consistent padding with quiz container */
+    max-width: 600px;
+    width: 90%; /* Ensure it doesn't exceed viewport */
+    margin: 0 auto;
+    background-color: rgba(131, 56, 236, 0.7); /* Match the quiz container */
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    text-align: center;
+}
+
+/* Mobile Styling */
+@media (max-width: 600px) {
+    /* Adjust result title and description sizes for mobile */
+    #result-title {
+        font-size: 1.4rem; /* Smaller for mobile */
+        line-height: 1.6rem;
     }
 
-    #cover-image, #question-illustration, #result-image {
-        width: 100%;
-        max-width: 100%; /* Ensure full width on mobile */
+    #result-description {
+        font-size: 1.2rem; /* Smaller for mobile */
+        line-height: 1.4rem;
     }
 
-    /* Text alignment and resizing */
-    #result-title, .question-text {
-        font-size: 1.4rem;
-        line-height: 1.2;
-        margin: 0.5rem 0;
+    /* Ensure buttons are well spaced and centered */
+    button {
+        margin: 10px auto; /* Adjust spacing */
     }
 }
