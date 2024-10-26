@@ -144,10 +144,12 @@ function showQuestion() {
     const questionText = current.question.replace("{{name}}", userName || "survivor");
     document.getElementById("question-text").innerText = questionText;
     document.getElementById("question-illustration").src = current.gif;
-
+    updateProgressBar();
+    
     // Clear previous answers
     answersContainer.innerHTML = "";  // Clear previous answers
 
+    
 // Create answer buttons
 current.answers.forEach((answer, index) => {
     const answerButton = document.createElement("button");
@@ -165,31 +167,30 @@ current.answers.forEach((answer, index) => {
 
         // Apply the selected style to the clicked button
         answerButton.classList.add('selected'); // Add class for visual feedback
-            // Handle Question 5 branching to custom questions (6A, 6B, or 6C)
-            if (currentQuestion === 4) {  // Check if it's Question 5
-                updateProgressBar(); // Update progress bar
-                setTimeout(() => {
-                    if (index === 0) showCustomQuestion(question6A);
-                    else if (index === 1) showCustomQuestion(question6B);
-                    else showCustomQuestion(question6C);
-                }, 100);
-            } else {
-                // Progress to next question or results for non-branching questions
-                currentQuestion++;
-                if (currentQuestion < questions.length) {
-                    updateProgressBar(); // Update progress bar for non-custom questions
-                    showQuestion();
-                } else {
-                    showResults();
-                }
-            }
-        });
 
-        answersContainer.appendChild(answerButton); // Append each answer button to the container
+        // Handle Question 5 branching to custom questions (6A, 6B, or 6C)
+        if (currentQuestion === 4) {  // Check if it's Question 5
+            updateProgressBar(); // Update progress bar
+            setTimeout(() => {
+                if (index === 0) showCustomQuestion(question6A);
+                else if (index === 1) showCustomQuestion(question6B);
+                else showCustomQuestion(question6C);
+            }, 100);
+        } else {
+            // Progress to next question or results for non-branching questions
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                updateProgressBar(); // Update progress bar for non-custom questions
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
     });
 
-    updateProgressBar(); // Ensure progress bar updates for each question
-}
+    answersContainer.appendChild(answerButton); // Append each answer button to the container
+});
+
 // Function to show custom questions (6A, 6B, or 6C)
 function showCustomQuestion(customQuestion) {
     // Display the custom question and associated image
@@ -242,10 +243,9 @@ function moveToNextAfterCustom() {
     showQuestion();  // Show Question 7
     updateProgressBar();  // Update progress bar after showing Question 7
 }
-
 // Function to handle Question 10 and go directly to results
 function showQuestion10() {
-    const current = questions[9];  // Question 10 is at index 9 in your array
+    const current = questions[9];  // Question 10 is at index 9
     document.getElementById("question-text").innerText = current.question;
     document.getElementById("question-illustration").src = current.gif;
 
@@ -266,17 +266,18 @@ function showQuestion10() {
                 userAnswers.push(current.scores[index]);  // Record score for Question 10
                 scoreRecorded = true;  // Prevent multiple scores
 
-                // After answering, go directly to results regardless of the answer selected
+                // After answering, go directly to results
                 console.log("Going directly to results after Question 10.");
                 showResults();  // Show results and exit
             }
         });
 
-        answersContainer.appendChild(answerButton);
+        answersContainer.appendChild(answerButton); // Append each answer button to the container
     });
 
     updateProgressBar();  // Update progress bar when showing Question 10
 }
+
 // Function to show results
 function showResults() {
     // Hide the question page and show the results page
@@ -307,7 +308,6 @@ function showResults() {
     // Set progress bar to 100% when showing results
     updateProgressBar(100);
 }
-
 // Function to determine the outcome based on total score
 function determineOutcome(score) {
     if (score <= 28) return "Soap Saviors";
