@@ -35,11 +35,12 @@ body {
 
 /* Alternating color hues for questions */
 .question-odd {
-    background-color: rgba(131, 56, 236, 0.7); /* Initial color */
+    background-color: rgba(131, 56, 236, 0.7);
 }
 .question-even {
-    background-color: rgba(56, 131, 236, 0.7); /* Alternate hue */
+    background-color: rgba(56, 131, 236, 0.7);
 }
+
 #name-input-container {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -54,7 +55,6 @@ body {
     border: none;
     border-radius: 5px;
     text-align: center;
-    font-family: 'LazyDog', sans-serif;
     font-size: 1rem;
     box-shadow: 0px 0px 10px 2px #00FFFF, 0px 0px 10px 2px #FF00FF;
 }
@@ -108,11 +108,12 @@ button:hover {
 }
 
 button:active {
-    background-color: #FF00FF;
+    background-color: #FF00FF; /* Shows pink on click */
     transform: scale(0.97);
     box-shadow: 0 0 15px #FF00FF, 0 0 20px #00FFFF;
 }
 
+/* Disable hover styles for touch devices */
 @media (hover: none) {
     button:hover {
         background-color: inherit;
@@ -128,17 +129,17 @@ button:active {
 }
 
 #result-page {
-    padding: 20px;  /* Adjust padding here */
+    padding: 20px;  
     max-width: 600px;
     margin: 0 auto;
-    background-color: rgba(131, 56, 236, 0.7); /* Keep consistent with quiz container */
+    background-color: rgba(131, 56, 236, 0.7);
     border-radius: 10px;
     backdrop-filter: blur(5px);
     text-align: center;
 }
 
 #result-title {
-    font-size: 1.8rem; /* Increase size if needed */
+    font-size: 1.8rem; /* Adjust as needed */
     color: #ffffff;
     text-shadow: 0 0 10px rgba(255, 0, 255, 0.7), 0 0 15px rgba(0, 255, 255, 0.7);
     margin-bottom: 10px; /* Add spacing below title */
@@ -160,9 +161,8 @@ button:active {
         background-color: rgba(131, 56, 236, 0.7); /* Match the desktop */
     }
 
-    /* Button styles for mobile */
     button {
-        background-color: #FF00FF; /* Pink background */
+        background-color: #FF00FF; /* Pink background for mobile */
         color: #000;
         font-size: 1rem; /* Ensure it's the same as desktop */
     }
@@ -171,9 +171,8 @@ button:active {
         background-color: #FF69B4; /* Lighter pink on hover */
     }
 
-    /* Result title and description styles */
     #result-title {
-        font-size: 1.4rem; /* Adjust to make it more readable */
+        font-size: 1.4rem; /* Smaller on mobile */
         line-height: 1.6rem;
     }
 
