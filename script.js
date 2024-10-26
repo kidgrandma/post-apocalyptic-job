@@ -125,6 +125,15 @@ function showQuestion() {
         console.error("Question not found for index", currentQuestion);
         return;
     }
+
+    // Set question text, replacing {{name}} with userName or a fallback
+    const questionText = current.question.replace("{{name}}", userName || "survivor");
+    document.getElementById("question-text").innerText = questionText;
+    document.getElementById("question-illustration").src = current.gif;
+
+    // Clear previous answers
+    answersContainer.innerHTML = "";  // Clear previous answers
+
     // Apply alternating background color based on question index
     if (currentQuestion % 2 === 0) {
         quizContainer.classList.add("question-even");
@@ -134,24 +143,20 @@ function showQuestion() {
         quizContainer.classList.remove("question-even");
     }
 
-    // Set question text, replacing {{name}} with userName or a fallback
-    const questionText = current.question.replace("{{name}}", userName || "survivor");
-    document.getElementById("question-text").innerText = questionText;
-    document.getElementById("question-illustration").src = current.gif;
-
     // Render new answer buttons
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
         answerButton.addEventListener("click", () => {
-            // Clear button hover state
+            userAnswers.push(current.scores[index]);
+
+            // Reset hover state for all buttons
             answersContainer.querySelectorAll('button').forEach(btn => {
                 btn.style.backgroundColor = ''; // Reset background color
                 btn.style.color = ''; // Reset text color
             });
 
-            userAnswers.push(current.scores[index]);
             // Branching for Question 5 to custom questions (6A, 6B, or 6C)
             if (currentQuestion === 4) {
                 setTimeout(() => {
