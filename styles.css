@@ -111,9 +111,9 @@ button {
 /* Disable hover styles for touch devices while keeping other button behaviors */
 @media (hover: none) {
     button:hover {
-        background-color: #00FFFF; /* Keep the original color */
-        color: #000; /* Keep the original text color */
-    }
+        background-color: #FF00FF; /* Change to the desired hover color */
+        color: #FFF; /* Change text color on hover */
+}
 }
 
 /* Adjust button size on touch devices */
