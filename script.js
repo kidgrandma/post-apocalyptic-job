@@ -149,21 +149,22 @@ function showQuestion() {
     answersContainer.innerHTML = "";  // Clear previous answers
 
 // Create answer buttons
-    current.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
+current.answers.forEach((answer, index) => {
+    const answerButton = document.createElement("button");
+    answerButton.innerText = answer;
 
-        answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);
+    answerButton.addEventListener("click", () => {
+        userAnswers.push(current.scores[index]);
 
-            // Reset hover state for all buttons
-            answersContainer.querySelectorAll('button').forEach(btn => {
-                btn.classList.remove('selected'); // Remove selected class
-            });
+        // Reset all buttons
+        answersContainer.querySelectorAll('button').forEach(btn => {
+            btn.classList.remove('selected'); // Remove selected class
+            btn.style.backgroundColor = ''; // Reset background color
+            btn.style.color = ''; // Reset text color
+        });
 
-            // Apply the selected style to the clicked button
-            answerButton.classList.add('selected'); // Add class for visual feedback
-        
+        // Apply the selected style to the clicked button
+        answerButton.classList.add('selected'); // Add class for visual feedback
             // Handle Question 5 branching to custom questions (6A, 6B, or 6C)
             if (currentQuestion === 4) {  // Check if it's Question 5
                 updateProgressBar(); // Update progress bar
