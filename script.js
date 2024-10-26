@@ -132,15 +132,6 @@ function showQuestion() {
         console.error("Question not found for index", currentQuestion);
         return;
     }
-
-    // Set question text, replacing {{name}} with userName or a fallback
-    const questionText = current.question.replace("{{name}}", userName || "survivor");
-    document.getElementById("question-text").innerText = questionText;
-    document.getElementById("question-illustration").src = current.gif;
-
-    // Clear previous answers
-    answersContainer.innerHTML = "";  // Clear previous answers
-
     // Apply alternating background color based on question index
     if (currentQuestion % 2 === 0) {
         quizContainer.classList.add("question-even");
@@ -149,26 +140,29 @@ function showQuestion() {
         quizContainer.classList.add("question-odd");
         quizContainer.classList.remove("question-even");
     }
+    // Set question text, replacing {{name}} with userName or a fallback
+    const questionText = current.question.replace("{{name}}", userName || "survivor");
+    document.getElementById("question-text").innerText = questionText;
+    document.getElementById("question-illustration").src = current.gif;
+
+    // Clear previous answers
+    answersContainer.innerHTML = "";  // Clear previous answers
 
 current.answers.forEach((answer, index) => {
     const answerButton = document.createElement("button");
     answerButton.innerText = answer;
 
-    // Add click event listener for the button
     answerButton.addEventListener("click", () => {
         userAnswers.push(current.scores[index]);
 
-        // Reset hover state for all buttons before applying the clicked button's state
+        // Reset hover state for all buttons
         answersContainer.querySelectorAll('button').forEach(btn => {
-            btn.classList.remove('hover'); // Remove hover class if using CSS classes
-            btn.style.backgroundColor = ''; // Reset background color
-            btn.style.color = ''; // Reset text color
+            btn.classList.remove('selected'); // Remove selected class
         });
 
         // Apply the selected style to the clicked button
-        answerButton.style.backgroundColor = '#FF69B4'; // Change to pink when selected
-        answerButton.style.color = '#FFF'; // Set text color to white
-
+        answerButton.classList.add('selected'); // Add selected class
+        
         // Handle Question 5 branching to custom questions (6A, 6B, or 6C)
         if (currentQuestion === 4) {  // Check if it's Question 5
             updateProgressBar(); // Update progress bar before showing custom question
