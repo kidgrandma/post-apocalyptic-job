@@ -149,7 +149,12 @@ button {
         font-size: 1.4rem; /* Smaller for mobile */
         line-height: 1.6rem;
     }
-
+    #result-image {
+        width: 100%; /* Make sure it fills the container */
+        max-width: 600px; /* Cap it to a maximum width */
+        height: auto; /* Maintain aspect ratio */
+        margin-bottom: 5px; /* Adjust margin as needed */
+}
     #result-description {
         font-size: 1.2rem; /* Smaller for mobile */
         line-height: 1.4rem;
