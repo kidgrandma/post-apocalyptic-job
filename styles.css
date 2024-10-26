@@ -35,10 +35,10 @@ body {
 
 /* Alternating color hues for questions */
 .question-odd {
-    background-color: rgba(131, 56, 236, 0.7) !important; /* Initial color */
+    background-color: rgba(131, 56, 236, 0.7); /* Original translucent purple */
 }
 .question-even {
-    background-color: rgba(56, 131, 236, 0.7) !important; /* Alternate hue */
+    background-color: rgba(0, 255, 127, 0.7); /* Translucent neon green */
 }
 
 #name-input-container {
