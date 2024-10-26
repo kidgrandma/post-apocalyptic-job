@@ -152,3 +152,43 @@ button:active {
     max-width: 600px;
     margin-bottom: 5px; /* Adjust as needed */
 }
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    #quiz-container, #result-page {
+        padding: 0.5rem;
+        max-width: 100%;
+        width: 95%;
+        margin: 0 auto;
+        max-height: 80vh; /* Reduced height to fit better on mobile */
+        border-radius: 8px;
+    }
+
+    #name-input {
+        font-size: 0.9rem; /* Smaller font for mobile */
+    }
+
+    button {
+        padding: 0.4rem; /* Reduced padding for mobile */
+        font-size: 0.9rem; /* Smaller font for better fit */
+    }
+
+    #progress-bar {
+        height: 6px; /* Reduced height for mobile */
+        margin-top: 10px; /* Smaller top margin */
+    }
+
+    #result-title {
+        font-size: 1.5rem; /* Smaller title for mobile */
+    }
+
+    #cover-image, #question-illustration, #result-image {
+        width: 100%;
+        max-width: 100%; /* Full width on mobile */
+    }
+}
