@@ -102,6 +102,7 @@ function startQuiz() {
     // Prevent scroll jump by focusing on the container
     document.getElementById("quiz-container").scrollIntoView({ behavior: 'smooth' });
 }
+
 // Event listener for Start Quiz button
 document.addEventListener("DOMContentLoaded", function() {
     const startButton = document.getElementById("start-quiz");
@@ -112,68 +113,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Function to show the current question from the main array
 function showQuestion() {
-    // Define answersContainer and check if it exists (moved outside the if block)
     const answersContainer = document.getElementById("answers-container");
     if (!answersContainer) {
         console.error("Element with ID 'answers-container' not found.");
         return;  // Exit if the element doesn't exist
     }
 
-    // Check if we're at Question 5 (index 4) and handle branching
-    if (currentQuestion === 4) {  // Question 5
-        const current = questions[currentQuestion];
-        if (!current) {
-            console.error("Question not found for index", currentQuestion);
-            return;
-        }
-  // Replace placeholder with user's name in question text
-    const questionText = current.question.replace("{{name}}", userName || "survivor");
-
-        // Clear the answers container
-        answersContainer.innerHTML = "";  
-
-        document.getElementById("question-text").innerText = current.question;
-        document.getElementById("question-illustration").src = current.gif;
-
-        // Render answers for Question 5
-        current.answers.forEach((answer, index) => {
-            const answerButton = document.createElement("button");
-            answerButton.innerText = answer;
-
-            // Add click event listener for the button
-            answerButton.addEventListener("click", () => {
-                console.log(`Answer selected for Question 5: ${answer}`);  // Log selected answer
-                userAnswers.push(current.scores[index]);  // Record score for Question 5
-                console.log(`Score for Question 5 recorded: ${current.scores[index]}`);
-
-                // Add a small delay before transitioning to ensure the score is logged
-                setTimeout(() => {
-                    // Now branch to custom questions (6A, 6B, or 6C) based on the selected answer
-                    if (index === 0) {
-                        showCustomQuestion(question6A);
-                    } else if (index === 1) {
-                        showCustomQuestion(question6B);
-                    } else {
-                        showCustomQuestion(question6C);
-                    }
-                }, 100);  // Small 100ms delay
-            });
-
-            answersContainer.appendChild(answerButton);  // Append each answer button to the container
-        });
-
-        updateProgressBar();  // Update progress bar after displaying Question 5
-        return;  // Exit here to prevent further processing of other questions
-    }
-
-    // Regular question handling for non-branching questions
+    const quizContainer = document.getElementById("quiz-container");
     const current = questions[currentQuestion];
     if (!current) {
         console.error("Question not found for index", currentQuestion);
         return;
     }
- // Apply alternating background color
-    const quizContainer = document.getElementById("quiz-container");
+
+    // Set question text, replacing {{name}} with userName or a fallback
+    const questionText = current.question.replace("{{name}}", userName || "survivor");
+    document.getElementById("question-text").innerText = questionText;
+    document.getElementById("question-illustration").src = current.gif;
+
+    // Apply alternating background color based on question index
     if (currentQuestion % 2 === 0) {
         quizContainer.classList.add("question-even");
         quizContainer.classList.remove("question-odd");
@@ -182,52 +140,37 @@ function showQuestion() {
         quizContainer.classList.remove("question-even");
     }
 
+    // Clear previous answers and render new answer buttons
+    answersContainer.innerHTML = "";  
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
         answerButton.addEventListener("click", () => {
             userAnswers.push(current.scores[index]);
-            currentQuestion++;
-            if (currentQuestion < questions.length) {
-                showQuestion();
+
+            // Branching for Question 5 to custom questions (6A, 6B, or 6C)
+            if (currentQuestion === 4) {
+                setTimeout(() => {
+                    if (index === 0) showCustomQuestion(question6A);
+                    else if (index === 1) showCustomQuestion(question6B);
+                    else showCustomQuestion(question6C);
+                }, 100);
             } else {
-                showResults();
+                // Progress to next question or results for non-branching questions
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    showQuestion();
+                } else {
+                    showResults();
+                }
             }
         });
 
-        answersContainer.appendChild(answerButton);
+        answersContainer.appendChild(answerButton);  // Append each answer button to the container
     });
 
     updateProgressBar();
-}
-    // Clear previous question's answers
-    answersContainer.innerHTML = "";  
-
-    document.getElementById("question-text").innerText = current.question;
-    document.getElementById("question-illustration").src = current.gif;
-
-    current.answers.forEach((answer, index) => {
-        const answerButton = document.createElement("button");
-        answerButton.innerText = answer;
-
-        answerButton.addEventListener("click", () => {
-            console.log(`Answer button clicked: ${answer} (Index: ${index})`);
-            userAnswers.push(current.scores[index]);  // Record score for current question
-
-            // Move to the next question
-            currentQuestion++;
-            if (currentQuestion < questions.length) {
-                showQuestion();  // Show the next question
-            } else {
-                showResults();  // Show results if no more questions
-            }
-        });
-
-        answersContainer.appendChild(answerButton);
-    });
-
-    updateProgressBar(); // Update progress after displaying a question
 }
 // Function to show custom questions (6A, 6B, or 6C)
 function showCustomQuestion(customQuestion) {
