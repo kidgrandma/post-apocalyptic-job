@@ -174,9 +174,14 @@ button:active {
     }
 
     button {
-        background-color: #FF00FF; /* Pink background for mobile */
+        padding: 1rem; /* Adequate padding for touch */
+        font-size: 1.2rem; /* Larger font for visibility */
+        background-color: #FF00FF; /* Consistent button color for mobile */
         color: #000;
-        font-size: 1rem; /* Ensure it's the same as desktop */
+    }
+
+    button:active {
+        background-color: #FF69B4; /* Feedback color for tapped state */
     }
 
     /* Adjust result title and description sizes for mobile */
