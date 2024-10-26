@@ -38,8 +38,8 @@ const questions = [
     },
     {
           // Question 7 after custom questions 6A, 6B, or 6C
-        question: "Now that you found shelter, food, and a weapon—you’ve become quite the dickhead. How will you repent?",
-        answers: ["Rehab", "Double down at the casino"],
+        question: "You're kind of an asshole now that you have food, shelter, and a weapon. How will you celebrate?",
+        answers: ["Rehab baby!", "Double down at the casino"],
         scores: [3, 6],
         gif: "images/question7-illustration.gif"
     },
