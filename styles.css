@@ -107,11 +107,6 @@ button {
     font-size: 1rem; /* Adjust for better visibility */
 }
 
-.selected {
-    background-color: #FF69B4; /* Pink when selected */
-    color: #FFF; /* White text */
-}p
-
 /* Additional mobile-specific styles to enhance button visibility */
 @media (max-width: 600px) {
     button {
