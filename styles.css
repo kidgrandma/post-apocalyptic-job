@@ -87,7 +87,6 @@ body {
     border-radius: 50px;
     box-shadow: 0 0 10px #00ffff, 0 0 15px #ff00ff;
 }
-
 button {
     display: block;
     width: 100%;
@@ -102,26 +101,30 @@ button {
     border-radius: 5px;
     box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF; /* Glow effect */
     text-transform: uppercase;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
 }
 
+/* Updated hover state for non-touch devices */
 button:hover {
     background-color: #FF00FF;
     color: #FFF;
 }
 
+/* Active state */
 button:active {
     background-color: #FF00FF; /* Shows pink on click */
     transform: scale(0.97);
     box-shadow: 0 0 15px #FF00FF, 0 0 20px #00FFFF;
 }
 
-/* Disable hover styles for touch devices */
+/* Disable hover styles for touch devices while keeping other button behaviors */
 @media (hover: none) {
     button:hover {
-        background-color: inherit;
-        color: inherit;
+        background-color: #00FFFF; /* Keep the original color */
+        color: #000; /* Keep the original text color */
     }
 }
+
 
 #cover-image, #question-illustration {
     width: 100%;
