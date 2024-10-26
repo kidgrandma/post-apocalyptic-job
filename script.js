@@ -157,8 +157,9 @@ function showQuestion() {
                 btn.style.color = ''; // Reset text color
             });
 
-            // Branching for Question 5 to custom questions (6A, 6B, or 6C)
-            if (currentQuestion === 4) {
+     // Handle Question 5 branching to custom questions (6A, 6B, or 6C)
+            if (currentQuestion === 4) {  // Check if it's Question 5
+                updateProgressBar(); // Update progress bar before showing custom question
                 setTimeout(() => {
                     if (index === 0) showCustomQuestion(question6A);
                     else if (index === 1) showCustomQuestion(question6B);
@@ -168,6 +169,7 @@ function showQuestion() {
                 // Progress to next question or results for non-branching questions
                 currentQuestion++;
                 if (currentQuestion < questions.length) {
+                    updateProgressBar(); // Update progress bar for non-custom questions
                     showQuestion();
                 } else {
                     showResults();
@@ -175,10 +177,10 @@ function showQuestion() {
             }
         });
 
-        answersContainer.appendChild(answerButton);  // Append each answer button to the container
+        answersContainer.appendChild(answerButton);
     });
 
-    updateProgressBar();
+    updateProgressBar(); // Ensure progress bar updates for each question
 }
 // Function to show custom questions (6A, 6B, or 6C)
 function showCustomQuestion(customQuestion) {
