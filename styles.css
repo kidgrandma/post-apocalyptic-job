@@ -110,21 +110,7 @@ button {
 .selected {
     background-color: #FF69B4; /* Pink when selected */
     color: #FFF; /* White text */
-}
-
-/* Updated hover state for non-touch devices */
-button:hover {
-    background-color: #FF00FF;
-    color: #FFF;
-}
-
-/* Disable hover styles for touch devices */
-@media (hover: none) {
-    button:hover {
-        background-color: #00FFFF; /* Keep original color */
-        color: #000; /* Keep original text color */
-    }
-}
+}p
 
 /* Additional mobile-specific styles to enhance button visibility */
 @media (max-width: 600px) {
