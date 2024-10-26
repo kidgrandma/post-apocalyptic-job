@@ -129,16 +129,6 @@ button:active {
     margin: 0 auto;
 }
 
-#result-page {
-    padding: 20px;  
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: rgba(131, 56, 236, 0.7);
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
-    text-align: center;
-}
-
 #result-title {
     font-size: 1.8rem; /* Adjust as needed */
     color: #ffffff;
@@ -168,10 +158,6 @@ button:active {
         font-size: 1rem; /* Ensure it's the same as desktop */
     }
 
-    button:hover {
-        background-color: #FF69B4; /* Lighter pink on hover */
-    }
-
     #result-title {
         font-size: 1.4rem; /* Smaller on mobile */
         line-height: 1.6rem;
@@ -181,4 +167,10 @@ button:active {
         font-size: 1.2rem;
         line-height: 1.4rem;
     }
+    @media (hover: none) {
+    button:hover {
+        background-color: inherit;
+        color: inherit;
+    }
+}
 }
