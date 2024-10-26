@@ -85,21 +85,31 @@ body {
     border-radius: 50px;
     box-shadow: 0 0 10px #00ffff, 0 0 15px #ff00ff;
 }
+#result-page {
+    padding: 15px; /* Reduced padding */
+    max-width: 90%; /* Allow more room for buttons */
+    margin: 0 auto;
+    background-color: rgba(131, 56, 236, 0.7);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    text-align: center;
+    overflow-y: auto; /* Allow scrolling if content exceeds height */
+}
 
 button {
     display: block;
-    width: 100%;
-    max-width: 300px;
-    padding: 0.5rem 1rem;
-    margin: 10px auto;
+    width: 100%; /* Make buttons full width */
+    max-width: none; /* Remove the max-width restriction */
+    padding: 0.5rem; /* Ensure adequate padding */
+    margin: 10px auto; /* Adjust margins to avoid cutting off */
     cursor: pointer;
-    background-color: #00FFFF;
+    background-color: #00FFFF; /* Default button color */
     color: #000;
     font-family: 'LazyDog', sans-serif;
     font-size: 1rem;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF;
+    box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF; /* Glow effect */
     text-transform: uppercase;
 }
 
