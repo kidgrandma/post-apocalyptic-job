@@ -91,13 +91,13 @@ body {
 button {
     display: block;
     width: 100%;
-    padding: 0.5rem; /* Ensure adequate padding */
+    padding: 1rem; /* Increase padding for better touch targets */
     margin: 10px auto; /* Adjust margins to avoid cutting off */
     cursor: pointer;
     background-color: #00FFFF; /* Default button color */
     color: #000;
     font-family: 'LazyDog', sans-serif;
-    font-size: 1rem;
+    font-size: 1.2rem; /* Slightly increase font size for readability */
     border: none;
     border-radius: 5px;
     box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF; /* Glow effect */
@@ -130,6 +130,19 @@ button:active {
         color: #000; /* Keep the original text color */
     }
 }
+
+/* Additional mobile-specific styles to enhance button visibility */
+@media (max-width: 600px) {
+    button {
+        font-size: 1.2rem; /* Ensure larger text on mobile */
+        padding: 1rem; /* Ensure adequate padding for touch */
+    }
+
+    #result-page {
+        padding: 20px; /* Adjust padding if needed to avoid cutting off buttons */
+    }
+}
+
 
 #cover-image, #question-illustration {
     width: 100%;
