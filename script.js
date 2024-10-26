@@ -148,48 +148,47 @@ function showQuestion() {
     // Clear previous answers
     answersContainer.innerHTML = "";  // Clear previous answers
 
-current.answers.forEach((answer, index) => {
-    const answerButton = document.createElement("button");
-    answerButton.innerText = answer;
+// Create answer buttons
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
 
-    answerButton.addEventListener("click", () => {
-    userAnswers.push(current.scores[index]);
+        answerButton.addEventListener("click", () => {
+            userAnswers.push(current.scores[index]);
 
-    // Reset hover state for all buttons
-    answersContainer.querySelectorAll('button').forEach(btn => {
-        btn.classList.remove('selected'); // Remove selected class if needed
-        btn.style.backgroundColor = ''; // Reset background color
-        btn.style.color = ''; // Reset text color
+            // Reset hover state for all buttons
+            answersContainer.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('selected'); // Remove selected class
+            });
+
+            // Apply the selected style to the clicked button
+            answerButton.classList.add('selected'); // Add class for visual feedback
+        
+            // Handle Question 5 branching to custom questions (6A, 6B, or 6C)
+            if (currentQuestion === 4) {  // Check if it's Question 5
+                updateProgressBar(); // Update progress bar
+                setTimeout(() => {
+                    if (index === 0) showCustomQuestion(question6A);
+                    else if (index === 1) showCustomQuestion(question6B);
+                    else showCustomQuestion(question6C);
+                }, 100);
+            } else {
+                // Progress to next question or results for non-branching questions
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    updateProgressBar(); // Update progress bar for non-custom questions
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }
+        });
+
+        answersContainer.appendChild(answerButton); // Append each answer button to the container
     });
 
-    // Apply the selected style to the clicked button
-    answerButton.classList.add('selected'); // Add class for visual feedback
-});
-        
-// Handle Question 5 branching to custom questions (6A, 6B, or 6C)
-if (currentQuestion === 4) {  // Check if it's Question 5
-    updateProgressBar(); // Update progress bar before showing custom question
-    setTimeout(() => {
-        if (index === 0) showCustomQuestion(question6A);
-        else if (index === 1) showCustomQuestion(question6B);
-        else showCustomQuestion(question6C);
-    }, 100);
-} else {
-    // Progress to next question or results for non-branching questions
-    currentQuestion++;
-    if (currentQuestion < questions.length) {
-        updateProgressBar(); // Update progress bar for non-custom questions
-        showQuestion();
-    } else {
-        showResults();
-    }
+    updateProgressBar(); // Ensure progress bar updates for each question
 }
-
-// This closing bracket is correct if it corresponds to a function or loop.
-// If it's closing an event listener or a function, ensure it matches the opening bracket.
-answersContainer.appendChild(answerButton); // Append each answer button to the container
-
-updateProgressBar(); // Ensure progress bar updates for each question
 // Function to show custom questions (6A, 6B, or 6C)
 function showCustomQuestion(customQuestion) {
     // Display the custom question and associated image
@@ -222,7 +221,7 @@ function showCustomQuestion(customQuestion) {
     // Update progress bar after displaying the custom question
     updateProgressBar();
 }
-// Function to update progress bar 
+// Update Progress Bar Function
 function updateProgressBar(completion = null) {
     let progressPercent;
 
