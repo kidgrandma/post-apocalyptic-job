@@ -117,8 +117,6 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('progress-bar').style.display = 'block';
     }
 });
-
-// Function to show the current question from the main array
 function showQuestion() {
     const answersContainer = document.getElementById("answers-container");
     if (!answersContainer) {
@@ -132,6 +130,7 @@ function showQuestion() {
         console.error("Question not found for index", currentQuestion);
         return;
     }
+
     // Apply alternating background color based on question index
     if (currentQuestion % 2 === 0) {
         quizContainer.classList.add("question-even");
@@ -140,6 +139,7 @@ function showQuestion() {
         quizContainer.classList.add("question-odd");
         quizContainer.classList.remove("question-even");
     }
+
     // Set question text, replacing {{name}} with userName or a fallback
     const questionText = current.question.replace("{{name}}", userName || "survivor");
     document.getElementById("question-text").innerText = questionText;
@@ -149,47 +149,47 @@ function showQuestion() {
     // Clear previous answers
     answersContainer.innerHTML = "";  // Clear previous answers
 
-    
-// Create answer buttons
-current.answers.forEach((answer, index) => {
-    const answerButton = document.createElement("button");
-    answerButton.innerText = answer;
+    // Create answer buttons
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
 
-    answerButton.addEventListener("click", () => {
-        userAnswers.push(current.scores[index]);
+        answerButton.addEventListener("click", () => {
+            userAnswers.push(current.scores[index]);
 
-        // Reset all buttons
-        answersContainer.querySelectorAll('button').forEach(btn => {
-            btn.classList.remove('selected'); // Remove selected class
-            btn.style.backgroundColor = ''; // Reset background color
-            btn.style.color = ''; // Reset text color
+            // Reset all buttons
+            answersContainer.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('selected'); // Remove selected class
+                btn.style.backgroundColor = ''; // Reset background color
+                btn.style.color = ''; // Reset text color
+            });
+
+            // Apply the selected style to the clicked button
+            answerButton.classList.add('selected'); // Add class for visual feedback
+
+            // Handle Question 5 branching to custom questions (6A, 6B, or 6C)
+            if (currentQuestion === 4) {  // Check if it's Question 5
+                updateProgressBar(); // Update progress bar
+                setTimeout(() => {
+                    if (index === 0) showCustomQuestion(question6A);
+                    else if (index === 1) showCustomQuestion(question6B);
+                    else showCustomQuestion(question6C);
+                }, 100);
+            } else {
+                // Progress to next question or results for non-branching questions
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    updateProgressBar(); // Update progress bar for non-custom questions
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }
         });
 
-        // Apply the selected style to the clicked button
-        answerButton.classList.add('selected'); // Add class for visual feedback
-
-        // Handle Question 5 branching to custom questions (6A, 6B, or 6C)
-        if (currentQuestion === 4) {  // Check if it's Question 5
-            updateProgressBar(); // Update progress bar
-            setTimeout(() => {
-                if (index === 0) showCustomQuestion(question6A);
-                else if (index === 1) showCustomQuestion(question6B);
-                else showCustomQuestion(question6C);
-            }, 100);
-        } else {
-            // Progress to next question or results for non-branching questions
-            currentQuestion++;
-            if (currentQuestion < questions.length) {
-                updateProgressBar(); // Update progress bar for non-custom questions
-                showQuestion();
-            } else {
-                showResults();
-            }
-        }
+        answersContainer.appendChild(answerButton); // Append each answer button to the container
     });
-
-    answersContainer.appendChild(answerButton); // Append each answer button to the container
-});
+} 
 
 // Function to show custom questions (6A, 6B, or 6C)
 function showCustomQuestion(customQuestion) {
