@@ -27,7 +27,7 @@ body {
     border-radius: 10px;
     text-align: center;
     backdrop-filter: blur(5px);
-    overflow-y: hidden;
+    overflow-y: auto;
     max-height: 90vh;
     position: relative;
     transition: background-color 0.5s;
@@ -103,6 +103,8 @@ button {
     box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF; /* Glow effect */
     text-transform: uppercase;
     transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+ min-height: 50px; /* Ensure the button has a minimum height */
+    font-size: 1rem; /* Adjust for better visibility */
 }
 
 .selected {
@@ -116,18 +118,11 @@ button:hover {
     color: #FFF;
 }
 
-/* Active state */
-button:active {
-    background-color: #FF00FF; /* Shows pink on click */
-    transform: scale(0.97);
-    box-shadow: 0 0 15px #FF00FF, 0 0 20px #00FFFF;
-}
-
-/* Disable hover styles for touch devices while keeping other button behaviors */
+/* Disable hover styles for touch devices */
 @media (hover: none) {
     button:hover {
-        background-color: #00FFFF; /* Keep the original color */
-        color: #000; /* Keep the original text color */
+        background-color: #00FFFF; /* Keep original color */
+        color: #000; /* Keep original text color */
     }
 }
 
