@@ -266,6 +266,7 @@ function showResults() {
     document.getElementById("result-page").style.display = "block";
 
     const totalScore = userAnswers.reduce((a, b) => a + b, 0);
+    console.log(`Total Score: ${totalScore}`);  // Log the total score to the console
     const outcome = determineOutcome(totalScore);
 
     // Get crew color based on outcome
