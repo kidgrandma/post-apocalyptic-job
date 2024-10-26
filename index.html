@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="quiz-container"> <!-- Removed the glitch class for simplicity -->
-        
+
         <!-- Start Page -->
         <div id="start-page">
             <img id="cover-image" src="images/apocalypse-survival-job-cover.png" alt="Cover image: Which Apocalypse Survival Crew Will Keep You Alive?" style="width:100%; max-width:600px; display:block; margin: 0 auto;">
@@ -21,30 +21,34 @@
             
             <button id="start-quiz" aria-label="Start the quiz">Start Quiz</button>
         </div>
-        
-        <!-- Progress Bar -->
-        <div id="progress-bar" style="width: 100%; background-color: rgba(0, 0, 0, 0.6); height: 10px; border-radius: 5px; margin-bottom: 20px;">
-            <div id="progress-fill" style="width: 0%; background-color: #00ff00; height: 100%; border-radius: 5px; box-shadow: 0px 0px 10px 3px #00ff00; animation: glitch 1.5s infinite;"></div>
-        </div>
 
         <!-- Question Page -->
         <div id="question-page" style="display: none;">
+            <!-- Progress Bar -->
+            <div id="progress-bar" style="width: 100%; background-color: rgba(0, 0, 0, 0.6); height: 10px; border-radius: 5px; margin-bottom: 20px;">
+                <div id="progress-fill" style="width: 0%; background-color: #00ff00; height: 100%; border-radius: 5px; box-shadow: 0px 0px 10px 3px #00ff00; animation: glitch 1.5s infinite;"></div>
+            </div>
+
             <!-- Dynamically changing question illustrations -->
             <img id="question-illustration" src="" alt="Question illustration" style="width:100%; max-width:400px; display:block; margin: 20px auto;">
             <h2 id="question-text"></h2>
             <div id="answers-container"></div>
         </div>
 
-<!-- Result Page -->
-<div id="result-page" style="display: none;">
-    <h1 id="result-title"></h1>
-    <img id="result-image" src="" alt="Result outcome image" style="width:100%; max-width:600px; display:block; margin: 20px auto;">
-    <p id="result-description"></p>
-    <button id="retake-quiz" aria-label="Retake the quiz">Retake Quiz</button>
-    <button id="meet-moderator" aria-label="Meet the moderator">Meet the Moderator</button>
-    <button id="copy-link-button" aria-label="Copy the quiz link">Copy Quiz Link</button>
-</div>
+        <!-- Result Page -->
+        <div id="result-page" style="display: none;">
+            <h1 id="result-title"></h1>
+            <img id="result-image" src="" alt="Result outcome image" style="width:100%; max-width:600px; display:block; margin: 20px auto;">
+            <p id="result-description"></p>
+            <button id="retake-quiz" aria-label="Retake the quiz">Retake Quiz</button>
+            <button id="meet-moderator" aria-label="Meet the moderator">Meet the Moderator</button>
+            <button id="copy-link-button" aria-label="Copy the quiz link">Copy Quiz Link</button>
+        </div>
+    </div>
 
+    <!-- Ensure that the script.js path is correct and place it before the closing body tag -->
+    <script src="script.js"></script>
+</body>
     <script src="script.js"></script>
 </body>
 </html>
