@@ -275,7 +275,7 @@ function showQuestion10() {
 function showResults() {
     document.getElementById("question-page").style.display = "none";
     document.getElementById("result-page").style.display = "block";
-
+document.getElementById('progress-bar').style.display = 'none';
     const totalScore = userAnswers.reduce((a, b) => a + b, 0);
     console.log(`Total Score: ${totalScore}`);  // Log the total score to the console
     const outcome = determineOutcome(totalScore);
