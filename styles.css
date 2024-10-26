@@ -87,79 +87,61 @@ body {
     border-radius: 50px; /* Rounded edges */
     box-shadow: 0 0 10px #00ffff, 0 0 15px #00ff00; /* Neon glow effect */
 }
-
 button {
     display: block;
     width: 100%;
-    padding: 1rem; /* Increase padding for better touch targets */
+    padding: 1rem; /* Increase padding for better touch target */
     margin: 10px auto; /* Adjust margins to avoid cutting off */
     cursor: pointer;
     background-color: #00FFFF; /* Default button color */
     color: #000;
     font-family: 'LazyDog', sans-serif;
-    font-size: 1.2rem; /* Slightly increase font size for readability */
+    font-size: 1.2rem; /* Slightly larger font for readability */
     border: none;
     border-radius: 5px;
     box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF; /* Glow effect */
     text-transform: uppercase;
     transition: background-color 0.3s, color 0.3s; /* Smooth transition */
- min-height: 50px; /* Ensure the button has a minimum height */
-    font-size: 1rem; /* Adjust for better visibility */
 }
 
-/* Additional mobile-specific styles to enhance button visibility */
+.selected {
+    background-color: #FF69B4; /* Pink when selected */
+    color: #FFF; /* White text */
+}
+/* Disable hover styles for touch devices while keeping other button behaviors */
+@media (hover: none) {
+    button:hover {
+        background-color: #00FFFF; /* Keep the original color */
+        color: #000; /* Keep the original text color */
+    }
+}
+
+/* Adjust button size on touch devices */
 @media (max-width: 600px) {
     button {
-        font-size: 1.2rem; /* Ensure larger text on mobile */
-        padding: 1rem; /* Ensure adequate padding for touch */
+        padding: 1.2rem; /* Adjust padding for larger touch targets */
+        font-size: 1.2rem; /* Slightly larger font */
     }
 
-    #result-page {
-        padding: 20px; /* Adjust padding if needed to avoid cutting off buttons */
-    }
-}
-
-
-#cover-image, #question-illustration {
-    width: 100%;
-    max-width: 600px;
-    display: block;
-    margin: 0 auto;
-}
-
-#result-page {
-    padding: 20px; /* Consistent padding with quiz container */
-    max-width: 600px;
-    width: 90%; /* Ensure it doesn't exceed viewport */
-    margin: 0 auto;
-    background-color: rgba(131, 56, 236, 0.7); /* Match the quiz container */
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
-    text-align: center;
-    box-shadow: none; /* Ensure there's no shadow */
-}
-
-#result-title {
-    font-size: 1.8rem; /* Adjust as needed */
-    color: #ffffff;
-    text-shadow: 0 0 10px rgba(255, 0, 255, 0.7), 0 0 15px rgba(0, 255, 255, 0.7);
-    margin-bottom: 10px; /* Add spacing below title */
-}
-
-#result-image {
-    width: 100%;
-    max-width: 600px;
-    margin-bottom: 5px; /* Adjust as needed */
-}
-
-/* Mobile Styling */
-@media (max-width: 600px) {
+    /* Mobile-specific styles for result page */
     body {
         background-color: #000; /* Fallback background color */
     }
 
     #quiz-container {
         background-color: rgba(131, 56, 236, 0.7); /* Match the desktop */
+    }
+
+    #result-page {
+        padding: 20px; /* Consistent padding with quiz container */
+        max-width: 600px;
+        width: 90%; /* Ensure it doesn't exceed viewport */
+        margin: 0 auto;
+        background-color: rgba(131, 56, 236, 0.7); /* Match the quiz container */
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+        text-align: center;
+        box-shadow: none; /* Ensure there's no shadow */
     }
 
     /* Adjust result title and description sizes for mobile */
@@ -173,3 +155,11 @@ button {
         line-height: 1.4rem;
     }
 }
+
+#cover-image, #question-illustration {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 0 auto;
+}
+
