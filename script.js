@@ -172,7 +172,35 @@ function showQuestion() {
         console.error("Question not found for index", currentQuestion);
         return;
     }
+ // Apply alternating background color
+    const quizContainer = document.getElementById("quiz-container");
+    if (currentQuestion % 2 === 0) {
+        quizContainer.classList.add("question-even");
+        quizContainer.classList.remove("question-odd");
+    } else {
+        quizContainer.classList.add("question-odd");
+        quizContainer.classList.remove("question-even");
+    }
 
+    current.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.innerText = answer;
+
+        answerButton.addEventListener("click", () => {
+            userAnswers.push(current.scores[index]);
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        answersContainer.appendChild(answerButton);
+    });
+
+    updateProgressBar();
+}
     // Clear previous question's answers
     answersContainer.innerHTML = "";  
 
