@@ -146,36 +146,33 @@ button:active {
 
 /* Mobile Styling */
 @media (max-width: 600px) {
-    #quiz-container {
-        padding: 0.625rem;
-        max-width: 90%;
-        backdrop-filter: blur(3px);
+    body {
+        background-color: #000; /* Fallback background color */
     }
 
+    #quiz-container {
+        background-color: rgba(131, 56, 236, 0.7); /* Match the desktop */
+    }
+
+    /* Button styles for mobile */
+    button {
+        background-color: #FF00FF; /* Pink background */
+        color: #000;
+        font-size: 1rem; /* Ensure it's the same as desktop */
+    }
+
+    button:hover {
+        background-color: #FF69B4; /* Lighter pink on hover */
+    }
+
+    /* Result title and description styles */
     #result-title {
-        font-size: 1.2rem; /* Smaller font for outcome title */
-        line-height: 1.4rem;
-        text-shadow: 0 0 5px rgba(255, 0, 255, 0.5), 0 0 8px rgba(0, 255, 255, 0.5);
+        font-size: 1.4rem; /* Adjust to make it more readable */
+        line-height: 1.6rem;
     }
 
     #result-description {
         font-size: 1.2rem;
         line-height: 1.4rem;
-    }
-
-    html, body {
-        overflow: hidden;
-        height: 100%;
-    }
-
-    #quiz-container {
-        max-height: 100vh;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    /* Adjust button size on mobile */
-    button {
-        font-size: 0.9rem;
     }
 }
