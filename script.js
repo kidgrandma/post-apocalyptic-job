@@ -125,12 +125,6 @@ function showQuestion() {
         console.error("Question not found for index", currentQuestion);
         return;
     }
-
-    // Set question text, replacing {{name}} with userName or a fallback
-    const questionText = current.question.replace("{{name}}", userName || "survivor");
-    document.getElementById("question-text").innerText = questionText;
-    document.getElementById("question-illustration").src = current.gif;
-
     // Apply alternating background color based on question index
     if (currentQuestion % 2 === 0) {
         quizContainer.classList.add("question-even");
@@ -139,6 +133,12 @@ function showQuestion() {
         quizContainer.classList.add("question-odd");
         quizContainer.classList.remove("question-even");
     }
+
+    // Set question text, replacing {{name}} with userName or a fallback
+    const questionText = current.question.replace("{{name}}", userName || "survivor");
+    document.getElementById("question-text").innerText = questionText;
+    document.getElementById("question-illustration").src = current.gif;
+
 
     // Clear previous answers and render new answer buttons
     answersContainer.innerHTML = "";  
