@@ -44,19 +44,19 @@ const questions = [
         gif: "images/question7-illustration.gif"
     },
     {
-        question: "Surprise! It’s a water witch and they've granted you three wishes in exchange for all your supplies.",
-        answers: ["Wishy wish", "No deal", "Amateur massage"],
+        question: "OMG {{name}}! You've met a Smart Water Witch, you get unlimited wishes—but there's a price. What's the deal?",
+        answers: ["Wishy wish", "No deal", "Cut them and run"],
         scores: [6, 3, 4],
         gif: "images/question8-illustration.gif"
     },
     {
-        question: "Oh no! You’ve been ROBBED. How do you go out?",
+        question: "Turns out, the Smart Water Witch sold you to the Caffeine Nicotine Cartel. How do you approach?",
         answers: ["OD on cigarettes", "Hadouken"],
         scores: [3, 4],
         gif: "images/question9-illustration.gif"
     },
     {
-        question: "The Protein Priest has saved you. You can join his wellness club or pledge your life to an apocalypse crew.",
+        question: "The Protein Priest rescues you. You can join his wellness club or find literally anyone else to be friends with so you don't...die.",
         answers: ["Meet your new gang", "Hot yoga matcha baptism"],
         scores: [3, 6],
         gif: "images/question10-illustration.gif"
