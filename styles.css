@@ -30,7 +30,7 @@ body {
     overflow-y: auto;
     max-height: 90vh;
     position: relative;
-    transition: background-color 0.5s;
+    transition: background-color 0.3s;
 }
 
 /* Alternating color hues for questions */
