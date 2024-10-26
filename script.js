@@ -153,15 +153,18 @@ current.answers.forEach((answer, index) => {
     answerButton.innerText = answer;
 
     answerButton.addEventListener("click", () => {
-        userAnswers.push(current.scores[index]);
+    userAnswers.push(current.scores[index]);
 
-        // Reset hover state for all buttons
-        answersContainer.querySelectorAll('button').forEach(btn => {
-            btn.classList.remove('selected'); // Remove selected class
-        });
+    // Reset hover state for all buttons
+    answersContainer.querySelectorAll('button').forEach(btn => {
+        btn.classList.remove('selected'); // Remove selected class if needed
+        btn.style.backgroundColor = ''; // Reset background color
+        btn.style.color = ''; // Reset text color
+    });
 
-        // Apply the selected style to the clicked button
-        answerButton.classList.add('selected'); // Add selected class
+    // Apply the selected style to the clicked button
+    answerButton.classList.add('selected'); // Add class for visual feedback
+});
         
         // Handle Question 5 branching to custom questions (6A, 6B, or 6C)
         if (currentQuestion === 4) {  // Check if it's Question 5
