@@ -139,16 +139,19 @@ function showQuestion() {
     document.getElementById("question-text").innerText = questionText;
     document.getElementById("question-illustration").src = current.gif;
 
-
-    // Clear previous answers and render new answer buttons
-    answersContainer.innerHTML = "";  
+    // Render new answer buttons
     current.answers.forEach((answer, index) => {
         const answerButton = document.createElement("button");
         answerButton.innerText = answer;
 
         answerButton.addEventListener("click", () => {
-            userAnswers.push(current.scores[index]);
+            // Clear button hover state
+            answersContainer.querySelectorAll('button').forEach(btn => {
+                btn.style.backgroundColor = ''; // Reset background color
+                btn.style.color = ''; // Reset text color
+            });
 
+            userAnswers.push(current.scores[index]);
             // Branching for Question 5 to custom questions (6A, 6B, or 6C)
             if (currentQuestion === 4) {
                 setTimeout(() => {
