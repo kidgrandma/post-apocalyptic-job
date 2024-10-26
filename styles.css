@@ -162,13 +162,6 @@ button {
         background-color: rgba(131, 56, 236, 0.7); /* Match the desktop */
     }
 
-    button {
-        padding: 1rem; /* Adequate padding for touch */
-        font-size: 1.2rem; /* Larger font for visibility */
-        background-color: #FF00FF; /* Consistent button color for mobile */
-        color: #000;
-    }
-
     /* Adjust result title and description sizes for mobile */
     #result-title {
         font-size: 1.4rem; /* Smaller for mobile */
