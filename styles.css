@@ -81,12 +81,13 @@ body {
 
 #progress-fill {
     height: 100%;
-    background-color: #00ffff;
-    width: 0;
-    transition: none;
-    border-radius: 50px;
-    box-shadow: 0 0 10px #00ffff, 0 0 15px #ff00ff;
+    background-color: #00ffff; /* Neon green */
+    width: 0; /* Initially set to 0 for the progress bar */
+    transition: width 0.3s ease; /* Smooth transition */
+    border-radius: 50px; /* Rounded edges */
+    box-shadow: 0 0 10px #00ffff, 0 0 15px #00ff00; /* Neon glow effect */
 }
+
 button {
     display: block;
     width: 100%;
@@ -102,6 +103,11 @@ button {
     box-shadow: 0 0 15px #00FFFF, 0 0 20px #FF00FF; /* Glow effect */
     text-transform: uppercase;
     transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.selected {
+    background-color: #FF69B4; /* Pink when selected */
+    color: #FFF; /* White text */
 }
 
 /* Updated hover state for non-touch devices */
@@ -124,7 +130,6 @@ button:active {
         color: #000; /* Keep the original text color */
     }
 }
-
 
 #cover-image, #question-illustration {
     width: 100%;
