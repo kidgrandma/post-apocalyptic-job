@@ -279,7 +279,7 @@ function showQuestion10() {
 
     updateProgressBar();  // Update progress bar when showing Question 10
 }
-// Function to show results
+// Function to show the results
 function showResults() {
     // Hide the question page and show the results page
     document.getElementById("question-page").style.display = "none";
