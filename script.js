@@ -102,12 +102,13 @@ function startQuiz() {
     // Show the progress bar
     progressBarContainer.style.display = 'block'; // Show the progress bar
     updateProgressBar(0); // Reset progress to 0%
-    
+
     showQuestion(); // Show the first question
 
     // Prevent scroll jump by focusing on the container
     document.getElementById("quiz-container").scrollIntoView({ behavior: 'smooth' });
 }
+
 // Event listener for Start Quiz button
 document.addEventListener("DOMContentLoaded", function() {
     const startButton = document.getElementById("start-quiz");
@@ -224,18 +225,18 @@ function showCustomQuestion(customQuestion) {
     // Update progress bar after displaying the custom question
     updateProgressBar();
 }
-// function to update progress bar 
+// Function to update progress bar 
 function updateProgressBar(completion = null) {
     let progressPercent;
 
     if (completion !== null) {
-        progressPercent = completion;
+        progressPercent = completion; // Use the provided completion value
     } else {
-        progressPercent = ((currentQuestion + 1) / totalQuestions) * 100;
+        progressPercent = ((currentQuestion + 1) / totalQuestions) * 100; // Calculate progress percentage
     }
 
-    if (progressBar) {
-        progressBar.style.width = `${progressPercent}%`;
+    if (progressFill) { // Ensure progressFill is defined
+        progressFill.style.width = `${progressPercent}%`; // Set the width of the progress fill element
     }
 }
 // Function to move to Question 7 after custom questions
@@ -279,7 +280,7 @@ function showQuestion10() {
 
     updateProgressBar();  // Update progress bar when showing Question 10
 }
-// Function to show the results
+// Function to show results
 function showResults() {
     // Hide the question page and show the results page
     document.getElementById("question-page").style.display = "none";
