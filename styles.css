@@ -157,38 +157,43 @@ button:active {
     body {
         padding: 0;
         margin: 0;
-        overflow: hidden;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
     }
 
     #quiz-container, #result-page {
-        padding: 0.5rem;
-        max-width: 100%;
+        padding: 1rem;
+        max-width: 95%;
         width: 95%;
         margin: 0 auto;
-        max-height: 80vh; /* Reduced height to fit better on mobile */
+        max-height: 75vh; /* Adjusted height to avoid content cutoff */
         border-radius: 8px;
+        overflow-y: auto; /* Enable scrolling within the container if content overflows */
     }
 
     #name-input {
-        font-size: 0.9rem; /* Smaller font for mobile */
+        font-size: 0.85rem; /* Smaller font for mobile */
     }
 
     button {
-        padding: 0.4rem; /* Reduced padding for mobile */
-        font-size: 0.9rem; /* Smaller font for better fit */
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        width: 90%; /* Keep buttons within viewable area */
+        margin: 0.5rem auto; /* Spacing between buttons */
     }
 
     #progress-bar {
-        height: 6px; /* Reduced height for mobile */
-        margin-top: 10px; /* Smaller top margin */
-    }
-
-    #result-title {
-        font-size: 1.5rem; /* Smaller title for mobile */
+        display: none; /* Initially hide on cover screen */
     }
 
     #cover-image, #question-illustration, #result-image {
         width: 100%;
-        max-width: 100%; /* Full width on mobile */
+        max-width: 100%; /* Ensure full width on mobile */
+    }
+
+    /* Text alignment and resizing */
+    #result-title, .question-text {
+        font-size: 1.4rem;
+        line-height: 1.2;
+        margin: 0.5rem 0;
     }
 }
