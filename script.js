@@ -12,25 +12,25 @@ const questions = [
         gif: "images/question1-illustration.gif"
     },
     {
-        question: "Thank gosh you got out of there alive. Death by science guy would have been a weird way to go out. It’s breakfast time! Choose a BUDDY™️ to forage for food:",
+        question: "Bill Nye didn't need you anyway. You'll need a BUDDY™️ to survive the next 24hrs. Who's it gonna be?",
         answers: ["Tupperware Tammy", "The Hermes Shredders", "The Used Bar Salesman"],
         scores: [3, 4, 2],
         gif: "images/question2-illustration.gif"
     },
     {
-        question: "Great work! You and your BUDDY™️ need to grab something to eat, where ya headed?",
+        question: "Great work {{name}}! You're new here so you'll be in charge of the next meal. What's the plan?",
         answers: ["Waffle House", "Steal from someone's kid", "Street fighter for it"],
         scores: [2, 3, 1],
         gif: "images/question3-illustration.gif"
     },
     {
-        question: "Uh oh! Not enough food for you and BUDDY™️ - what do you do?",
+        question: "Uh oh! Not enough food for you and BUDDY™️. What's the move?",
         answers: ["Kill BUDDY™️", "Share food with BUDDY™️", "Sell BUDDY™️"],
         scores: [4, 2, 4],
         gif: "images/question4-illustration.gif"
     },
     {
-        question: "Aw, BUDDY™️ died anyways. Time to look for shelter. Where do you go?",
+        question: "Aw, BUDDY™️ died anyways. Time to look for shelter. Where are you headed?",
         answers: ["Abandoned DMV", "Mojo Dojo Casa House", "Spirit Halloween"],
         scores: [3, 5, 3],
         gif: "images/question5-illustration.gif"
@@ -51,13 +51,13 @@ const questions = [
     {
         question: "Oh no! You’ve been ROBBED. How do you go out?",
         answers: ["OD on cigarettes", "Hadouken"],
-        scores: [3, 6],
+        scores: [3, 4],
         gif: "images/question9-illustration.gif"
     },
     {
         question: "The Protein Priest has saved you. You can join his wellness club or pledge your life to an apocalypse crew.",
         answers: ["Meet your new gang", "Hot yoga matcha baptism"],
-        scores: [6, 3],
+        scores: [3, 6],
         gif: "images/question10-illustration.gif"
     },
 
@@ -126,6 +126,8 @@ function showQuestion() {
             console.error("Question not found for index", currentQuestion);
             return;
         }
+  // Replace placeholder with user's name in question text
+    const questionText = current.question.replace("{{name}}", userName || "survivor");
 
         // Clear the answers container
         answersContainer.innerHTML = "";  
