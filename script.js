@@ -97,7 +97,6 @@ function startQuiz() {
     userName = nameInput; // Save the user's name if provided
     document.getElementById("start-page").style.display = "none";  // Hide the start page
     document.getElementById("question-page").style.display = "block";  // Show the question page
-    document.getElementById("progress-bar").style.display = "block"; // Show progress bar on question page
     showQuestion();
     
     // Prevent scroll jump by focusing on the container
