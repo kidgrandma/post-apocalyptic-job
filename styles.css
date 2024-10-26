@@ -188,10 +188,6 @@ button:hover {
         color: #000;
     }
 
-    button:active {
-        background-color: #FF69B4; /* Feedback color for tapped state */
-    }
-
     /* Adjust result title and description sizes for mobile */
     #result-title {
         font-size: 1.4rem; /* Smaller for mobile */
