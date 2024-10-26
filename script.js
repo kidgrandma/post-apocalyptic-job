@@ -109,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const startButton = document.getElementById("start-quiz");
     if (startButton) {
         startButton.addEventListener("click", startQuiz);
+        document.getElementById('progress-bar').style.display = 'block';
     }
 });
 
