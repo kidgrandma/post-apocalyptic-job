@@ -310,7 +310,7 @@ function showResults() {
 }
 // Function to determine the outcome based on total score
 function determineOutcome(score) {
-    if (score <= 20) return "Soap Saviors";
+    if (score <=63) return "Soap Saviors";
     if (score <= 30) return "Caffeine Nicotine Cartel";
     if (score <= 40) return "Hermes Shredders";
     if (score <= 50) return "Homicidal Power Ranger";
