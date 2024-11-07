@@ -15,7 +15,7 @@ const questions = [
     {
         question: "Bill Nye didn't need you anyway. You'll need a BUDDY™️ to survive the next 24hrs. Who's it gonna be?",
         answers: ["Tupperware Tammy", "The Hermes Shredders", "The Used Bar Salesman"],
-        scores: [3, 4, 2],
+        scores: [3, 1, 2],
         gif: "images/question2-illustration.gif"
     },
     {
@@ -33,14 +33,14 @@ const questions = [
     {
         question: "Aw, BUDDY™️ died anyways. Time to look for shelter. Where are you headed?",
         answers: ["Abandoned DMV", "Mojo Dojo Casa House", "Spirit Halloween"],
-        scores: [3, 5, 3],
+        scores: [3, 5, 1],
         gif: "images/question5-illustration.gif"
     },
     {
           // Question 7 after custom questions 6A, 6B, or 6C
         question: "You're kind of an asshole now that you have food, shelter, and a weapon. How will you celebrate?",
         answers: ["Rehab baby!", "Double down at the casino"],
-        scores: [3, 6],
+        scores: [3, 7],
         gif: "images/question7-illustration.gif"
     },
     {
@@ -52,7 +52,7 @@ const questions = [
     {
         question: "Turns out, the Smart Water Witch sold you to the Caffeine Nicotine Cartel. How do you approach?",
         answers: ["OD on cigarettes", "Hadouken"],
-        scores: [3, 4],
+        scores: [3, 2],
         gif: "images/question9-illustration.gif"
     },
     {
@@ -80,7 +80,7 @@ const question6B = {
 const question6C = {
     question: "We’re never closing!! You’re trapped inside an out-of-season Spirit Halloween with the Homicidal Power Ranger. How do you escape?",
     answers: ["Agua gun", "Butter knife", "Bible"],
-    scores: [2, 2, 4],
+    scores: [2, 6, 4],
     gif: "images/question6c-illustration.gif"
 };
 
