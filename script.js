@@ -320,9 +320,9 @@ function determineOutcome(score) {
     if (score <= 74) return "Protein Priest";
     if (score <= 78) return "Radioactive Radio Media Empire";
     if (score <= 80) return "The Olsen Twins";
-    if (score === 82) return "Museum of Car Parts";
-    if (score === 85) return "Used Bar Salesman";
-    if (score === 150) return "Unfortune Teller";
+    if (score <= 82) return "Museum of Car Parts";
+    if (score <= 85) return "Used Bar Salesman";
+    if (score <= 150) return "Unfortune Teller";
     return "Unknown";  // Fallback for unexpected scores
 }
 
