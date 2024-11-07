@@ -9,13 +9,13 @@ const questions = [
     {
         question: "Welcome to the apocalypse! You just woke up in the ruins of Bill Nye's townhouse. Is something burning?!",
         answers: ["Check it out", "SCREAM", "Jump out window"],
-        scores: [1, 5, 10],
+        scores: [1, 4, 10],
         gif: "images/question1-illustration.gif"
     },
     {
         question: "Bill Nye didn't need you anyway. You'll need a BUDDY™️ to survive the next 24hrs. Who's it gonna be?",
         answers: ["Tupperware Tammy", "The Hermes Shredders", "The Used Bar Salesman"],
-        scores: [7, 1, 8],
+        scores: [7, 1, 3],
         gif: "images/question2-illustration.gif"
     },
     {
@@ -40,13 +40,13 @@ const questions = [
           // Question 7 after custom questions 6A, 6B, or 6C
         question: "You're kind of an asshole now that you have food, shelter, and a weapon. How will you celebrate?",
         answers: ["Rehab baby!", "Double down at the casino"],
-        scores: [3, 10],
+        scores: [3, 15],
         gif: "images/question7-illustration.gif"
     },
     {
         question: "OMG {{name}}! You've met a Smart Water Witch, you get unlimited wishes—but there's a price. What's the deal?",
         answers: ["Wishy wish", "No deal", "Cut them and run"],
-        scores: [6, 3, 4],
+        scores: [5, 3, 4],
         gif: "images/question8-illustration.gif"
     },
     {
@@ -58,7 +58,7 @@ const questions = [
     {
         question: "The Protein Priest rescues you. You can join his wellness club or find literally anyone else to be friends with so you don't...die.",
         answers: ["Meet your new gang", "Hot yoga matcha baptism"],
-        scores: [3, 10],
+        scores: [3, 8],
         gif: "images/question10-illustration.gif"
     },
 
@@ -68,13 +68,13 @@ const questions = [
 const question6A = {
     question: "Post-apocalyptic club kids have kidnapped you! The bag's out, and they've been carpet farming for months. How do you escape?",
     answers: ["Agua gun", "Bible", "Butter knife"],
-    scores: [2, 10, 5],
+    scores: [2, 10, 3],
     gif: "images/question6a-illustration.gif"
 };
 const question6B = {
     question: "Ahh, the good old Olsen bait and switch. You're tied to the bed while they take turns reading your birth chart. How do you escape?",
     answers: ["Bible", "Agua gun", "Butter knife"],
-    scores: [4, 2, 10],
+    scores: [6, 2, 10],
     gif: "images/question6b-illustration.gif"
 };
 const question6C = {
