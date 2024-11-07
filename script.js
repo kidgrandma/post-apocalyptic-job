@@ -9,38 +9,38 @@ const questions = [
     {
         question: "Welcome to the apocalypse! You just woke up in the ruins of Bill Nye's townhouse. Is something burning?!",
         answers: ["Check it out", "SCREAM", "Jump out window"],
-        scores: [2, 3, 3],
+        scores: [1, 5, 10],
         gif: "images/question1-illustration.gif"
     },
     {
         question: "Bill Nye didn't need you anyway. You'll need a BUDDY™️ to survive the next 24hrs. Who's it gonna be?",
         answers: ["Tupperware Tammy", "The Hermes Shredders", "The Used Bar Salesman"],
-        scores: [3, 1, 2],
+        scores: [7, 1, 8],
         gif: "images/question2-illustration.gif"
     },
     {
         question: "Great work {{name}}! You're new here so you'll be in charge of the next meal. What's the plan?",
         answers: ["Waffle House", "Steal from someone's kid", "Street fighter for it"],
-        scores: [2, 3, 1],
+        scores: [8, 3, 10],
         gif: "images/question3-illustration.gif"
     },
     {
         question: "Uh oh! Not enough food for you and BUDDY™️. What's the move?",
         answers: ["Kill BUDDY™️", "Share food with BUDDY™️", "Sell BUDDY™️"],
-        scores: [4, 2, 4],
+        scores: [1, 2, 8],
         gif: "images/question4-illustration.gif"
     },
     {
         question: "Aw, BUDDY™️ died anyways. Time to look for shelter. Where are you headed?",
         answers: ["Abandoned DMV", "Mojo Dojo Casa House", "Spirit Halloween"],
-        scores: [3, 5, 1],
+        scores: [10, 5, 1],
         gif: "images/question5-illustration.gif"
     },
     {
           // Question 7 after custom questions 6A, 6B, or 6C
         question: "You're kind of an asshole now that you have food, shelter, and a weapon. How will you celebrate?",
         answers: ["Rehab baby!", "Double down at the casino"],
-        scores: [3, 7],
+        scores: [3, 10],
         gif: "images/question7-illustration.gif"
     },
     {
@@ -52,13 +52,13 @@ const questions = [
     {
         question: "Turns out, the Smart Water Witch sold you to the Caffeine Nicotine Cartel. How do you approach?",
         answers: ["OD on cigarettes", "Hadouken"],
-        scores: [3, 2],
+        scores: [10, 2],
         gif: "images/question9-illustration.gif"
     },
     {
         question: "The Protein Priest rescues you. You can join his wellness club or find literally anyone else to be friends with so you don't...die.",
         answers: ["Meet your new gang", "Hot yoga matcha baptism"],
-        scores: [3, 6],
+        scores: [3, 10],
         gif: "images/question10-illustration.gif"
     },
 
@@ -68,19 +68,19 @@ const questions = [
 const question6A = {
     question: "Post-apocalyptic club kids have kidnapped you! The bag's out, and they've been carpet farming for months. How do you escape?",
     answers: ["Agua gun", "Bible", "Butter knife"],
-    scores: [2, 4, 5],
+    scores: [2, 10, 5],
     gif: "images/question6a-illustration.gif"
 };
 const question6B = {
     question: "Ahh, the good old Olsen bait and switch. You're tied to the bed while they take turns reading your birth chart. How do you escape?",
     answers: ["Bible", "Agua gun", "Butter knife"],
-    scores: [4, 2, 4],
+    scores: [4, 2, 10],
     gif: "images/question6b-illustration.gif"
 };
 const question6C = {
     question: "We’re never closing!! You’re trapped inside an out-of-season Spirit Halloween with the Homicidal Power Ranger. How do you escape?",
     answers: ["Agua gun", "Butter knife", "Bible"],
-    scores: [2, 6, 4],
+    scores: [10, 6, 4],
     gif: "images/question6c-illustration.gif"
 };
 
@@ -310,17 +310,19 @@ function showResults() {
 }
 // Function to determine the outcome based on total score
 function determineOutcome(score) {
-    if (score <= 28) return "Soap Saviors";
+    if (score <= 20) return "Soap Saviors";
     if (score <= 30) return "Caffeine Nicotine Cartel";
-    if (score <= 29) return "Hermes Shredders";
-    if (score <= 35) return "Homicidal Power Ranger";
-    if (score <= 32) return "The DMV (Club Kids)";
-    if (score <= 34) return "Internet Preservation Society";
-    if (score <= 36) return "Tupperware Tammy";
-    if (score <= 38) return "Protein Priest";
-    if (score <= 40) return "Radioactive Radio Media Empire";
-    if (score <= 46) return "The Olsen Twins";
-    if (score === 58) return "Museum of Car Parts";
+    if (score <= 40) return "Hermes Shredders";
+    if (score <= 50) return "Homicidal Power Ranger";
+    if (score <= 60) return "The DMV (Club Kids)";
+    if (score <= 76) return "Internet Preservation Society";
+    if (score <= 72) return "Tupperware Tammy";
+    if (score <= 74) return "Protein Priest";
+    if (score <= 78) return "Radioactive Radio Media Empire";
+    if (score <= 80) return "The Olsen Twins";
+    if (score === 82) return "Museum of Car Parts";
+    if (score === 85) return "Used Bar Salesman";
+    if (score === 100) return "Unfortune Teller";
     return "Unknown";  // Fallback for unexpected scores
 }
 
@@ -338,6 +340,8 @@ function getOutcomeImage(outcome) {
         case "Radioactive Radio Media Empire": return 10;
         case "The Olsen Twins": return 4;
         case "Museum of Car Parts": return 13;
+        case "Used Bar Salesman": return 5;
+        case "Unfortune Teller": return 6;
         default: return "unknown";  // Fallback
     }
 }
@@ -356,6 +360,8 @@ function getCrewColor(outcome) {
         case "Radioactive Radio Media Empire": return "#cddc39";  // Lime green
         case "The Olsen Twins": return "#ce93d8";  // Lavender purple
         case "Museum of Car Parts": return "#ffd54f";  // Golden yellow
+        case "Used Bar Salesman": return "#8d6e63";  // Brownish
+        case "Unfortune Teller": return "#7e57c2"; // Purple
         default: return "#ffffff";  // Fallback to white if needed
     }
 }
