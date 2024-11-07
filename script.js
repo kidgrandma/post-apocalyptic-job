@@ -360,8 +360,8 @@ function getCrewColor(outcome) {
         case "Radioactive Radio Media Empire": return "#cddc39";  // Lime green
         case "The Olsen Twins": return "#ce93d8";  // Lavender purple
         case "Museum of Car Parts": return "#ffd54f";  // Golden yellow
-        case "Used Bar Salesman": return "#8d6e63";  // Brownish
-        case "Unfortune Teller": return "#7e57c2"; // Purple
+        case "Used Bar Salesman": return "#FFF176";  // Light Yellow
+        case "Unfortune Teller": return "#FFB74D";    // Soft Orange
         default: return "#ffffff";  // Fallback to white if needed
     }
 }
